@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+  <meta charset="UTF-8" />
+  <link href="tyyli.css" rel="StyleSheet" type="text/css" />
+  <script type="text/javascript" language="javascript" src="kirjautuminen.js"></script>
+  <title>Autoliike</title>
+</head>
+
+<body>
+  <p id="tervetulo_teksti">Tervetuloa</p>
+  <div id="landing">
+    <button type="button" id="landing_kirjaudu_nappi" onClick="avaaKirjautumislomake()">Kirjaudu sisään</button>
+    <button type="button" id="landing_rekisteröidy_nappi" onClick="avaaRekisteroitymislomake()">Rekisteröidy</button>
+  </div>
+  <form id="rekisteroitymis_lomake">
+    <input id="uusi_tunnus" type="text" placeholder="Käyttäjätunnus" value="" />
+    <input id="uusi_salasana" type="password" placeholder="Salasana" value="" />
+    <input id="rekisteroitymis_nappi" type="submit" value="Luo tunnus" onClick="luoTunnus()" />
+  </form>
+  <form id="kirjautumis_lomake">
+    <input id="kirjautumis_tunnus" type="text" placeholder="Syötä Käyttäjätunnus" value="" />
+    <input id="kirjautumis_salasana" type="password" placeholder="Syötä salasana" value="" />
+    <input id="login_btn" type="submit" value="Kirjaudu sisään" onClick="tarkistaTunnus()" />
+  </form>
+</body>
+
+</html>
