@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #helloAnimation {
+        font-size: 50px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 200px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      #animalSelection {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 20px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      #resultText {
+        font-size: 24px;
+        text-align: center;
+        margin-top: 20px;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="helloAnimation">Hello</div>
+    <div id="animalSelection">
+      <select id="animalSelect">
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        <option value="horse">Horse</option>
+      </select>
+    </div>
+    <div id="resultText"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const helloElement = document.getElementById("helloAnimation");
+        const selectionElement = document.getElementById("animalSelection");
+        const resultElement = document.getElementById("resultText");
+        const selectElement = document.getElementById("animalSelect");
+
+        // Fade in hello animation
+        setTimeout(() => {
+          helloElement.style.opacity = "1";
+        }, 500);
+
+        // Fade in selection
+        setTimeout(() => {
+          selectionElement.style.opacity = "1";
+        }, 1500);
+
+        // Handle selection change
+        selectElement.addEventListener("change", function () {
+          const selectedAnimal = selectElement.value;
+
+          // Fade out selection
+          selectionElement.style.opacity = "0";
+
+          // Fade in result
+          setTimeout(() => {
+            resultElement.innerHTML = "You chose: " + selectedAnimal;
+            resultElement.style.opacity = "1";
+          }, 1000);
+
+          // Remove result after some time
+          setTimeout(() => {
+            resultElement.style.opacity = "0";
+          }, 3000);
+
+          // Remove elements after animation
+          setTimeout(() => {
+            selectionElement.remove();
+            resultElement.innerHTML = "";
+          }, 4000);
+        });
+      });
+    </script>
+  </body>
+</html>
