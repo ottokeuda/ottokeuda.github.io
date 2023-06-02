@@ -17,7 +17,7 @@
   
   /* form styles */
   #msform {
-	width: 100%;
+	width: 400px;
 	margin: 50px auto;
 	text-align: center;
 	position: relative;
@@ -143,5 +143,47 @@
   #progressbar li.active:after {
 	background: #27AE60;
 	color: white;
+  }
+  
+  /* responsive styles */
+  @media (max-width: 768px) {
+	#msform {
+	  width: 90%;
+	}
+  
+	#msform fieldset {
+	  width: 90%;
+	  margin: 0 5%;
+	  padding: 15px 20px;
+	}
+  
+	#msform input,
+	#msform textarea,
+	#msform select {
+	  font-size: 12px;
+	}
+  }
+  
+  @media (max-width: 480px) {
+	#msform {
+	  width: 100%;
+	  padding: 0 10px;
+	}
+  
+	#msform fieldset {
+	  width: 100%;
+	  margin: 0;
+	  padding: 15px;
+	}
+  
+	#msform input,
+	#msform textarea,
+	#msform select {
+	  font-size: 11px;
+	}
+  
+	#progressbar li {
+	  font-size: 8px;
+	}
   }
   
