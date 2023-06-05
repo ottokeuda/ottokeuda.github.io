@@ -3,8 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>CodePen - Multi Step Form with Progress Bar using jQuery and CSS3</title>
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"> -->
+	<title>Powerant Manager</title>
 	<link rel="stylesheet" href="./style.css">
 
 </head>
@@ -15,34 +14,40 @@
 	<form id="msform">
 		<!-- progressbar -->
 		<ul id="progressbar">
-			<li class="active">Select your Wifi</li>
-			<li>Select county/area</li>
-			<li>Select active hours</li>
-			<li>Select max price</li>
-			<li>Connect phone number</li>
-			<li>Connect to Whatsapp</li>
+			<li class="active">Language</li>
+			<li>Wifi</li>
+			<li>County</li>
+			<li>Hours</li>
+			<li>Price</li>
+			<li>Phone</li>
+			<li>Whatsapp</li>
 		</ul>
 		<!-- fieldsets -->
 		<fieldset>
-			</br>
-			<h2 class="fs-title">Select your Wifi</h2>
-			<select id='ssid' name='ssid' required>
-				<option value="a">PrettyFlyForaWifi</option>
-				<option value="b">CIA-Surveilance-van</option>
-				<option value="d">Wlan123-wifi</option>
+			<h2 id="language-title" class="fs-title">Select your language</h2>
+			<select id="language" name="language" required>
+				<option value="english">English</option>
+				<option value="finnish">Finnish</option>
+				<!-- Add more language options here -->
 			</select>
-			</br>
-			</br>
-			</br>
-			<h2 class="fs-title">Wifi password</h2>
-        	<input type='password' id='password' name='password' placeholder='Your wifi password' required><br><br>
-			</br>		
 			<input type="button" name="next" class="next action-button" value="Next" />
 		</fieldset>
 		<fieldset>
-			<h2 class="fs-title">Country/area</h2>
-			<h3 class="fs-subtitle">The device downloads prices for your selected country/area</h3>
-			<select id='country' name='country' required> 
+			<h2 id="wifi-title" class="fs-title">Select your Wifi</h2>
+			<select id="ssid" name="ssid" required>
+				<!-- Wifi options will be dynamically updated -->
+			</select>
+			<h2 id="wifi-password" class="fs-title">Wifi password</h2>
+			<input type="password" id="password" name="password" placeholder="Your wifi password" required><br><br>
+			<input type="button" name="previous" class="previous action-button" value="Previous" />
+			<input type="button" name="next" class="next action-button" value="Next" />
+		</fieldset>
+
+		<fieldset>
+			<h2 id="country-title" class="fs-title">Country/area</h2>
+			<h3 id="country-subtitle" class="fs-subtitle">The device downloads prices for your selected country/area
+			</h3>
+			<select id="country" name="country" required>
 				<option value='finland-fi1'>Finland</option>
 				<option value='norway-no1'>Norway</option>
 				<option value='sweden-se1'>Sweden</option>
@@ -50,59 +55,173 @@
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
 			<input type="button" name="next" class="next action-button" value="Next" />
 		</fieldset>
+
 		<fieldset>
-			<h2 class="fs-title">Active hours</h2>
-			<h3 class="fs-subtitle">Select the number of daily active hours for the device. The device will turn on during the cheapest hours of the day</h3>
-			<select id='hours' name='hours' required>
-				<option value="a">0</option>
-				<option value="b">1</option>
-				<option value="a">2</option>
-				<option value="b">3</option>
-				<option value="a">4</option>
-				<option value="b">5</option>
-				<option value="a">6</option>
-				<option value="b">7</option>
-				<option value="a">8</option>
-				<option value="b">9</option>
+			<h2 id="hours-title" class="fs-title">Active hours</h2>
+			<h3 id="hours-subtitle" class="fs-subtitle">Select the number of daily active hours for the device. The
+				device will turn on during the cheapest hours of the day</h3>
+			<select id="hours" name="hours" required>
+				<option value='0'>0</option>
+				<option value='1'>1</option>
+				<option value='2'>2</option>
+				<option value='3'>3</option>
+				<option value='4'>4</option>
+				<option value='5'>5</option>
+				<option value='6'>6</option>
+				<option value='7'>7</option>
+				<option value='8'>8</option>
+				<option value='9'>9</option>
+				<option value='10'>10</option>
+				<option value='11'>11</option>
+				<option value='12'>12</option>
+				<option value='13'>13</option>
+				<option value='14'>14</option>
+				<option value='15'>15</option>
+				<option value='16'>16</option>
+				<option value='17'>17</option>
+				<option value='18'>18</option>
+				<option value='19'>19</option>
+				<option value='20'>20</option>
+				<option value='21'>21</option>
+				<option value='22'>22</option>
+				<option value='23'>23</option>
+				<option value='24'>24</option>
 			</select>
-			</br>
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
 			<input type="button" name="next" class="next action-button" value="Next" />
 		</fieldset>
 		<fieldset>
-			<h2 class="fs-title">Maximum price</h2>
-			<h3 class="fs-subtitle">Input your maximum price for electricity in cents/Kwh</h3>
-			<input type='number' id='maxprice' name='maxprice' placeholder='eg. 5.25' step='0.01' required><br><br>
-			</br>
+			<h2 id="maxprice-title" class="fs-title">Maximum price</h2>
+			<h3 id="maxprice-subtitle" class="fs-subtitle">Input your maximum price for electricity in cents/Kwh</h3>
+			<input type="number" id="maxprice" name="maxprice" placeholder="e.g., 5.25" step="0.01" required><br><br>
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
 			<input type="button" name="next" class="next action-button" value="Next" />
 		</fieldset>
+
 		<fieldset>
-			<h2 class="fs-title">Phone number</h2>
-			<h3 class="fs-subtitle">You can receive daily price notifications through Whatsapp</h3>
-			<input type='tel' id='phoneNumber' name='phoneNumber' placeholder='eg. +35845678910' pattern='\+[0-9]{1,3}[0-9]{9}'>
-			</br>
-			</br>
+			<h2 id="phone-title" class="fs-title">Phone number</h2>
+			<h3 id="phone-subtitle" class="fs-subtitle">You can receive daily price notifications through Whatsapp</h3>
+			<input type="tel" id="phoneNumber" name="phoneNumber" placeholder="e.g., +35845678910"
+				pattern="\+[0-9]{1,3}[0-9]{9}">
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
 			<input type="button" name="next" class="next action-button" value="Next" />
 		</fieldset>
+
 		<fieldset>
-			<h2 class="fs-title">Whatsapp code</h2>
-			<h3 class="fs-subtitle">You need to input your Whatsapp code to receive notifications.</h3>
-			<input type='number' id='apikey' name='apikey' placeholder='eg. 9906006' maxlength='10'><br><br>
-			</br>
-			</br>
+			<h2 id="whatsapp-title" class="fs-title">Whatsapp code</h2>
+			<h3 id="whatsapp-subtitle" class="fs-subtitle">Input your Whatsapp code to receive notifications. Check the
+				guide below on how to get your code.</h3>
+			<input type="number" id="apikey" name="apikey" placeholder="e.g., 9906006" maxlength="10">
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
-			<input type="submit" name="submit" class="submit action-button" value="Calculate" />
+			<input type="submit" name="submit" class="submit action-button" value="Save and reboot" /><br><br><br>
+			<h2 id="instructions-title" class="fs-title">Instructions</h2>
+			<h3 id="instructions-subtitle" class="fs-subtitle" style="text-align: left;">
+				<ol style="list-style-type: decimal; padding-left: 1.5em;">
+					<li>Open your phone contacts and add +34 611 048 748 as Powerant.</li>
+					<li>Open Whatsapp and find the previously added Powerant contact.</li>
+					<li>Send it the following Whatsapp message: "I allow callmebot to send me messages".</li>
+					<li>You will receive a 7 number API-key as a response. Input the key to the form above.</li>
+				</ol>
+			</h3>
 		</fieldset>
 	</form>
 
 	<!-- jQuery -->
-	<!-- <script src="http://thecodeplayer.com/uploads/js/jquery-1.9.1.min.js" type="text/javascript"></script> -->
-	<!-- jQuery easing plugin -->
-	<!-- <script src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js" type="text/javascript"></script> -->
-	<!-- partial -->
 	<script src="./script.js"></script>
+
+	<!-- javascript -->
+	<script>
+		const translations = {
+			english: {
+				"language-title": "Select your language",
+				"wifi-title": "Select your wifi network",
+				"wifi-password": "Wifi password",
+				"country-title": "Country/area",
+				"country-subtitle": "The device downloads prices for your selected country/area",
+				"hours-title": "Active hours",
+				"hours-subtitle": "Select the number of daily active hours for the device. The device will turn on during the cheapest hours of the day",
+				"maxprice-title": "Maximum price",
+				"maxprice-subtitle": "Input your maximum price for electricity in cents/KWh",
+				"phone-title": "Phone number",
+				"phone-subtitle": "You can receive daily price notifications through Whatsapp",
+				"whatsapp-title": "Whatsapp code",
+				"whatsapp-subtitle": "Input your Whatsapp code to receive notifications. Check the guide below on how to get your code.",
+				"instructions-title": "INSTRUCTIONS",
+				"next-button": "Next",
+				"previous-button": "Previous",
+				"submit-button": "Save"
+				// Add more translations here
+			},
+			finnish: {
+				"language-title": "Valitse kieli",
+				"wifi-title": "Valitse Wifi-verkko",
+				"wifi-password": "Wifi-salasana",
+				"country-title": "Maa/alue",
+				"country-subtitle": "Laite lataa hintatiedot valitsemallesi maalle/alueelle",
+				"hours-title": "Aktiiviset tunnit",
+				"hours-subtitle": "Valitse laitteen päivittäiset aktiiviset tunnit. Laite käynnistyy halvimmilla tunneilla päivän aikana",
+				"maxprice-title": "Enimmäishinta",
+				"maxprice-subtitle": "Syötä enimmäishintasi sähköstä sentteinä/KWh",
+				"phone-title": "Puhelinnumero",
+				"phone-subtitle": "Voit vastaanottaa päivittäisiä hintailmoituksia Whatsappin kautta",
+				"whatsapp-title": "Whatsapp-koodi",
+				"whatsapp-subtitle": "Syötä Whatsapp-koodisi vastaanottaaksesi ilmoituksia. Katso alla oleva ohje, miten saat koodin.",
+				"instructions-title": "Ohjeet",
+				"next-button": "Seuraava",
+				"previous-button": "Edellinen",
+				"submit-button": "Tallenna"
+				// Add more translations here
+			},
+		};
+
+		function updateFormLanguage() {
+			const selectedLanguage = document.getElementById("language").value;
+			const translation = translations[selectedLanguage];
+
+			// Update the headings
+			document.getElementById("wifi-title").textContent = translation["wifi-title"];
+			document.getElementById("language-title").textContent = translation["language-title"];
+			document.getElementById("wifi-title").textContent = translation["wifi-title"];
+			document.getElementById("wifi-password").textContent = translation["wifi-password"];
+			document.getElementById("country-title").textContent = translation["country-title"];
+			document.getElementById("country-subtitle").textContent = translation["country-subtitle"];
+			document.getElementById("hours-title").textContent = translation["hours-title"];
+			document.getElementById("hours-subtitle").textContent = translation["hours-subtitle"];
+			document.getElementById("maxprice-title").textContent = translation["maxprice-title"];
+			document.getElementById("maxprice-subtitle").textContent = translation["maxprice-subtitle"];
+			document.getElementById("phone-title").textContent = translation["phone-title"];
+			document.getElementById("phone-subtitle").textContent = translation["phone-subtitle"];
+			document.getElementById("whatsapp-title").textContent = translation["whatsapp-title"];
+			document.getElementById("whatsapp-subtitle").textContent = translation["whatsapp-subtitle"];
+			document.getElementById("instructions-title").textContent = translation["instructions-title"];
+
+			// Update the button texts
+			const nextButtons = document.querySelectorAll("input[name='next']");
+			nextButtons.forEach(button => {
+				button.value = translation["next-button"];
+			});
+
+			const previousButtons = document.querySelectorAll("input[name='previous']");
+			previousButtons.forEach(button => {
+				button.value = translation["previous-button"];
+			});
+
+			const submitButtons = document.querySelectorAll("input[name='submit']");
+			submitButtons.forEach(button => {
+				button.value = translation["submit-button"];
+			});
+
+
+			// Update more headings here
+		}
+
+		// Call the updateFormLanguage() function whenever the language selection changes
+		document.getElementById("language").addEventListener("change", updateFormLanguage);
+
+		// Update the form language initially
+		updateFormLanguage();
+
+	</script>
 
 </body>
 
