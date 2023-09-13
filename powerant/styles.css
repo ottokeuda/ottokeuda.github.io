@@ -58,18 +58,18 @@
   
   /* buttons */
   #msform .action-button {
-	width: 15vw;
-	max-width: 10rem;
+	width: 25vw;                /* increased from 15vw to 25vw */
+	max-width: 15rem;          /* increased from 10rem to 15rem */
 	background: #27AE60;
 	font-weight: bold;
 	color: white;
 	border: none;
-	border-radius: 1px;
+	border-radius: 5px;        /* increased from 3px to 5px for a slightly rounder edge */
 	cursor: pointer;
-	padding: 3vw 1.5vw;
-	margin: 4vw 1.5vw;
-	font-size: 3vw;
-  }
+	padding: 5vw 2.5vw;        /* increased from 3vw 1.5vw to 5vw 2.5vw */
+	margin: 6vw 2vw;           /* increased from 4vw 1.5vw to 6vw 2vw */
+	font-size: 4vw;            /* increased from 3vw to 4vw */
+}
   
   #msform .action-button:hover,
   #msform .action-button:focus {
