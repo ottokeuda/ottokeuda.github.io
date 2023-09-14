@@ -36,8 +36,8 @@
 	position: absolute;
   }
   
-  /* Hide all except first fieldset */
-  #msform fieldset:not(:first-of-type) {
+  /* Hide all except second fieldset */
+  #msform fieldset:not(:nth-of-type(2)) {
 	display: none;
   }
   
@@ -107,7 +107,7 @@
 	color: white;
 	text-transform: uppercase;
 	font-size: 2.5vw;
-	width: 20%;
+	width: 33.33%;
 	position: relative;
   }
   

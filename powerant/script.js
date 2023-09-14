@@ -155,9 +155,9 @@ const translations = {
     "instructions-step2": "Avaa Whatsapp ja etsi aiemmin lisätty Powerant-yhteystieto.",
     "instructions-step3": "Lähetä seuraava Whatsapp-viesti: 'I allow callmebot to send me messages.",
     "instructions-step4": "Saat vastauksena 7-numeroisen API-avaimen. Syötä avain yllä olevaan lomakkeeseen.",
-    "language-menu": "Kieli",
-    "wifi-menu": "Wifi",
-    "country-menu": "Maa",
+    "yesterday-menu": "Eilen",
+    "today-menu": "Tänään",
+    "tomorrow-menu": "Huomenna",
     "hours-menu": "Tunnit",
     "price-menu": "Hinta",
     "phone-menu": "Puhelin",
@@ -354,6 +354,8 @@ function updateFormLanguage() {
 
   // Update more headings here
 }
+
+
 
 // Call the updateFormLanguage() function to initially set the language
 updateFormLanguage();

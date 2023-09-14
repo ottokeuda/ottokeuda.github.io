@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Time Zone Offset</title>
+</head>
+<body>
+    <h1>Time Zone Offset</h1>
+    <p>Your time is <span id="timeOffset">calculating...</span> hours ahead/behind UTC.</p>
+
+    <script>
+        function displayTimeZoneOffset() {
+            // Create a Date object
+            const now = new Date();
+
+            // Get the time zone offset in minutes
+            const timeZoneOffsetMinutes = now.getTimezoneOffset();
+
+            // Convert the time zone offset to hours
+            const timeZoneOffsetHours = -(timeZoneOffsetMinutes / 60);
+
+            // Display the time zone offset in hours
+            document.getElementById("timeOffset").innerText = timeZoneOffsetHours;
+        }
+
+        // Run the function to display the time zone offset
+        displayTimeZoneOffset();
+    </script>
+</body>
+</html>

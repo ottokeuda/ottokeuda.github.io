@@ -7,136 +7,38 @@
 </head>
 
 <body>
+
 	<!-- multistep form -->
 	<form id="msform" action='/connect' method='post'>
+		<img src="powerant-logo.png" alt="HTML" width="100%">
+		<br><br>
 		<!-- progressbar -->
 		<ul id="progressbar">
-			<li class="active" id="language-menu">Language</li>
-			<li id="wifi-menu">Wifi</li>
-			<li id="country-menu">County</li>
-			<li id="hours-menu">Hours</li>
-			<li id="price-menu">Price</li>
-			<li id="phone-menu">Phone</li>
-			<li id="whatsapp-menu">Whatsapp</li>
+			<li class="active" id="yesterday-menu">Yesterday</li>
+			<li class="active" id="today-menu">Today</li>
+			<li id="tomorrow-menu">Tomorrow</li>
 		</ul>
 		<!-- fieldsets -->
 		<fieldset>
-			<h2 id="language-title" class="fs-title">Select your language</h2>
-			<select id="language" name="language" required>
-				<option value="english">English</option>
-				<option value="finnish">Finnish</option>
-				<option value="swedish">Swedish</option>
-				<option value="norwegian">Norwegian</option>
-				<option value="danish">Danish</option>
-				<option value="estonian">Estonian</option>
-				<!-- Add more language options here -->
-			</select>
+			<h2 id="yesterday-title" class="fs-title">Yesterday</h2>
+			
 			<input type="button" name="next" class="next action-button" value="Next" />
 		</fieldset>
 		<fieldset>
-			<h2 id="wifi-title" class="fs-title">Select your Wifi</h2>
-			<select id="ssid" name="ssid" required>
-				<option value="wifi1">wifi1</option>
-				<option value="wifi2">Wifi2</option>
-			</select>
-			<h2 id="wifi-password" class="fs-title">Wifi password</h2>
-			<input type="password" id="password" name="password" placeholder="Your wifi password" required><br><br>
+			<h2 id="today-title" class="fs-title">Today</h2>
+			
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
 			<input type="button" name="next" class="next action-button" value="Next" />
 		</fieldset>
 
 		<fieldset>
-			<h2 id="country-title" class="fs-title">Country/area</h2>
-			<h3 id="country-subtitle" class="fs-subtitle">The device downloads prices for your selected country/area
-			</h3>
-			<select id="country" name="country" required>
-				<option value='finland-fi1'>Finland</option>
-				<option value='norway-no1'>Norway NO1</option>
-				<option value='norway-no2'>Norway NO2</option>
-				<option value='norway-no3'>Norway NO3</option>
-				<option value='norway-no4'>Norway NO4</option>
-				<option value='norway-no5'>Norway NO5</option>
-				<option value='sweden-se1'>Sweden SE1</option>
-				<option value='sweden-se2'>Sweden SE2</option>
-				<option value='sweden-se3'>Sweden SE3</option>
-				<option value='sweden-se4'>Sweden SE4</option>
-				<option value='denmark-dk1'>Denmark DK1</option>
-				<option value='denmark-dk2'>Denmark DK2</option>
-			</select><br><br>
+			<h2 id="tomorrow-title" class="fs-title">Tomorrow</h2>
+			<h3 id="tomorrow-subtitle" class="fs-subtitle">Info about tomorrows prices. </h3>
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
 			<input type="button" name="next" class="next action-button" value="Next" />
 		</fieldset>
 
-		<fieldset>
-			<h2 id="hours-title" class="fs-title">Active hours</h2>
-			<h3 id="hours-subtitle" class="fs-subtitle">Select the number of daily active hours for the device. The
-				device will turn on during the cheapest hours of the day</h3>
-			<select id="hours" name="hours" required>
-				<option value='0'>0</option>
-				<option value='1'>1</option>
-				<option value='2'>2</option>
-				<option value='3'>3</option>
-				<option value='4'>4</option>
-				<option value='5'>5</option>
-				<option value='6'>6</option>
-				<option value='7'>7</option>
-				<option value='8'>8</option>
-				<option value='9'>9</option>
-				<option value='10'>10</option>
-				<option value='11'>11</option>
-				<option value='12'>12</option>
-				<option value='13'>13</option>
-				<option value='14'>14</option>
-				<option value='15'>15</option>
-				<option value='16'>16</option>
-				<option value='17'>17</option>
-				<option value='18'>18</option>
-				<option value='19'>19</option>
-				<option value='20'>20</option>
-				<option value='21'>21</option>
-				<option value='22'>22</option>
-				<option value='23'>23</option>
-				<option value='24'>24</option>
-			</select>
-			<input type="button" name="previous" class="previous action-button" value="Previous" />
-			<input type="button" name="next" class="next action-button" value="Next" />
-		</fieldset>
-		<fieldset>
-			<h2 id="maxprice-title" class="fs-title">Maximum price</h2>
-			<h3 id="maxprice-subtitle" class="fs-subtitle">Input your maximum price for electricity in cents/Kwh</h3>
-			<input type="number" id="maxprice" name="maxprice" placeholder="e.g., 5.25" step="0.01" required><br><br>
-			<input type="button" name="previous" class="previous action-button" value="Previous" />
-			<input type="button" name="next" class="next action-button" value="Next" />
-		</fieldset>
-
-		<fieldset>
-			<h2 id="phone-title" class="fs-title">Phone number</h2>
-			<h3 id="phone-subtitle" class="fs-subtitle">You can receive daily price notifications through Whatsapp</h3>
-			<input type="tel" id="phoneNumber" name="phoneNumber" placeholder="e.g., +35845678910">
-			<input type="button" name="previous" class="previous action-button" value="Previous" />
-			<input type="button" name="next" class="next action-button" value="Next" />
-		</fieldset>
-
-		<fieldset>
-			<h2 id="whatsapp-title" class="fs-title">Whatsapp code</h2>
-			<h3 id="whatsapp-subtitle" class="fs-subtitle">Input your Whatsapp code to receive notifications. Check the
-				guide below on how to get your code.</h3>
-			<input type="number" id="apikey" name="apikey" placeholder="e.g., 9906006" maxlength="10">
-			<input type="button" name="previous" class="previous action-button" value="Previous" />
-			<input type="submit" name="submit" class="submit action-button" value="Save" onclick="showNotification()">
-			<br><br><br>
-			<h2 id="instructions-title" class="fs-title">Instructions</h2>
-			<h3 id="instructions-subtitle" class="fs-subtitle" style="text-align: left;">
-				<ol style="list-style-type: decimal; padding-left: 1.5em;">
-					<li id="instructions-step1">Open your phone contacts and add +34 611 048 748 as Powerant.</li>
-					<li id="instructions-step2">Open Whatsapp and find the previously added Powerant contact.</li>
-					<li id="instructions-step3">Send it the following Whatsapp message: "I allow callmebot to send me
-						messages".</li>
-					<li id="instructions-step4">You will receive a 7 number API-key as a response. Input the key to the
-						form above.</li>
-				</ol>
-			</h3>
-		</fieldset>
+		
 	</form>
 	<script src="script.js"></script>
 	<script>
