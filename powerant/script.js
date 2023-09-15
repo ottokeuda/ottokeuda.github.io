@@ -65,10 +65,7 @@ previousButtons.forEach(function (button) {
   });
 });
 
-submitButton.addEventListener('click', function () {
-  // Submit the form
-  form.submit();
-});
+
 
 // Fade out an element
 function fadeOut(element, callback) {
@@ -134,35 +131,19 @@ const translations = {
     // Add more translations here
   },
   finnish: {
-    "language-title": "Valitse kieli",
-    "wifi-title": "Valitse Wifi-verkko",
-    "wifi-password": "Wifi-salasana",
-    "country-title": "Maa/alue",
-    "country-subtitle": "Laite lataa hintatiedot valitsemallesi maalle/alueelle",
-    "hours-title": "Aktiiviset tunnit",
-    "hours-subtitle": "Valitse laitteen päivittäiset aktiiviset tunnit. Laite käynnistyy halvimmilla tunneilla päivän aikana",
-    "maxprice-title": "Enimmäishinta",
-    "maxprice-subtitle": "Syötä enimmäishintasi sähköstä sentteinä/KWh",
-    "phone-title": "Puhelinnumero",
-    "phone-subtitle": "Voit vastaanottaa päivittäisiä hintailmoituksia Whatsappin kautta",
-    "whatsapp-title": "Whatsapp-koodi",
-    "whatsapp-subtitle": "Syötä Whatsapp-koodisi vastaanottaaksesi ilmoituksia. Katso alla oleva ohje, miten saat koodin.",
-    "instructions-title": "Ohjeet",
+    "yesterday-title": "Eilen",
+    "today-title": "Tänään",
+    "tomorrow-title": "Huomenna",
     "next-button": "Seuraava",
     "previous-button": "Edellinen",
-    "submit-button": "Tallenna",
-    "instructions-step1": "Avaa puhelimen yhteystiedot ja lisää +34 611 048 748 nimellä Powerant.",
-    "instructions-step2": "Avaa Whatsapp ja etsi aiemmin lisätty Powerant-yhteystieto.",
-    "instructions-step3": "Lähetä seuraava Whatsapp-viesti: 'I allow callmebot to send me messages.",
-    "instructions-step4": "Saat vastauksena 7-numeroisen API-avaimen. Syötä avain yllä olevaan lomakkeeseen.",
     "yesterday-menu": "Eilen",
     "today-menu": "Tänään",
     "tomorrow-menu": "Huomenna",
-    "hours-menu": "Tunnit",
-    "price-menu": "Hinta",
-    "phone-menu": "Puhelin",
-    "whatsapp-menu": "Whatsapp",
-    "password-placeholder": "Wifi salasana"
+    "today-subtitle": "Tietoa tämän päivän tunneista",
+    "yesterday-subtitle": "Tietoa eilisen tunneista",
+    "tomorrow-subtitle": "Tietoa huomisen tunneista",
+    "device-selection-text": "Valitse laite",
+    "add-device-text": "Lisää laite" 
 
     // Add more translations here
   },
@@ -308,33 +289,19 @@ function updateFormLanguage() {
   const translation = translations[selectedLanguage];
 
   // Update the headings
-  document.getElementById("wifi-title").textContent = translation["wifi-title"];
-  document.getElementById("language-title").textContent = translation["language-title"];
-  document.getElementById("wifi-title").textContent = translation["wifi-title"];
-  document.getElementById("wifi-password").textContent = translation["wifi-password"];
-  document.getElementById("country-title").textContent = translation["country-title"];
-  document.getElementById("country-subtitle").textContent = translation["country-subtitle"];
-  document.getElementById("hours-title").textContent = translation["hours-title"];
-  document.getElementById("hours-subtitle").textContent = translation["hours-subtitle"];
-  document.getElementById("maxprice-title").textContent = translation["maxprice-title"];
-  document.getElementById("maxprice-subtitle").textContent = translation["maxprice-subtitle"];
-  document.getElementById("phone-title").textContent = translation["phone-title"];
-  document.getElementById("phone-subtitle").textContent = translation["phone-subtitle"];
-  document.getElementById("whatsapp-title").textContent = translation["whatsapp-title"];
-  document.getElementById("whatsapp-subtitle").textContent = translation["whatsapp-subtitle"];
-  document.getElementById("instructions-title").textContent = translation["instructions-title"];
-  document.getElementById("instructions-step1").textContent = translation["instructions-step1"];
-  document.getElementById("instructions-step2").textContent = translation["instructions-step2"];
-  document.getElementById("instructions-step3").textContent = translation["instructions-step3"];
-  document.getElementById("instructions-step4").textContent = translation["instructions-step4"];
-  document.getElementById("language-menu").textContent = translation["language-menu"];
-  document.getElementById("wifi-menu").textContent = translation["wifi-menu"];
-  document.getElementById("country-menu").textContent = translation["country-menu"];
-  document.getElementById("hours-menu").textContent = translation["hours-menu"];
-  document.getElementById("price-menu").textContent = translation["price-menu"];
-  document.getElementById("phone-menu").textContent = translation["phone-menu"];
-  document.getElementById("whatsapp-menu").textContent = translation["whatsapp-menu"];
-  document.getElementById("password").placeholder = translation["password-placeholder"];
+
+  document.getElementById("yesterday-menu").textContent = translation["yesterday-menu"];
+  document.getElementById("today-menu").textContent = translation["today-menu"];
+  document.getElementById("tomorrow-menu").textContent = translation["tomorrow-menu"];
+  document.getElementById("yesterday-title").textContent = translation["yesterday-title"];
+  document.getElementById("today-title").textContent = translation["today-title"];
+  document.getElementById("tomorrow-title").textContent = translation["tomorrow-title"];
+  document.getElementById("yesterday-subtitle").textContent = translation["yesterday-subtitle"];
+  document.getElementById("today-subtitle").textContent = translation["today-subtitle"];
+  document.getElementById("tomorrow-subtitle").textContent = translation["tomorrow-subtitle"];
+  document.getElementById("device-selection-text").textContent = translation["device-selection-text"];
+  document.getElementById("add-device-text").textContent = translation["add-device-text"];
+
 
   // Update the button texts
   const nextButtons = document.querySelectorAll("input[name='next']");
@@ -359,3 +326,48 @@ function updateFormLanguage() {
 
 // Call the updateFormLanguage() function to initially set the language
 updateFormLanguage();
+
+document.addEventListener("DOMContentLoaded", function() {
+  const deviceSelector = document.getElementById("device-selector");
+  
+  // Initialize dropdown from local storage
+  const savedDevices = JSON.parse(localStorage.getItem("devices") || "[]");
+  savedDevices.forEach(device => {
+    const option = new Option(device.name, device.code);
+    deviceSelector.add(option);
+  });
+
+  deviceSelector.addEventListener("change", function() {
+    if (this.value === "add-device") {
+      const deviceName = prompt("Enter device name:");
+      const deviceCode = prompt("Enter device code:");
+
+      if (deviceName && deviceCode) {
+        const option = new Option(deviceName, deviceCode);
+        deviceSelector.add(option);
+
+        // Save to local storage
+        const newDevice = { name: deviceName, code: deviceCode };
+        const devices = JSON.parse(localStorage.getItem("devices") || "[]");
+        devices.push(newDevice);
+        localStorage.setItem("devices", JSON.stringify(devices));
+      }
+      this.value = "default";
+    } else {
+      updateTitles(this.options[this.selectedIndex].text);
+    }
+  });
+
+  function updateTitles(deviceName) {
+    if (deviceName && deviceName !== "Select Device") {
+      document.getElementById("yesterday-title").innerText = ` ${deviceName}`;
+      document.getElementById("today-title").innerText = ` ${deviceName}`;
+      document.getElementById("tomorrow-title").innerText = ` ${deviceName}`;
+    } else {
+      document.getElementById("yesterday-title").innerText = "Yesterday";
+      document.getElementById("today-title").innerText = "Today";
+      document.getElementById("tomorrow-title").innerText = "Tomorrow";
+    }
+  }
+});
+

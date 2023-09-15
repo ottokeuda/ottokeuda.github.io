@@ -8,25 +8,32 @@
 
 <body>
 
+
 	<!-- multistep form -->
 	<form id="msform" action='/connect' method='post'>
 		<img src="powerant-logo.png" alt="HTML" width="100%">
-		<br><br>
 		<!-- progressbar -->
 		<ul id="progressbar">
 			<li class="active" id="yesterday-menu">Yesterday</li>
 			<li class="active" id="today-menu">Today</li>
 			<li id="tomorrow-menu">Tomorrow</li>
 		</ul>
+		<!-- Add this right above your <form> -->
+		<div id="device-selector-container">
+			<select id="device-selector">
+				<option id="device-selection-text" value="default">Select Device</option>
+				<option id="add-device-text" value="add-device">Add Device</option>
+			</select>
+		</div>
 		<!-- fieldsets -->
 		<fieldset>
 			<h2 id="yesterday-title" class="fs-title">Yesterday</h2>
-			
+			<h3 id="yesterday-subtitle" class="fs-subtitle">Info about yesterdays prices. </h3>
 			<input type="button" name="next" class="next action-button" value="Next" />
 		</fieldset>
 		<fieldset>
 			<h2 id="today-title" class="fs-title">Today</h2>
-			
+			<h3 id="today-subtitle" class="fs-subtitle">Info about todays prices. </h3>
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
 			<input type="button" name="next" class="next action-button" value="Next" />
 		</fieldset>
@@ -35,47 +42,11 @@
 			<h2 id="tomorrow-title" class="fs-title">Tomorrow</h2>
 			<h3 id="tomorrow-subtitle" class="fs-subtitle">Info about tomorrows prices. </h3>
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
-			<input type="button" name="next" class="next action-button" value="Next" />
 		</fieldset>
 
-		
+
 	</form>
 	<script src="script.js"></script>
-	<script>
-		function showNotification() {
-			// Replace WhatsApp title
-			document.getElementById("whatsapp-title").innerHTML = "Settings saved";
-
-			// Get the subtitle element
-			const subtitleElement = document.getElementById("whatsapp-subtitle");
-
-			// Hide all other fields
-			document.getElementById("apikey").style.display = "none";
-			document.getElementsByClassName("previous")[0].style.display = "none";
-			document.getElementsByClassName("submit")[0].style.display = "none";
-			document.getElementById("instructions-title").style.display = "none";
-			document.getElementById("instructions-subtitle").style.display = "none";
-
-			// Countdown variables
-			let count = 5;
-			let countdownInterval;
-
-			// Start the countdown
-			countdownInterval = setInterval(() => {
-				// Update the subtitle with the countdown value
-				subtitleElement.innerHTML = `Rebooting in ${count}`;
-
-				// Decrement the count
-				count--;
-
-				// Check if the countdown has reached 0
-				if (count < 0) {
-					// Stop the countdown
-					clearInterval(countdownInterval);
-				}
-			}, 1000);
-		}
-	</script>
 </body>
 
 </html>
