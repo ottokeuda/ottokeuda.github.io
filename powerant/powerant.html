@@ -200,7 +200,7 @@
 			<h3 id="yesterday-subtitle" class="fs-subtitle">Info about yesterdays prices. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today</h2>
+			<h2 id="today-title" class="fs-title">Today is a good day</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">Info about todays prices. </h3>
 		</fieldset>
 
@@ -256,6 +256,7 @@
 			previous_fs = current_fs.previousElementSibling;
 
 			if (direction === 'next' && next_fs) {
+				// Moving to the next fieldset
 				current_fs.classList.remove('current');
 				next_fs.classList.add('current');
 
@@ -268,6 +269,7 @@
 				animating = false;
 
 			} else if (direction === 'previous' && previous_fs) {
+				// Moving to the previous fieldset
 				current_fs.classList.remove('current');
 				previous_fs.classList.add('current');
 
@@ -277,6 +279,10 @@
 
 				current_fs.style.display = 'none';
 				previous_fs.style.display = 'block';
+				animating = false;
+
+			} else {
+				// Edge case: At the beginning or end; can't move further
 				animating = false;
 			}
 		}
