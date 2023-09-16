@@ -16,18 +16,28 @@ function handleTouchMove(evt) {
   }
 
   var xDiff = xStart - evt.touches[0].clientX;
-  
+
   // swipe left
   if (xDiff > 50) {
     moveFieldset('next');
+    xStart = null;
   }
   // swipe right
   else if (xDiff < -50) {
     moveFieldset('previous');
+    xStart = null;
   }
-  
+}
+
+function handleTouchEnd(evt) {
   xStart = null; // Reset xStart for the next swipe
 }
+
+// Listen for touch events on the document
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+document.addEventListener('touchend', handleTouchEnd, false);
+
 
 function moveFieldset(direction) {
   if (animating) return false;
@@ -68,10 +78,6 @@ function moveFieldset(direction) {
 
 // Add 'current' class to the first fieldset initially
 document.querySelector('fieldset').classList.add('current');
-
-// Listen for touch events on the document
-document.addEventListener('touchstart', handleTouchStart, false);
-document.addEventListener('touchmove', handleTouchMove, false);
 
 nextButtons.forEach(function (button) {
   button.addEventListener('click', function () {
@@ -167,7 +173,7 @@ function fadeIn(element) {
 const translations = {
   english: {
     "yesterday-title": "Yesterday",
-    "today-title": "Today",
+    "today-title": "Today is the day",
     "tomorrow-title": "Tomorrow",
     "next-button": "Next",
     "previous-button": "Previous",
