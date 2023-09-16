@@ -188,20 +188,19 @@
 			<li id="tomorrow-menu">Tomorrow</li>
 		</ul>
 		<!-- Add this right above your <form> -->
-		
+		<div id="device-selector-container">
+			<select id="device-selector">
+				<option id="device-selection-text" value="default">Select Device</option>
+				<option id="add-device-text" value="add-device">Add Device</option>
+			</select>
+		</div>
 		<!-- fieldsets -->
 		<fieldset>
 			<h2 id="yesterday-title" class="fs-title">Yesterday</h2>
 			<h3 id="yesterday-subtitle" class="fs-subtitle">Info about yesterdays prices. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<div id="device-selector-container">
-				<select id="device-selector">
-					<option id="device-selection-text" value="default">Select Device</option>
-					<option id="add-device-text" value="add-device">Add Device</option>
-				</select>
-			</div>
-			<h2 id="today-title" class="fs-title">Today is a green day</h2>
+			<h2 id="today-title" class="fs-title">Today is a bloody day</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">Info about todays prices. </h3>
 		</fieldset>
 
@@ -250,50 +249,49 @@
 
 		function moveFieldset(direction) {
 			if (animating) return false;
-
 			animating = true;
+
 			current_fs = document.querySelector('.current');
+
+			// Determine next and previous fieldsets based on the new current_fs
 			next_fs = current_fs.nextElementSibling;
 			previous_fs = current_fs.previousElementSibling;
 
 			if (direction === 'next') {
 				if (next_fs) {
-					// Existing 'next' fieldset, proceed with the transition
 					current_fs.classList.remove('current');
 					next_fs.classList.add('current');
 
 					var progressbar = document.getElementById('progressbar');
-					var fieldsets = document.querySelectorAll('fieldset');
-					var index = Array.from(fieldsets).indexOf(next_fs);
+					var index = Array.from(document.querySelectorAll('fieldset')).indexOf(next_fs);
 					progressbar.children[index].classList.add('active');
 
 					current_fs.style.display = 'none';
 					next_fs.style.display = 'block';
 				} else {
-					// At the last fieldset, can't move forward
-					console.log('At the last step, can\'t move forward.');
+					// If at the last fieldset, can't move forward
+					console.log("At the last step, can't move forward.");
 				}
 			} else if (direction === 'previous') {
 				if (previous_fs) {
-					// Existing 'previous' fieldset, proceed with the transition
 					current_fs.classList.remove('current');
 					previous_fs.classList.add('current');
 
 					var progressbar = document.getElementById('progressbar');
-					var fieldsets = document.querySelectorAll('fieldset');
-					var index = Array.from(fieldsets).indexOf(current_fs);
+					var index = Array.from(document.querySelectorAll('fieldset')).indexOf(current_fs);
 					progressbar.children[index].classList.remove('active');
 
 					current_fs.style.display = 'none';
 					previous_fs.style.display = 'block';
 				} else {
-					// At the first fieldset, can't move backward
-					console.log('At the first step, can\'t move backward.');
+					// If at the first fieldset, can't move backward
+					console.log("At the first step, can't move backward.");
 				}
 			}
 
 			animating = false;  // Reset the animating flag
 		}
+
 
 	</script>
 </body>
