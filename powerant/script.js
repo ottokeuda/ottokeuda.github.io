@@ -185,7 +185,7 @@ function fadeIn(element) {
 const translations = {
   english: {
     "yesterday-title": "Yesterday",
-    "today-title": "Today is awesome",
+    "today-title": "Today is blue",
     "tomorrow-title": "Tomorrow",
     "next-button": "Next",
     "previous-button": "Previous",
