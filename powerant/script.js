@@ -47,37 +47,48 @@ function moveFieldset(direction) {
   next_fs = current_fs.nextElementSibling;
   previous_fs = current_fs.previousElementSibling;
 
-  var progressbar = document.getElementById('progressbar');
-  var fieldsets = document.querySelectorAll('fieldset');
-  var index;
-
   if (direction === 'next' && next_fs) {
-    index = Array.from(fieldsets).indexOf(next_fs);
-    progressbar.children[index].classList.add('active');
-    fadeOut(current_fs, function () {
-      next_fs.style.display = 'block';
-      fadeIn(next_fs);
-      current_fs.style.display = 'none';
-      current_fs.classList.remove('current');
-      next_fs.classList.add('current');
-      animating = false;
+      // activate next step on progressbar using the index of next_fs
+      var progressbar = document.getElementById('progressbar');
+      var fieldsets = document.querySelectorAll('fieldset');
+      var index = Array.from(fieldsets).indexOf(next_fs);
+      progressbar.children[index].classList.add('active');
+  
+      // fade out the current fieldset
+      fadeOut(current_fs, function () {
+        // show the next fieldset
+        next_fs.style.display = 'block';
+  
+        // fade in the next fieldset
+        fadeIn(next_fs);
+  
+        // hide the current fieldset
+        current_fs.style.display = 'none';
+  
+        animating = false;
     });
   } else if (direction === 'previous' && previous_fs) {
-    index = Array.from(fieldsets).indexOf(current_fs);
+    // de-activate current step on progressbar
+    var progressbar = document.getElementById('progressbar');
+    var fieldsets = document.querySelectorAll('fieldset');
+    var index = Array.from(fieldsets).indexOf(current_fs);
     progressbar.children[index].classList.remove('active');
+
+    // fade out the current fieldset
     fadeOut(current_fs, function () {
+      // show the previous fieldset
       previous_fs.style.display = 'block';
+
+      // fade in the previous fieldset
       fadeIn(previous_fs);
+
+      // hide the current fieldset
       current_fs.style.display = 'none';
-      current_fs.classList.remove('current');
-      previous_fs.classList.add('current');
+
       animating = false;
     });
   }
 }
-
-// Add 'current' class to the first fieldset initially
-document.querySelector('fieldset').classList.add('current');
 
 nextButtons.forEach(function (button) {
   button.addEventListener('click', function () {
