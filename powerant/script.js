@@ -1,9 +1,77 @@
-var current_fs, next_fs, previous_fs; // fieldsets
-var animating; // flag to prevent quick multi-click glitches
-
 var nextButtons = document.querySelectorAll('.next');
 var previousButtons = document.querySelectorAll('.previous');
 var submitButton = document.querySelector('.submit');
+
+var current_fs, next_fs, previous_fs; // fieldsets
+var animating; // flag to prevent quick multi-click glitches
+var xStart = null;
+
+function handleTouchStart(evt) {
+  xStart = evt.touches[0].clientX;
+}
+
+function handleTouchMove(evt) {
+  if (!xStart) {
+    return;
+  }
+
+  var xDiff = xStart - evt.touches[0].clientX;
+  
+  // swipe left
+  if (xDiff > 50) {
+    moveFieldset('next');
+  }
+  // swipe right
+  else if (xDiff < -50) {
+    moveFieldset('previous');
+  }
+  
+  xStart = null; // Reset xStart for the next swipe
+}
+
+function moveFieldset(direction) {
+  if (animating) return false;
+  animating = true;
+
+  current_fs = document.querySelector('.current');
+  next_fs = current_fs.nextElementSibling;
+  previous_fs = current_fs.previousElementSibling;
+
+  var progressbar = document.getElementById('progressbar');
+  var fieldsets = document.querySelectorAll('fieldset');
+  var index;
+
+  if (direction === 'next' && next_fs) {
+    index = Array.from(fieldsets).indexOf(next_fs);
+    progressbar.children[index].classList.add('active');
+    fadeOut(current_fs, function () {
+      next_fs.style.display = 'block';
+      fadeIn(next_fs);
+      current_fs.style.display = 'none';
+      current_fs.classList.remove('current');
+      next_fs.classList.add('current');
+      animating = false;
+    });
+  } else if (direction === 'previous' && previous_fs) {
+    index = Array.from(fieldsets).indexOf(current_fs);
+    progressbar.children[index].classList.remove('active');
+    fadeOut(current_fs, function () {
+      previous_fs.style.display = 'block';
+      fadeIn(previous_fs);
+      current_fs.style.display = 'none';
+      current_fs.classList.remove('current');
+      previous_fs.classList.add('current');
+      animating = false;
+    });
+  }
+}
+
+// Add 'current' class to the first fieldset initially
+document.querySelector('fieldset').classList.add('current');
+
+// Listen for touch events on the document
+document.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
 
 nextButtons.forEach(function (button) {
   button.addEventListener('click', function () {
@@ -98,37 +166,19 @@ function fadeIn(element) {
 
 const translations = {
   english: {
-    "language-title": "Select your language",
-    "wifi-title": "Select your wifi network",
-    "wifi-password": "Wifi password",
-    "country-title": "Country/area",
-    "country-subtitle": "The device downloads prices for your selected country/area",
-    "hours-title": "Active hours",
-    "hours-subtitle": "Select the number of daily active hours for the device. The device will turn on during the cheapest hours of the day",
-    "maxprice-title": "Maximum price",
-    "maxprice-subtitle": "Input your maximum price for electricity in cents/KWh",
-    "phone-title": "Phone number",
-    "phone-subtitle": "You can receive daily price notifications through Whatsapp",
-    "whatsapp-title": "Whatsapp code",
-    "whatsapp-subtitle": "Input your Whatsapp code to receive notifications. Check the guide below on how to get your code.",
-    "instructions-title": "INSTRUCTIONS",
+    "yesterday-title": "Yesterday",
+    "today-title": "Today",
+    "tomorrow-title": "Tomorrow",
     "next-button": "Next",
     "previous-button": "Previous",
-    "submit-button": "Save",
-    "instructions-step1": "Open your phone contacts and add +34 611 048 748 as Powerant.",
-    "instructions-step2": "Open Whatsapp and find the previously added Powerant contact.",
-    "instructions-step3": "Send it the following Whatsapp message: 'I allow callmebot to send me messages'.",
-    "instructions-step4": "You will receive a 7 number API-key as a response. Input the key to the form above.",
-    "language-menu": "Language",
-    "wifi-menu": "Wifi",
-    "country-menu": "County",
-    "hours-menu": "Hours",
-    "price-menu": "Price",
-    "phone-menu": "Phone",
-    "whatsapp-menu": "Whatsapp",
-    "password-placeholder": "Wifi password"
-
-    // Add more translations here
+    "yesterday-menu": "Yesterday",
+    "today-menu": "Today",
+    "tomorrow-menu": "Tomorrow",
+    "today-subtitle": "Information about today's hours",
+    "yesterday-subtitle": "Information about yesterday's hours",
+    "tomorrow-subtitle": "Information about tomorrow's hours",
+    "device-selection-text": "Select device",
+    "add-device-text": "Add device"
   },
   finnish: {
     "yesterday-title": "Eilen",
@@ -144,132 +194,6 @@ const translations = {
     "tomorrow-subtitle": "Tietoa huomisen tunneista",
     "device-selection-text": "Valitse laite",
     "add-device-text": "Lisää laite" 
-
-    // Add more translations here
-  },
-  swedish: {
-    "language-title": "Välj ditt språk",
-    "wifi-title": "Välj ditt wifi-nätverk",
-    "wifi-password": "Wifi lösenord",
-    "country-title": "Land/område",
-    "country-subtitle": "Enheten laddar ner priser för ditt valda land/område",
-    "hours-title": "Aktiva timmar",
-    "hours-subtitle": "Välj antalet dagliga aktiva timmar för enheten. Enheten kommer att slås på under de billigaste timmarna på dagen",
-    "maxprice-title": "Maximalt pris",
-    "maxprice-subtitle": "Ange ditt maximala pris för el i cent/kWh",
-    "phone-title": "Telefonnummer",
-    "phone-subtitle": "Du kan få dagliga prismeddelanden via Whatsapp",
-    "whatsapp-title": "Whatsapp-kod",
-    "whatsapp-subtitle": "Ange din Whatsapp-kod för att få meddelanden. Se guiden nedan om hur du får din kod.",
-    "instructions-title": "INSTRUKTIONER",
-    "next-button": "Nästa",
-    "previous-button": "Föregående",
-    "submit-button": "Spara",
-    "instructions-step1": "Öppna dina telefonkontakter och lägg till +34 611 048 748 som Powerant.",
-    "instructions-step2": "Öppna Whatsapp och hitta den tidigare tillagda Powerant-kontakten.",
-    "instructions-step3": "Skicka följande Whatsapp-meddelande till den: 'Jag tillåter callmebot att skicka mig meddelanden'.",
-    "instructions-step4": "Du kommer att få ett API-nyckel med 7 siffror som svar. Ange nyckeln i formuläret ovan.",
-    "language-menu": "Språk",
-    "wifi-menu": "Wifi",
-    "country-menu": "Land",
-    "hours-menu": "Timmar",
-    "price-menu": "Pris",
-    "phone-menu": "Telefon",
-    "whatsapp-menu": "Whatsapp",
-    "password-placeholder": "Wifi lösenord"
-  },
-  norwegian: {
-    "language-title": "Velg språk",
-    "wifi-title": "Velg ditt Wi-Fi-nettverk",
-    "wifi-password": "Wi-Fi-passord",
-    "country-title": "Land/område",
-    "country-subtitle": "Enheten laster ned priser for det valgte landet/området",
-    "hours-title": "Aktive timer",
-    "hours-subtitle": "Velg antall daglige aktive timer for enheten. Enheten vil slå seg på i løpet av de billigste timene på dagen",
-    "maxprice-title": "Maksimal pris",
-    "maxprice-subtitle": "Skriv inn maksimalprisen for strøm i cent/kWh",
-    "phone-title": "Telefonnummer",
-    "phone-subtitle": "Du kan motta daglige prisvarsler via WhatsApp",
-    "whatsapp-title": "WhatsApp-kode",
-    "whatsapp-subtitle": "Skriv inn WhatsApp-koden din for å motta varsler. Se guiden nedenfor for hvordan du får koden din.",
-    "instructions-title": "INSTRUKSJONER",
-    "next-button": "Neste",
-    "previous-button": "Forrige",
-    "submit-button": "Lagre",
-    "instructions-step1": "Åpne kontaktene på telefonen din og legg til +34 611 048 748 som Powerant.",
-    "instructions-step2": "Åpne WhatsApp og finn den tidligere lagt til kontakten Powerant.",
-    "instructions-step3": "Send følgende WhatsApp-melding til den: 'Jeg tillater callmebot å sende meg meldinger'.",
-    "instructions-step4": "Du vil motta en API-nøkkel med 7 tall som svar. Skriv inn nøkkelen i skjemaet ovenfor.",
-    "language-menu": "Språk",
-    "wifi-menu": "Wi-Fi",
-    "country-menu": "Land",
-    "hours-menu": "Timer",
-    "price-menu": "Pris",
-    "phone-menu": "Telefon",
-    "whatsapp-menu": "WhatsApp",
-    "password-placeholder": "Wi-Fi-passord"
-  },
-  danish: {
-    "language-title": "Vælg dit sprog",
-    "wifi-title": "Vælg dit Wi-Fi-netværk",
-    "wifi-password": "Wi-Fi-adgangskode",
-    "country-title": "Land/område",
-    "country-subtitle": "Enheden downloader priser for dit valgte land/område",
-    "hours-title": "Aktive timer",
-    "hours-subtitle": "Vælg antallet af daglige aktive timer for enheden. Enheden vil tænde i løbet af de billigste timer på dagen",
-    "maxprice-title": "Maksimal pris",
-    "maxprice-subtitle": "Indtast din maksimale pris for elektricitet i cent/kWh",
-    "phone-title": "Telefonnummer",
-    "phone-subtitle": "Du kan modtage daglige prismeddelelser via WhatsApp",
-    "whatsapp-title": "WhatsApp-kode",
-    "whatsapp-subtitle": "Indtast din WhatsApp-kode for at modtage meddelelser. Se vejledningen nedenfor om, hvordan du får din kode.",
-    "instructions-title": "INSTRUKTIONER",
-    "next-button": "Næste",
-    "previous-button": "Forrige",
-    "submit-button": "Gem",
-    "instructions-step1": "Åbn dine telefonkontakter og tilføj +34 611 048 748 som Powerant.",
-    "instructions-step2": "Åbn WhatsApp og find den tidligere tilføjede Powerant-kontakt.",
-    "instructions-step3": "Send følgende WhatsApp-besked til den: 'Jeg tillader callmebot at sende mig beskeder'.",
-    "instructions-step4": "Du vil modtage en 7-cifret API-nøgle som svar. Indtast nøglen i formularen ovenfor.",
-    "language-menu": "Sprog",
-    "wifi-menu": "Wi-Fi",
-    "country-menu": "Land",
-    "hours-menu": "Timer",
-    "price-menu": "Pris",
-    "phone-menu": "Telefon",
-    "whatsapp-menu": "WhatsApp",
-    "password-placeholder": "Wi-Fi-adgangskode"
-  },
-  estonian: {
-    "language-title": "Valige oma keel",
-    "wifi-title": "Valige oma WiFi-võrk",
-    "wifi-password": "WiFi-parool",
-    "country-title": "Riik/piirkond",
-    "country-subtitle": "Seade laadib alla hindu valitud riigi/piirkonna jaoks",
-    "hours-title": "Aktiivsed tunnid",
-    "hours-subtitle": "Valige seadme igapäevaste aktiivsete tundide arv. Seade lülitub sisse päeva odavaimatel tundidel",
-    "maxprice-title": "Maksimaalne hind",
-    "maxprice-subtitle": "Sisestage oma elektri maksimaalne hind sentides/kWh",
-    "phone-title": "Telefoninumber",
-    "phone-subtitle": "Saate igapäevaseid hinnateavitusi WhatsAppi kaudu",
-    "whatsapp-title": "WhatsAppi kood",
-    "whatsapp-subtitle": "Sisestage oma WhatsAppi kood teadete saamiseks. Vaadake allpool juhendit, kuidas oma koodi saada.",
-    "instructions-title": "JUHISED",
-    "next-button": "Järgmine",
-    "previous-button": "Eelmine",
-    "submit-button": "Salvesta",
-    "instructions-step1": "Avage oma telefoni kontaktid ja lisage Powerant +34 611 048 748 nime all.",
-    "instructions-step2": "Avage WhatsApp ja leidke varem lisatud Powerant kontakt.",
-    "instructions-step3": "Saada sellele järgmine WhatsAppi sõnum: 'Luba callmebotil saata mulle teateid'.",
-    "instructions-step4": "Saate vastuseks 7-kohalise API võtme. Sisestage võti ülaltoodud vormi.",
-    "language-menu": "Keel",
-    "wifi-menu": "WiFi",
-    "country-menu": "Riik",
-    "hours-menu": "Tunnid",
-    "price-menu": "Hind",
-    "phone-menu": "Telefon",
-    "whatsapp-menu": "WhatsApp",
-    "password-placeholder": "WiFi-parool"
   }
   // add translations
 };
