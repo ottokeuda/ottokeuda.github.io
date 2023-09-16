@@ -2,93 +2,99 @@ var nextButtons = document.querySelectorAll('.next');
 var previousButtons = document.querySelectorAll('.previous');
 var submitButton = document.querySelector('.submit');
 
-var current_fs, next_fs, previous_fs; // fieldsets
-var animating; // flag to prevent quick multi-click glitches
-var xStart = null;
+var current_fs, next_fs, previous_fs;
+		var animating = false;
+		var xStart = null;
+		let currentFieldsetIndex = 1; // You start at index 1, which is the second fieldset
 
-function handleTouchStart(evt) {
-  xStart = evt.touches[0].clientX;
+		// Initialize the "current" fieldset
+		var fieldsets = document.querySelectorAll('fieldset');
+		fieldsets[1].classList.add('current');
+
+		function handleTouchStart(evt) {
+			xStart = evt.touches[0].clientX;
+		}
+
+		function handleTouchMove(evt) {
+			if (!xStart) {
+				return;
+			}
+
+			var xDiff = xStart - evt.touches[0].clientX;
+
+			if (xDiff > 50) {
+				moveFieldset('next');
+				xStart = null;
+			} else if (xDiff < -50) {
+				moveFieldset('previous');
+				xStart = null;
+			}
+		}
+
+		function handleTouchEnd(evt) {
+			xStart = null;
+		}
+
+		// Add touch event listeners
+		document.addEventListener('touchstart', handleTouchStart, false);
+		document.addEventListener('touchmove', handleTouchMove, false);
+		document.addEventListener('touchend', handleTouchEnd, false);
+
+		function moveFieldset(direction) {
+			if (animating) return false;
+			animating = true;
+
+			let fieldsets = document.querySelectorAll('fieldset');
+
+			if (direction === 'next' && currentFieldsetIndex < fieldsets.length - 1) {
+				fieldsets[currentFieldsetIndex].style.display = 'none';
+				currentFieldsetIndex++;
+				fieldsets[currentFieldsetIndex].style.display = 'block';
+
+				let progressbar = document.getElementById('progressbar');
+				progressbar.children[currentFieldsetIndex].classList.add('active');
+
+			} else if (direction === 'previous' && currentFieldsetIndex > 0) {
+				fieldsets[currentFieldsetIndex].style.display = 'none';
+				currentFieldsetIndex--;
+				fieldsets[currentFieldsetIndex].style.display = 'block';
+
+				let progressbar = document.getElementById('progressbar');
+				progressbar.children[currentFieldsetIndex + 1].classList.remove('active');
+
+			} else {
+				console.log("Either at the first or last step, can't move.");
+			}
+
+			animating = false;
+		}
+// Fade out an element
+function fadeOut(element, callback) {
+  var opacity = 1;
+  var timer = setInterval(function () {
+    if (opacity <= 0.1) {
+      clearInterval(timer);
+      element.style.display = 'none';
+      callback();
+    }
+    element.style.opacity = opacity;
+    opacity -= opacity * 0.1;
+  }, 10);
 }
 
-function handleTouchMove(evt) {
-  if (!xStart) {
-    return;
-  }
+// Fade in an element
+function fadeIn(element) {
+  var opacity = 0.1;
+  element.style.opacity = 0;
+  element.style.display = 'block';
 
-  var xDiff = xStart - evt.touches[0].clientX;
-
-  // swipe left
-  if (xDiff > 50) {
-    moveFieldset('next');
-    xStart = null;
-  }
-  // swipe right
-  else if (xDiff < -50) {
-    moveFieldset('previous');
-    xStart = null;
-  }
-}
-
-function handleTouchEnd(evt) {
-  xStart = null; // Reset xStart for the next swipe
-}
-
-document.querySelectorAll('fieldset')[1].classList.add('current');
-// Listen for touch events on the document
-document.addEventListener('touchstart', handleTouchStart, false);
-document.addEventListener('touchmove', handleTouchMove, false);
-document.addEventListener('touchend', handleTouchEnd, false);
-
-
-function moveFieldset(direction) {
-  if (animating) return false;
-  animating = true;
-
-  current_fs = document.querySelector('.current');
-  next_fs = current_fs.nextElementSibling;
-  previous_fs = current_fs.previousElementSibling;
-
-  if (direction === 'next' && next_fs) {
-      // activate next step on progressbar using the index of next_fs
-      var progressbar = document.getElementById('progressbar');
-      var fieldsets = document.querySelectorAll('fieldset');
-      var index = Array.from(fieldsets).indexOf(next_fs);
-      progressbar.children[index].classList.add('active');
-  
-      // fade out the current fieldset
-      fadeOut(current_fs, function () {
-        // show the next fieldset
-        next_fs.style.display = 'block';
-  
-        // fade in the next fieldset
-        fadeIn(next_fs);
-  
-        // hide the current fieldset
-        current_fs.style.display = 'none';
-  
-        animating = false;
-    });
-  } else if (direction === 'previous' && previous_fs) {
-    // de-activate current step on progressbar
-    var progressbar = document.getElementById('progressbar');
-    var fieldsets = document.querySelectorAll('fieldset');
-    var index = Array.from(fieldsets).indexOf(current_fs);
-    progressbar.children[index].classList.remove('active');
-
-    // fade out the current fieldset
-    fadeOut(current_fs, function () {
-      // show the previous fieldset
-      previous_fs.style.display = 'block';
-
-      // fade in the previous fieldset
-      fadeIn(previous_fs);
-
-      // hide the current fieldset
-      current_fs.style.display = 'none';
-
-      animating = false;
-    });
-  }
+  var timer = setInterval(function () {
+    if (opacity >= 1) {
+      clearInterval(timer);
+    }
+    element.style.opacity = opacity;
+    opacity += opacity * 0.1;
+  }, 10);
 }
 
 nextButtons.forEach(function (button) {
@@ -150,37 +156,6 @@ previousButtons.forEach(function (button) {
     });
   });
 });
-
-
-
-// Fade out an element
-function fadeOut(element, callback) {
-  var opacity = 1;
-  var timer = setInterval(function () {
-    if (opacity <= 0.1) {
-      clearInterval(timer);
-      element.style.display = 'none';
-      callback();
-    }
-    element.style.opacity = opacity;
-    opacity -= opacity * 0.1;
-  }, 10);
-}
-
-// Fade in an element
-function fadeIn(element) {
-  var opacity = 0.1;
-  element.style.opacity = 0;
-  element.style.display = 'block';
-
-  var timer = setInterval(function () {
-    if (opacity >= 1) {
-      clearInterval(timer);
-    }
-    element.style.opacity = opacity;
-    opacity += opacity * 0.1;
-  }, 10);
-}
 
 const translations = {
   english: {
