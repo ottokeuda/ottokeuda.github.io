@@ -33,6 +33,7 @@ function handleTouchEnd(evt) {
   xStart = null; // Reset xStart for the next swipe
 }
 
+document.querySelectorAll('fieldset')[1].classList.add('current');
 // Listen for touch events on the document
 document.addEventListener('touchstart', handleTouchStart, false);
 document.addEventListener('touchmove', handleTouchMove, false);
@@ -43,7 +44,7 @@ function moveFieldset(direction) {
   if (animating) return false;
   animating = true;
 
-  current_fs = this.parentElement;
+  current_fs = document.querySelector('.current');
   next_fs = current_fs.nextElementSibling;
   previous_fs = current_fs.previousElementSibling;
 
