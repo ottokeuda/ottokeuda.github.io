@@ -200,7 +200,7 @@
 			<h3 id="yesterday-subtitle" class="fs-subtitle">Info about yesterdays prices. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today is a bloody day</h2>
+			<h2 id="today-title" class="fs-title">Today is a country day</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">Info about todays prices. </h3>
 		</fieldset>
 
@@ -251,47 +251,70 @@
 			if (animating) return false;
 			animating = true;
 
+			// Debugging: Print the current fieldset being operated upon
 			current_fs = document.querySelector('.current');
+			console.log("Current FS:", current_fs);
 
-			// Determine next and previous fieldsets based on the new current_fs
 			next_fs = current_fs.nextElementSibling;
 			previous_fs = current_fs.previousElementSibling;
 
-			if (direction === 'next') {
-				if (next_fs) {
-					current_fs.classList.remove('current');
-					next_fs.classList.add('current');
+			// Debugging: Print the next and previous fieldsets
+			console.log("Next FS:", next_fs);
+			console.log("Previous FS:", previous_fs);
 
-					var progressbar = document.getElementById('progressbar');
-					var index = Array.from(document.querySelectorAll('fieldset')).indexOf(next_fs);
-					progressbar.children[index].classList.add('active');
-
-					current_fs.style.display = 'none';
-					next_fs.style.display = 'block';
-				} else {
-					// If at the last fieldset, can't move forward
-					console.log("At the last step, can't move forward.");
-				}
-			} else if (direction === 'previous') {
-				if (previous_fs) {
-					current_fs.classList.remove('current');
-					previous_fs.classList.add('current');
-
-					var progressbar = document.getElementById('progressbar');
-					var index = Array.from(document.querySelectorAll('fieldset')).indexOf(current_fs);
-					progressbar.children[index].classList.remove('active');
-
-					current_fs.style.display = 'none';
-					previous_fs.style.display = 'block';
-				} else {
-					// If at the first fieldset, can't move backward
-					console.log("At the first step, can't move backward.");
-				}
+			// Handling edge cases
+			if (direction === 'next' && !next_fs) {
+				console.log('No next fieldset. Staying in the current fieldset.');
+				animating = false;
+				return;
+			} else if (direction === 'previous' && !previous_fs) {
+				console.log('No previous fieldset. Staying in the current fieldset.');
+				animating = false;
+				return;
 			}
 
-			animating = false;  // Reset the animating flag
-		}
+			if (direction === 'next' && next_fs) {
+				// activate next step on progressbar using the index of next_fs
+				var progressbar = document.getElementById('progressbar');
+				var fieldsets = document.querySelectorAll('fieldset');
+				var index = Array.from(fieldsets).indexOf(next_fs);
+				progressbar.children[index].classList.add('active');
 
+				// fade out the current fieldset
+				fadeOut(current_fs, function () {
+					// show the next fieldset
+					next_fs.style.display = 'block';
+
+					// fade in the next fieldset
+					fadeIn(next_fs);
+
+					// hide the current fieldset
+					current_fs.style.display = 'none';
+
+					animating = false;
+				});
+			} else if (direction === 'previous' && previous_fs) {
+				// de-activate current step on progressbar
+				var progressbar = document.getElementById('progressbar');
+				var fieldsets = document.querySelectorAll('fieldset');
+				var index = Array.from(fieldsets).indexOf(current_fs);
+				progressbar.children[index].classList.remove('active');
+
+				// fade out the current fieldset
+				fadeOut(current_fs, function () {
+					// show the previous fieldset
+					previous_fs.style.display = 'block';
+
+					// fade in the previous fieldset
+					fadeIn(previous_fs);
+
+					// hide the current fieldset
+					current_fs.style.display = 'none';
+
+					animating = false;
+				});
+			}
+		}
 
 	</script>
 </body>
