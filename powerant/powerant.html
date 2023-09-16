@@ -174,6 +174,17 @@
 			font-size: 16px;
 			margin-top: 10px;
 		}
+
+		#msform fieldset {
+			transition: left 0.3s ease-in-out;
+			left: 100%;
+			/* Initialize off-screen to the right */
+		}
+
+		#msform fieldset.current {
+			left: 0;
+			/* Display on-screen when it's the current fieldset */
+		}
 	</style>
 </head>
 
@@ -200,7 +211,7 @@
 			<h3 id="yesterday-subtitle" class="fs-subtitle">Info about yesterdays prices. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today is a fine day</h2>
+			<h2 id="today-title" class="fs-title">Today is a nice day</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">Info about todays prices. </h3>
 		</fieldset>
 
@@ -210,6 +221,8 @@
 		</fieldset>
 	</form>
 	<script>
+		
+		
 		var current_fs, next_fs, previous_fs;
 		var animating = false;
 		var xStart = null;
@@ -255,17 +268,19 @@
 			let fieldsets = document.querySelectorAll('fieldset');
 
 			if (direction === 'next' && currentFieldsetIndex < fieldsets.length - 1) {
-				fieldsets[currentFieldsetIndex].style.display = 'none';
+
+				fieldsets[currentFieldsetIndex].classList.remove('current');
 				currentFieldsetIndex++;
-				fieldsets[currentFieldsetIndex].style.display = 'block';
+				fieldsets[currentFieldsetIndex].classList.add('current');
 
 				let progressbar = document.getElementById('progressbar');
 				progressbar.children[currentFieldsetIndex].classList.add('active');
 
 			} else if (direction === 'previous' && currentFieldsetIndex > 0) {
-				fieldsets[currentFieldsetIndex].style.display = 'none';
+
+				fieldsets[currentFieldsetIndex].classList.remove('current');
 				currentFieldsetIndex--;
-				fieldsets[currentFieldsetIndex].style.display = 'block';
+				fieldsets[currentFieldsetIndex].classList.add('current');
 
 				let progressbar = document.getElementById('progressbar');
 				progressbar.children[currentFieldsetIndex + 1].classList.remove('active');
@@ -276,6 +291,7 @@
 
 			animating = false;
 		}
+
 
 
 
