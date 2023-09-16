@@ -43,7 +43,7 @@ function moveFieldset(direction) {
   if (animating) return false;
   animating = true;
 
-  current_fs = document.querySelector('.current');
+  current_fs = this.parentElement;
   next_fs = current_fs.nextElementSibling;
   previous_fs = current_fs.previousElementSibling;
 
@@ -184,7 +184,7 @@ function fadeIn(element) {
 const translations = {
   english: {
     "yesterday-title": "Yesterday",
-    "today-title": "Today is great",
+    "today-title": "Today is awesome",
     "tomorrow-title": "Tomorrow",
     "next-button": "Next",
     "previous-button": "Previous",
