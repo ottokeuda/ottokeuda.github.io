@@ -177,13 +177,15 @@
 
 		#msform fieldset {
 			transition: left 0.3s ease-in-out;
-			left: 100%;
-			/* Initialize off-screen to the right */
+			left: 0;
+			/* Initialize to be visible on the screen */
+			position: absolute;
+			/* Ensure the fieldsets are stackable */
 		}
 
-		#msform fieldset.current {
-			left: 0;
-			/* Display on-screen when it's the current fieldset */
+		#msform fieldset:not(.current) {
+			left: 100%;
+			/* Hide off-screen when it's not the current fieldset */
 		}
 	</style>
 </head>
@@ -211,7 +213,7 @@
 			<h3 id="yesterday-subtitle" class="fs-subtitle">Info about yesterdays prices. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today is a fine day</h2>
+			<h2 id="today-title" class="fs-title">Today is a day</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">Info about todays prices. </h3>
 		</fieldset>
 
@@ -221,7 +223,7 @@
 		</fieldset>
 	</form>
 	<script>
-		
+
 		var current_fs, next_fs, previous_fs;
 		var animating = false;
 		var xStart = null;
@@ -261,35 +263,32 @@
 		document.addEventListener('touchend', handleTouchEnd, false);
 
 		function moveFieldset(direction) {
-			if (animating) return false;
-			animating = true;
+    if (animating) return false;
+    animating = true;
 
-			let fieldsets = document.querySelectorAll('fieldset');
+    let fieldsets = Array.from(document.querySelectorAll('fieldset'));
+    let currentFieldsetIndex = fieldsets.indexOf(document.querySelector('.current'));
 
-			if (direction === 'next' && currentFieldsetIndex < fieldsets.length - 1) {
+    if (direction === 'next' && currentFieldsetIndex < fieldsets.length - 1) {
+        fieldsets[currentFieldsetIndex].classList.remove('current');
+        currentFieldsetIndex++;
+        fieldsets[currentFieldsetIndex].classList.add('current');
 
-				fieldsets[currentFieldsetIndex].classList.remove('current');
-				currentFieldsetIndex++;
-				fieldsets[currentFieldsetIndex].classList.add('current');
+        let progressbar = document.getElementById('progressbar');
+        progressbar.children[currentFieldsetIndex].classList.add('active');
 
-				let progressbar = document.getElementById('progressbar');
-				progressbar.children[currentFieldsetIndex].classList.add('active');
+    } else if (direction === 'previous' && currentFieldsetIndex > 0) {
+        fieldsets[currentFieldsetIndex].classList.remove('current');
+        currentFieldsetIndex--;
+        fieldsets[currentFieldsetIndex].classList.add('current');
 
-			} else if (direction === 'previous' && currentFieldsetIndex > 0) {
+        let progressbar = document.getElementById('progressbar');
+        progressbar.children[currentFieldsetIndex + 1].classList.remove('active');
+    }
 
-				fieldsets[currentFieldsetIndex].classList.remove('current');
-				currentFieldsetIndex--;
-				fieldsets[currentFieldsetIndex].classList.add('current');
+    animating = false;
+}
 
-				let progressbar = document.getElementById('progressbar');
-				progressbar.children[currentFieldsetIndex + 1].classList.remove('active');
-
-			} else {
-				console.log("Either at the first or last step, can't move.");
-			}
-
-			animating = false;
-		}
 
 
 
