@@ -175,19 +175,14 @@
 			margin-top: 10px;
 		}
 
-		.slide-left {
-			transform: translateX(-100%);
-			transition: transform 0.4s ease-in-out;
+		.fade {
+			opacity: 0;
+			transition: opacity 0.3s ease-in-out;
 		}
 
-		.slide-right {
-			transform: translateX(100%);
-			transition: transform 0.4s ease-in-out;
-		}
-
-		.slide-reset {
-			transform: translateX(0);
-			transition: transform 0.4s ease-in-out;
+		.visible {
+			opacity: 1;
+			transition: opacity 0.3s ease-in-out;
 		}
 	</style>
 </head>
@@ -215,7 +210,7 @@
 			<h3 id="yesterday-subtitle" class="fs-subtitle">Info about yesterdays prices. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today!</h2>
+			<h2 id="today-title" class="fs-title">Today!!</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">Info about todays prices. </h3>
 		</fieldset>
 
@@ -269,50 +264,54 @@
 			animating = true;
 
 			let fieldsets = document.querySelectorAll('fieldset');
-			let currentFieldset = fieldsets[currentFieldsetIndex];
-			let progressbar = document.getElementById('progressbar');
 
 			if (direction === 'next' && currentFieldsetIndex < fieldsets.length - 1) {
 
-				currentFieldset.classList.add('slide-left');
+				// Fade out the current fieldset
+				fieldsets[currentFieldsetIndex].classList.add('fade');
+				setTimeout(() => {
+					fieldsets[currentFieldsetIndex].style.display = 'none';
+					fieldsets[currentFieldsetIndex].classList.remove('fade', 'visible');
+				}, 300);
 
-				setTimeout(function () {
-					currentFieldset.style.display = 'none';
-					currentFieldset.classList.remove('slide-left');
+				// Move to next
+				currentFieldsetIndex++;
 
-					currentFieldsetIndex++;
-					let nextFieldset = fieldsets[currentFieldsetIndex];
-					nextFieldset.style.display = 'block';
-					nextFieldset.classList.add('slide-reset');
+				// Fade in the next fieldset
+				fieldsets[currentFieldsetIndex].style.display = 'block';
+				fieldsets[currentFieldsetIndex].classList.add('visible');
 
-					progressbar.children[currentFieldsetIndex].classList.add('active');
-
-					animating = false;
-				}, 400);
+				let progressbar = document.getElementById('progressbar');
+				progressbar.children[currentFieldsetIndex].classList.add('active');
 
 			} else if (direction === 'previous' && currentFieldsetIndex > 0) {
 
-				currentFieldset.classList.add('slide-right');
+				// Fade out the current fieldset
+				fieldsets[currentFieldsetIndex].classList.add('fade');
+				setTimeout(() => {
+					fieldsets[currentFieldsetIndex].style.display = 'none';
+					fieldsets[currentFieldsetIndex].classList.remove('fade', 'visible');
+				}, 300);
 
-				setTimeout(function () {
-					currentFieldset.style.display = 'none';
-					currentFieldset.classList.remove('slide-right');
+				// Move to previous
+				currentFieldsetIndex--;
 
-					currentFieldsetIndex--;
-					let previousFieldset = fieldsets[currentFieldsetIndex];
-					previousFieldset.style.display = 'block';
-					previousFieldset.classList.add('slide-reset');
+				// Fade in the previous fieldset
+				fieldsets[currentFieldsetIndex].style.display = 'block';
+				fieldsets[currentFieldsetIndex].classList.add('visible');
 
-					progressbar.children[currentFieldsetIndex + 1].classList.remove('active');
-
-					animating = false;
-				}, 400);
+				let progressbar = document.getElementById('progressbar');
+				progressbar.children[currentFieldsetIndex + 1].classList.remove('active');
 
 			} else {
 				console.log("Either at the first or last step, can't move.");
-				animating = false;
 			}
+
+			setTimeout(() => {
+				animating = false;
+			}, 300);
 		}
+
 
 
 
