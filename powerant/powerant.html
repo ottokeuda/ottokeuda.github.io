@@ -14,6 +14,7 @@
 		html {
 			height: 100%;
 			background: linear-gradient(rgba(0, 0, 0, 0.723), rgba(0, 0, 0, 0.8));
+			overflow-x: hidden;
 		}
 
 		body {
@@ -62,32 +63,6 @@
 			color: white;
 			font-size: 3vw;
 			background: #222;
-		}
-
-		/* buttons */
-		#msform .action-button {
-			width: 25vw;
-			/* increased from 15vw to 25vw */
-			max-width: 15rem;
-			/* increased from 10rem to 15rem */
-			background: #27AE60;
-			font-weight: bold;
-			color: white;
-			border: none;
-			border-radius: 5px;
-			/* increased from 3px to 5px for a slightly rounder edge */
-			cursor: pointer;
-			padding: 5vw 2.5vw;
-			/* increased from 3vw 1.5vw to 5vw 2.5vw */
-			margin: 6vw 2vw;
-			/* increased from 4vw 1.5vw to 6vw 2vw */
-			font-size: 4vw;
-			/* increased from 3vw to 4vw */
-		}
-
-		#msform .action-button:hover,
-		#msform .action-button:focus {
-			box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
 		}
 
 		/* headings */
@@ -245,7 +220,7 @@
 			<h3 id="yesterday-subtitle" class="fs-subtitle">Info about yesterdays prices. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today!!</h2>
+			<h2 id="today-title" class="fs-title">Today!</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">Info about todays prices. </h3>
 		</fieldset>
 
