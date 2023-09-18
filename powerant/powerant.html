@@ -34,9 +34,11 @@
 
 		#device-selector-container {
 			position: fixed;
-			right: 0;
+			left: 50%;
 			bottom: 0;
+			transform: translateX(-50%);
 			width: 100%;
+			text-align: center;
 		}
 
 		#msform fieldset {
@@ -65,7 +67,7 @@
 			border: 0.5vw solid #666;
 			border-radius: 3px;
 			margin-bottom: 4vw;
-			width: 50%;
+			width: 80%;
 			font-family: 'Montserrat';
 			color: white;
 			font-size: 3vw;
@@ -140,18 +142,6 @@
 
 		}
 
-		#device-selector-container {
-			margin: 20px auto;
-			text-align: center;
-		}
-
-		#device-selector {
-			padding: 10px;
-			width: 50%;
-			font-size: 16px;
-			margin-top: 10px;
-		}
-
 
 		.slide-left {
 			transform: translateX(-100%);
@@ -214,7 +204,7 @@
 			<h3 id="yesterday-subtitle" class="fs-subtitle">Info about yesterdays prices. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today is great</h2>
+			<h2 id="today-title" class="fs-title">Today</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">Info about todays prices. </h3>
 		</fieldset>
 		<fieldset>
