@@ -189,6 +189,34 @@
 			transform: translateX(0);
 			transition: transform 0.4s ease-in-out;
 		}
+
+		.slide-in-from-right {
+			animation: slideInFromRight 0.4s ease-in-out;
+		}
+
+		.slide-in-from-left {
+			animation: slideInFromLeft 0.4s ease-in-out;
+		}
+
+		@keyframes slideInFromRight {
+			0% {
+				transform: translateX(100%);
+			}
+
+			100% {
+				transform: translateX(0);
+			}
+		}
+
+		@keyframes slideInFromLeft {
+			0% {
+				transform: translateX(-100%);
+			}
+
+			100% {
+				transform: translateX(0);
+			}
+		}
 	</style>
 </head>
 
@@ -215,7 +243,7 @@
 			<h3 id="yesterday-subtitle" class="fs-subtitle">Info about yesterdays prices. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today!!!</h2>
+			<h2 id="today-title" class="fs-title">Today!!!!</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">Info about todays prices. </h3>
 		</fieldset>
 
@@ -273,7 +301,6 @@
 			let progressbar = document.getElementById('progressbar');
 
 			if (direction === 'next' && currentFieldsetIndex < fieldsets.length - 1) {
-
 				currentFieldset.classList.add('slide-left');
 
 				setTimeout(function () {
@@ -283,19 +310,18 @@
 					currentFieldsetIndex++;
 					let nextFieldset = fieldsets[currentFieldsetIndex];
 					nextFieldset.style.display = 'block';
-					nextFieldset.classList.add('slide-reset');
+					nextFieldset.classList.add('slide-in-from-right');
 
 					progressbar.children[currentFieldsetIndex].classList.add('active');
 
 					setTimeout(() => {
-						nextFieldset.classList.remove('slide-reset');
-					}, 10);
+						nextFieldset.classList.remove('slide-in-from-right');
+					}, 400);
 
 					animating = false;
 				}, 400);
 
 			} else if (direction === 'previous' && currentFieldsetIndex > 0) {
-
 				currentFieldset.classList.add('slide-right');
 
 				setTimeout(function () {
@@ -305,13 +331,13 @@
 					currentFieldsetIndex--;
 					let previousFieldset = fieldsets[currentFieldsetIndex];
 					previousFieldset.style.display = 'block';
-					previousFieldset.classList.add('slide-reset');
+					previousFieldset.classList.add('slide-in-from-left');
 
 					progressbar.children[currentFieldsetIndex + 1].classList.remove('active');
 
 					setTimeout(() => {
-						previousFieldset.classList.remove('slide-reset');
-					}, 10);
+						previousFieldset.classList.remove('slide-in-from-left');
+					}, 400);
 
 					animating = false;
 				}, 400);
