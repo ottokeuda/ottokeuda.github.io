@@ -1,452 +1,532 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>Powerant Manager</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<style>
-		/* basic reset */
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
+    <meta charset="UTF-8">
+    <title>Powerant Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <style>
+        /* basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-		html {
-			height: 100%;
-			width: 100%;
-			background: linear-gradient(rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.8));
-		}
+        html {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.8));
+        }
 
-		body {
-			font-family: 'Montserrat', Arial, Verdana;
-			color: white;
-		}
+        body {
+            font-family: 'Montserrat', Arial, Verdana;
+            color: white;
+        }
 
-		/* form styles */
-		#msform {
+        /* form styles */
+        #msform {
+            max-width: 90vw;
+            /* Relative max-width */
+            margin: 1vw auto;
+            text-align: center;
+        }
 
-			max-width: 90vw;
-			/* Relative max-width */
-			margin: 1vw auto;
-			text-align: center;
+        #device-selector-container {
+            width: 100%;
+            text-align: center;
+        }
 
+        #msform fieldset {
+            background: #333;
+            border: none;
+            padding: 4vw;
+            margin: 0;
+            box-shadow: 0 0 1vw 0.5vw rgba(0, 0, 0, 0.4);
+            padding: 4vw;
+            /* stacking fieldsets above each other */
+        }
 
-		}
+        /* Hide all except second fieldset */
+        #msform fieldset:not(:nth-of-type(2)) {
+            display: none;
+            box-shadow: 0 0 2vw 1vw rgba(0, 0, 0, 0.4);
+            padding: 4vw;
+        }
 
-		#device-selector-container {
-			position: fixed;
-			left: 50%;
-			bottom: 0;
-			transform: translateX(-50%);
-			width: 100%;
-			text-align: center;
-		}
+        /* inputs */
+        #msform input,
+        #msform textarea,
+        #msform select {
+            padding: 3vw;
+            border: 0vw solid #ffffff;
+            border-radius: 0px;
+            margin-bottom: 0vw;
+            width: 100%;
+            font-family: 'Montserrat';
+            color: white;
+            font-size: 3vw;
+            background: #333;
+        }
 
-		#msform fieldset {
-			background: #333;
-			border: none;
-			padding: 4vw;
-			margin: 0;
-			box-shadow: 0 0 1vw 0.5vw rgba(0, 0, 0, 0.4);
-			padding: 4vw;
-			/* stacking fieldsets above each other */
-		}
+        /* buttons */
+        #msform button {
+            width: 40%;
+            /* increased from 15vw to 25vw */
+            max-width: 15rem;
+            /* increased from 10rem to 15rem */
+            background: #27AE60;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            /* increased from 3px to 5px for a slightly rounder edge */
+            cursor: pointer;
+            padding: 5vw 2.5vw;
+            /* increased from 3vw 1.5vw to 5vw 2.5vw */
+            margin: 6vw 2vw;
+            /* increased from 4vw 1.5vw to 6vw 2vw */
+            font-size: 4vw;
+            /* increased from 3vw to 4vw */
+        }
 
-		/* Hide all except second fieldset */
-		#msform fieldset:not(:nth-of-type(2)) {
-			display: none;
-			box-shadow: 0 0 2vw 1vw rgba(0, 0, 0, 0.4);
-			padding: 4vw;
-		}
-
-		/* inputs */
-		#msform input,
-		#msform textarea,
-		#msform select {
-			padding: 3vw;
-			border: 0.5vw solid #666;
-			border-radius: 3px;
-			margin-bottom: 4vw;
-			width: 80%;
-			font-family: 'Montserrat';
-			color: white;
-			font-size: 3vw;
-			background: #222;
-		}
-
-		/* headings */
-		.fs-title {
-			font-size: 4.5vw;
-			text-transform: uppercase;
-			color: #27AE60;
-			margin-bottom: 4vw;
-		}
-
-		.fs-subtitle {
-			font-weight: normal;
-			font-size: 3.5vw;
-			color: #999;
-			margin-bottom: 8vw;
-		}
-
-		/* progressbar */
-		#progressbar {
-			box-shadow: 0 0 2vw 1vw rgba(0, 0, 0, 0.4);
-			margin-top: 5vw;
-			overflow: hidden;
-			/* CSS counters to number the steps */
-			counter-reset: step;
-			list-style-type: none;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			border-top-left-radius: 5px;
-			border-top-right-radius: 5px;
-		}
-
-		#progressbar li {
-			color: white;
-			text-transform: uppercase;
-			font-size: 2.5vw;
-			width: 100%;
-			position: relative;
-			background: white;
-			color: #333;
-
-		}
-
-		#progressbar li:before {
-			content: var(--date);
-			height: 6vw;
-			line-height: 6vw;
-			display: block;
-			font-size: 5vw;
-			color: #333;
-			background: white;
-			border-radius: 5px;
-			margin: 0 auto 0vw auto;
-
-		}
+        #msform button:hover,
+        #msform button:focus {
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+        }
 
 
-		/* marking active/completed steps green */
-		#progressbar li.active:before,
-		#progressbar li.active {
-			background: #27AE60;
-			color: white;
-		}
+        /* headings */
+        .fs-title {
+            font-size: 4.5vw;
+            text-transform: uppercase;
+            color: #27AE60;
+            margin-bottom: 4vw;
+        }
 
-		.slide-left {
-			transform: translateX(-100%);
-			transition: transform 0.1s ease-in-out;
-		}
+        .fs-subtitle {
+            font-weight: normal;
+            font-size: 3.5vw;
+            color: #999;
+            margin-bottom: 8vw;
+        }
 
-		.slide-right {
-			transform: translateX(100%);
-			transition: transform 0.1s ease-in-out;
-		}
+        /* progressbar */
+        #progressbar {
+            box-shadow: 0 0 2vw 1vw rgba(0, 0, 0, 0.4);
+            margin-top: 5vw;
+            overflow: hidden;
+            /* CSS counters to number the steps */
+            counter-reset: step;
+            list-style-type: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
 
-		.slide-reset {
-			transform: translateX(0);
-			transition: transform 0.1s ease-in-out;
-		}
+        #progressbar li {
+            color: white;
+            text-transform: uppercase;
+            font-size: 2.5vw;
+            width: 100%;
+            position: relative;
+            background: white;
+            color: #333;
 
-		.slide-in-from-right {
-			animation: slideInFromRight 0.1s ease-in-out;
-		}
+        }
 
-		.slide-in-from-left {
-			animation: slideInFromLeft 0.1s ease-in-out;
-		}
+        #progressbar li:before {
+            content: var(--date);
+            height: 6vw;
+            line-height: 6vw;
+            display: block;
+            font-size: 5vw;
+            color: #333;
+            background: white;
+            border-radius: 5px;
+            margin: 0 auto 0vw auto;
 
-		@keyframes slideInFromRight {
-			0% {
-				transform: translateX(100%);
-			}
+        }
 
-			100% {
-				transform: translateX(0);
-			}
-		}
+        .custom-select {
+            position: relative;
+            width: 200px;
+        }
 
-		@keyframes slideInFromLeft {
-			0% {
-				transform: translateX(-100%);
-			}
+        #selected-option {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
 
-			100% {
-				transform: translateX(0);
-			}
-		}
-	</style>
+        .custom-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            border: 1px solid #ccc;
+        }
+
+        .custom-options li {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .custom-options li:hover {
+            background-color: #f2f2f2;
+        }
+
+
+        /* marking active/completed steps green */
+        #progressbar li.active:before,
+        #progressbar li.active {
+            background: #27AE60;
+            color: white;
+        }
+
+        .slide-left {
+            transform: translateX(-100%);
+            transition: transform 0.1s ease-in-out;
+        }
+
+        .slide-right {
+            transform: translateX(100%);
+            transition: transform 0.1s ease-in-out;
+        }
+
+        .slide-reset {
+            transform: translateX(0);
+            transition: transform 0.1s ease-in-out;
+        }
+
+        .slide-in-from-right {
+            animation: slideInFromRight 0.1s ease-in-out;
+        }
+
+        .slide-in-from-left {
+            animation: slideInFromLeft 0.1s ease-in-out;
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
 
 </head>
 
 <body>
-	<!-- multistep form -->
-	<form id="msform" action='/connect' method='post'>
+    <!-- multistep form -->
+    <div id="msform">
         <br>
-		<img src="powerant-logo.png" alt="HTML" width="80%">
-		<!-- progressbar -->
-		<ul id="progressbar">
-			<li id="yesterday-menu">Yesterday</li>
-			<li class="active" id="today-menu">Today</li>
-			<li id="tomorrow-menu">Tomorrow</li>
-		</ul>
-		<!-- fieldsets -->
-		<fieldset>
-			<h2 id="yesterday-title" class="fs-title">Yesterday</h2>
-			<h3 id="yesterday-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
-		</fieldset>
-		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today</h2>
-			<h3 id="today-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
-		</fieldset>
-		<fieldset>
-			<h2 id="tomorrow-title" class="fs-title">Tomorrow</h2>
-			<h3 id="tomorrow-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
-		</fieldset>
-		<!-- Add this right above your <form> -->
-		<div id="device-selector-container">
-			<select id="device-selector">
-				<option id="device-selection-text" value="default">Select Device</option>
-				<option id="add-device-text" value="add-device">Add Device</option>
-			</select>
-		</div>
-	</form>
-	<script>
+        <img src="powerant-logo.png" alt="HTML" width="80%">
+        <!-- progressbar -->
+        <ul id="progressbar">
+            <li id="yesterday-menu">Yesterday</li>
+            <li class="active" id="today-menu">Today</li>
+            <li id="tomorrow-menu">Tomorrow</li>
+        </ul>
+        <div id="custom-device-selector" class="custom-select">
+            <div id="selected-option">Select Device</div>
+            <ul id="custom-options" class="custom-options">
+                <li data-value="default">Select Device</li>
+                <li data-value="add-device">Add Device</li>
+                <!-- Add more options here -->
+            </ul>
+        </div>
+        <!-- fieldsets -->
+        <fieldset>
+            <h2 id="yesterday-title" class="fs-title">Yesterday</h2>
+            <h3 id="yesterday-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
+        </fieldset>
+        <fieldset class="current">
+            <h2 id="today-title" class="fs-title">Today</h2>
+            <h3 id="today-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
+            <div id="device-form-container" style="text-align: center; display: none;">
+                <label for="device-name" style="display: block;">Device Name: </label>
+                <input id="device-name" type="text">
+                <label for="device-code" style="display: block;">Device Code: </label>
+                <input id="device-code" type="text">
+                <button id="submit-device">Add Device</button>
+                <button id="cancel-device">Cancel</button>
+            </div>
+        </fieldset>
+        <fieldset>
+            <h2 id="tomorrow-title" class="fs-title">Tomorrow</h2>
+            <h3 id="tomorrow-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
+        </fieldset>
+        <!-- Add this right above your <form> -->
 
-		var current_fs, next_fs, previous_fs;
-		var animating = false;
-		var xStart = null;
-		let currentFieldsetIndex = 1; // You start at index 1, which is the second fieldset
+    </div>
+    <script>
 
-		// Initialize the "current" fieldset
-		var fieldsets = document.querySelectorAll('fieldset');
-		fieldsets[1].classList.add('current');
+        var current_fs, next_fs, previous_fs;
+        var animating = false;
+        var xStart = null;
+        let currentFieldsetIndex = 1; // You start at index 1, which is the second fieldset
 
-		function handleTouchStart(evt) {
-			xStart = evt.touches[0].clientX;
-		}
+        // Initialize the "current" fieldset
+        var fieldsets = document.querySelectorAll('fieldset');
+        fieldsets[1].classList.add('current');
 
-		function handleTouchMove(evt) {
-			if (!xStart) {
-				return;
-			}
+        function handleTouchStart(evt) {
+            xStart = evt.touches[0].clientX;
+        }
 
-			var xDiff = xStart - evt.touches[0].clientX;
+        function handleTouchMove(evt) {
+            if (!xStart) {
+                return;
+            }
 
-			if (xDiff > 50) {
-				moveFieldset('next');
-				xStart = null;
-			} else if (xDiff < -50) {
-				moveFieldset('previous');
-				xStart = null;
-			}
-		}
+            var xDiff = xStart - evt.touches[0].clientX;
 
-		function handleTouchEnd(evt) {
-			xStart = null;
-		}
+            if (xDiff > 50) {
+                moveFieldset('next');
+                xStart = null;
+            } else if (xDiff < -50) {
+                moveFieldset('previous');
+                xStart = null;
+            }
+        }
 
-		// Add touch event listeners
-		document.addEventListener('touchstart', handleTouchStart, false);
-		document.addEventListener('touchmove', handleTouchMove, false);
-		document.addEventListener('touchend', handleTouchEnd, false);
+        function handleTouchEnd(evt) {
+            xStart = null;
+        }
 
-		function moveFieldset(direction) {
-			if (animating) return false;
-			animating = true;
+        // Add touch event listeners
+        document.addEventListener('touchstart', handleTouchStart, false);
+        document.addEventListener('touchmove', handleTouchMove, false);
+        document.addEventListener('touchend', handleTouchEnd, false);
 
-			let fieldsets = document.querySelectorAll('fieldset');
-			let currentFieldset = fieldsets[currentFieldsetIndex];
-			let progressbar = document.getElementById('progressbar');
-			let progressItems = progressbar.querySelectorAll('li');
+        function moveFieldset(direction) {
+            if (animating) return false;
+            animating = true;
 
-			// Clear all active statuses from the progress items
-			progressItems.forEach((item) => {
-				item.classList.remove('active');
-			});
+            let fieldsets = document.querySelectorAll('fieldset');
+            let currentFieldset = fieldsets[currentFieldsetIndex];
+            let progressbar = document.getElementById('progressbar');
+            let progressItems = progressbar.querySelectorAll('li');
 
-			if (direction === 'next' && currentFieldsetIndex < fieldsets.length - 1) {
-				currentFieldset.classList.add('slide-left');
+            // Clear all active statuses from the progress items
+            progressItems.forEach((item) => {
+                item.classList.remove('active');
+            });
 
-				setTimeout(function () {
-					currentFieldset.style.display = 'none';
-					currentFieldset.classList.remove('slide-left');
+            if (direction === 'next' && currentFieldsetIndex < fieldsets.length - 1) {
+                currentFieldset.classList.add('slide-left');
 
-					currentFieldsetIndex++;
-					let nextFieldset = fieldsets[currentFieldsetIndex];
-					nextFieldset.style.display = 'block';
-					nextFieldset.classList.add('slide-in-from-right');
+                setTimeout(function () {
+                    currentFieldset.style.display = 'none';
+                    currentFieldset.classList.remove('slide-left');
 
-					// Set active status on the new current progress item
-					progressItems[currentFieldsetIndex].classList.add('active');
+                    currentFieldsetIndex++;
+                    let nextFieldset = fieldsets[currentFieldsetIndex];
+                    nextFieldset.style.display = 'block';
+                    nextFieldset.classList.add('slide-in-from-right');
 
-					setTimeout(() => {
-						nextFieldset.classList.remove('slide-in-from-right');
-					}, 100);
+                    // Set active status on the new current progress item
+                    progressItems[currentFieldsetIndex].classList.add('active');
 
-					animating = false;
-				}, 100);
+                    setTimeout(() => {
+                        nextFieldset.classList.remove('slide-in-from-right');
+                    }, 100);
 
-			} else if (direction === 'previous' && currentFieldsetIndex > 0) {
-				currentFieldset.classList.add('slide-right');
+                    animating = false;
+                }, 100);
 
-				setTimeout(function () {
-					currentFieldset.style.display = 'none';
-					currentFieldset.classList.remove('slide-right');
+            } else if (direction === 'previous' && currentFieldsetIndex > 0) {
+                currentFieldset.classList.add('slide-right');
 
-					currentFieldsetIndex--;
-					let previousFieldset = fieldsets[currentFieldsetIndex];
-					previousFieldset.style.display = 'block';
-					previousFieldset.classList.add('slide-in-from-left');
+                setTimeout(function () {
+                    currentFieldset.style.display = 'none';
+                    currentFieldset.classList.remove('slide-right');
 
-					// Set active status on the new current progress item
-					progressItems[currentFieldsetIndex].classList.add('active');
+                    currentFieldsetIndex--;
+                    let previousFieldset = fieldsets[currentFieldsetIndex];
+                    previousFieldset.style.display = 'block';
+                    previousFieldset.classList.add('slide-in-from-left');
 
-					setTimeout(() => {
-						previousFieldset.classList.remove('slide-in-from-left');
-					}, 100);
+                    // Set active status on the new current progress item
+                    progressItems[currentFieldsetIndex].classList.add('active');
 
-					animating = false;
-				}, 100);
+                    setTimeout(() => {
+                        previousFieldset.classList.remove('slide-in-from-left');
+                    }, 100);
 
-			} else {
-				console.log("Either at the first or last step, can't move.");
-				animating = false;
-			}
-		}
+                    animating = false;
+                }, 100);
 
-		document.addEventListener('DOMContentLoaded', () => {
-			const listItems = document.querySelectorAll('#progressbar li');
-			const dateOffsets = [-1, 0, 1];  // Yesterday, today, and tomorrow
+            } else {
+                console.log("Either at the first or last step, can't move.");
+                animating = false;
+            }
+        }
 
-			listItems.forEach((li, index) => {
-				if (index < dateOffsets.length) {
-					const date = new Date();
-					date.setDate(date.getDate() + dateOffsets[index]);
-					const day = String(date.getDate());
-					const month = String(date.getMonth() + 1);
-					const formattedDate = `"${day}.${month}"`;  // Quote the string for valid CSS content
-					li.style.setProperty('--date', formattedDate);
-				}
-			});
-		});
+        document.addEventListener('DOMContentLoaded', () => {
+            const listItems = document.querySelectorAll('#progressbar li');
+            const dateOffsets = [-1, 0, 1];  // Yesterday, today, and tomorrow
 
-		const translations = {
-			english: {
-				"yesterday-title": "Yesterday",
-				"today-title": "Today",
-				"tomorrow-title": "Tomorrow",
-				"yesterday-menu": "Yesterday",
-				"today-menu": "Today",
-				"tomorrow-menu": "Tomorrow",
-				"today-subtitle": "No device is selected. Select or add a device from below.",
-				"yesterday-subtitle": "No device is selected. Select or add a device from below.",
-				"tomorrow-subtitle": "No device is selected. Select or add a device from below.",
-				"device-selection-text": "Select device",
-				"add-device-text": "Add device"
-			},
-			finnish: {
-				"yesterday-title": "Eilen",
-				"today-title": "Tänään",
-				"tomorrow-title": "Huomenna",
-				"yesterday-menu": "Eilen",
-				"today-menu": "Tänään",
-				"tomorrow-menu": "Huomenna",
-				"today-subtitle": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
-				"yesterday-subtitle": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
-				"tomorrow-subtitle": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
-				"device-selection-text": "Valitse laite",
-				"add-device-text": "Lisää laite"
-			}
-			// add translations
-		};
+            listItems.forEach((li, index) => {
+                if (index < dateOffsets.length) {
+                    const date = new Date();
+                    date.setDate(date.getDate() + dateOffsets[index]);
+                    const day = String(date.getDate());
+                    const month = String(date.getMonth() + 1);
+                    const formattedDate = `"${day}.${month}"`;  // Quote the string for valid CSS content
+                    li.style.setProperty('--date', formattedDate);
+                }
+            });
+        });
 
-		function getBrowserLanguage() {
-			const browserLanguage = navigator.language || navigator.userLanguage;
-			if (browserLanguage.startsWith('en')) {
-				return 'english';
-			} else if (browserLanguage.startsWith('fi')) {
-				return 'finnish';
-			}
-			return 'english'; // Default to English
-		}
+        const translations = {
+            english: {
+                "yesterday-title": "Yesterday",
+                "today-title": "Today",
+                "tomorrow-title": "Tomorrow",
+                "yesterday-menu": "Yesterday",
+                "today-menu": "Today",
+                "tomorrow-menu": "Tomorrow",
+                "today-subtitle": "No device is selected. Select or add a device from below.",
+                "yesterday-subtitle": "No device is selected. Select or add a device from below.",
+                "tomorrow-subtitle": "No device is selected. Select or add a device from below.",
+                "device-selection-text": "Select device",
+                "add-device-text": "Add device"
+            },
+            finnish: {
+                "yesterday-title": "Eilen",
+                "today-title": "Tänään",
+                "tomorrow-title": "Huomenna",
+                "yesterday-menu": "Eilen",
+                "today-menu": "Tänään",
+                "tomorrow-menu": "Huomenna",
+                "today-subtitle": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
+                "yesterday-subtitle": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
+                "tomorrow-subtitle": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
+                "device-selection-text": "Valitse laite",
+                "add-device-text": "Lisää laite"
+            }
+            // add translations
+        };
 
-		function updateFormLanguage() {
-			const selectedLanguage = getBrowserLanguage();
-			const translation = translations[selectedLanguage];
+        function getBrowserLanguage() {
+            const browserLanguage = navigator.language || navigator.userLanguage;
+            if (browserLanguage.startsWith('en')) {
+                return 'english';
+            } else if (browserLanguage.startsWith('fi')) {
+                return 'finnish';
+            }
+            return 'english'; // Default to English
+        }
 
-			// Update the headings
+        function updateFormLanguage() {
+            const selectedLanguage = getBrowserLanguage();
+            const translation = translations[selectedLanguage];
 
-			document.getElementById("yesterday-menu").textContent = translation["yesterday-menu"];
-			document.getElementById("today-menu").textContent = translation["today-menu"];
-			document.getElementById("tomorrow-menu").textContent = translation["tomorrow-menu"];
-			document.getElementById("yesterday-title").textContent = translation["yesterday-title"];
-			document.getElementById("today-title").textContent = translation["today-title"];
-			document.getElementById("tomorrow-title").textContent = translation["tomorrow-title"];
-			document.getElementById("yesterday-subtitle").textContent = translation["yesterday-subtitle"];
-			document.getElementById("today-subtitle").textContent = translation["today-subtitle"];
-			document.getElementById("tomorrow-subtitle").textContent = translation["tomorrow-subtitle"];
-			document.getElementById("device-selection-text").textContent = translation["device-selection-text"];
-			document.getElementById("add-device-text").textContent = translation["add-device-text"];
+            // Update the headings
 
-			// Update more headings here
-		}
+            document.getElementById("yesterday-menu").textContent = translation["yesterday-menu"];
+            document.getElementById("today-menu").textContent = translation["today-menu"];
+            document.getElementById("tomorrow-menu").textContent = translation["tomorrow-menu"];
+            document.getElementById("yesterday-title").textContent = translation["yesterday-title"];
+            document.getElementById("today-title").textContent = translation["today-title"];
+            document.getElementById("tomorrow-title").textContent = translation["tomorrow-title"];
+            document.getElementById("yesterday-subtitle").textContent = translation["yesterday-subtitle"];
+            document.getElementById("today-subtitle").textContent = translation["today-subtitle"];
+            document.getElementById("tomorrow-subtitle").textContent = translation["tomorrow-subtitle"];
+            document.getElementById("device-selection-text").textContent = translation["device-selection-text"];
+            document.getElementById("add-device-text").textContent = translation["add-device-text"];
 
-
-
-		// Call the updateFormLanguage() function to initially set the language
-		updateFormLanguage();
-
-		document.addEventListener("DOMContentLoaded", function () {
-			const deviceSelector = document.getElementById("device-selector");
-
-			// Initialize dropdown from local storage
-			const savedDevices = JSON.parse(localStorage.getItem("devices") || "[]");
-			savedDevices.forEach(device => {
-				const option = new Option(device.name, device.code);
-				deviceSelector.add(option);
-			});
-
-			deviceSelector.addEventListener("change", function () {
-				if (this.value === "add-device") {
-					const deviceName = prompt("Enter device name:");
-					const deviceCode = prompt("Enter device code:");
-
-					if (deviceName && deviceCode) {
-						const option = new Option(deviceName, deviceCode);
-						deviceSelector.add(option);
-
-						// Save to local storage
-						const newDevice = { name: deviceName, code: deviceCode };
-						const devices = JSON.parse(localStorage.getItem("devices") || "[]");
-						devices.push(newDevice);
-						localStorage.setItem("devices", JSON.stringify(devices));
-					}
-					this.value = "default";
-				} else {
-					updateTitles(this.options[this.selectedIndex].text);
-				}
-			});
-
-			function updateTitles(deviceName) {
-				if (deviceName && deviceName !== "Select Device") {
-					document.getElementById("yesterday-title").innerText = ` ${deviceName}`;
-					document.getElementById("today-title").innerText = ` ${deviceName}`;
-					document.getElementById("tomorrow-title").innerText = ` ${deviceName}`;
-				} else {
-					document.getElementById("yesterday-title").innerText = "Yesterday";
-					document.getElementById("today-title").innerText = "Today";
-					document.getElementById("tomorrow-title").innerText = "Tomorrow";
-				}
-			}
-		});
+            // Update more headings here
+        }
 
 
-	</script>
+
+        // Call the updateFormLanguage() function to initially set the language
+        updateFormLanguage();
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const deviceSelector = document.getElementById("device-selector");
+
+            // Initialize dropdown from local storage
+            const savedDevices = JSON.parse(localStorage.getItem("devices") || "[]");
+            savedDevices.forEach(device => {
+                const option = new Option(device.name, device.code);
+                deviceSelector.add(option);
+            });
+
+            // Close and reset form
+            function closeForm() {
+                document.getElementById('device-form-container').style.display = 'none';
+                document.getElementById('device-name').value = '';
+                document.getElementById('device-code').value = '';
+                deviceSelector.value = "default";
+            }
+
+            // Show form
+            document.getElementById('submit-device').addEventListener('click', function () {
+                const deviceName = document.getElementById('device-name').value;
+                const deviceCode = document.getElementById('device-code').value;
+
+                if (deviceName && deviceCode) {
+                    const option = new Option(deviceName, deviceCode);
+                    deviceSelector.add(option);
+
+                    const newDevice = { name: deviceName, code: deviceCode };
+                    const devices = JSON.parse(localStorage.getItem("devices") || "[]");
+                    devices.push(newDevice);
+                    localStorage.setItem("devices", JSON.stringify(devices));
+                }
+
+                closeForm();
+            });
+
+            document.getElementById('cancel-device').addEventListener('click', closeForm);
+
+            deviceSelector.addEventListener("change", function () {
+                if (this.value === "add-device") {
+                    document.getElementById('device-form-container').style.display = 'block';
+                } else {
+                    // Hide the form when any other option is selected
+                    document.getElementById('device-form-container').style.display = 'none';
+
+                    updateTitles(this.options[this.selectedIndex].text);
+                }
+            });
+
+
+            function updateTitles(deviceName) {
+                if (deviceName && deviceName !== "Select Device") {
+                    document.getElementById("yesterday-title").innerText = ` ${deviceName}`;
+                    document.getElementById("today-title").innerText = ` ${deviceName}`;
+                    document.getElementById("tomorrow-title").innerText = ` ${deviceName}`;
+                } else {
+                    document.getElementById("yesterday-title").innerText = "Yesterday";
+                    document.getElementById("today-title").innerText = "Today";
+                    document.getElementById("tomorrow-title").innerText = "Tomorrow";
+                }
+            }
+        });
+
+
+
+    </script>
 </body>
 
 </html>
