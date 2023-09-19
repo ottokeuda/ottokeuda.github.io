@@ -29,7 +29,7 @@
             /* Relative max-width */
             margin: 1vw auto;
             text-align: center;
-            }
+        }
 
         #device-selector-container {
             width: 100%;
@@ -63,13 +63,21 @@
             border-radius: 0px;
             margin-bottom: 0vw;
             width: 100%;
-            font-family: 'Montserrat';
-            color: white;
+
+            color: #333;
             font-size: 3vw;
-            background: #333;
+            background: white;
         }
 
-        /* buttons */
+        select#device-selector {
+            font-size: 5vw;
+            text-align: center;
+            text-transform: uppercase;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+
+        }
+
         #msform button {
             width: 40%;
             /* increased from 15vw to 25vw */
@@ -215,19 +223,14 @@
             <li class="active" id="today-menu">Today</li>
             <li id="tomorrow-menu">Tomorrow</li>
         </ul>
-        <div id="device-selector-container">
-            <select id="device-selector">
-                <option id="device-selection-text" value="default">Select Device</option>
-                <option id="add-device-text" value="add-device">Add Device</option>
-            </select>
-        </div>
+
         <!-- fieldsets -->
         <fieldset>
-            <h2 id="yesterday-title" class="fs-title">Yesterday</h2>
+            
             <h3 id="yesterday-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
         </fieldset>
         <fieldset class="current">
-            <h2 id="today-title" class="fs-title">Today</h2>
+            
             <h3 id="today-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
             <div id="device-form-container" style="text-align: center; display: none;">
                 <label for="device-name" style="display: block;">Device Name: </label>
@@ -239,11 +242,16 @@
             </div>
         </fieldset>
         <fieldset>
-            <h2 id="tomorrow-title" class="fs-title">Tomorrow</h2>
+            
             <h3 id="tomorrow-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
         </fieldset>
         <!-- Add this right above your <form> -->
-
+        <div id="device-selector-container">
+            <select id="device-selector">
+                <option id="device-selection-text" value="default">Select Device</option>
+                <option id="add-device-text" value="add-device">Add Device</option>
+            </select>
+        </div>
     </div>
     <script>
 
@@ -414,9 +422,6 @@
             document.getElementById("yesterday-menu").textContent = translation["yesterday-menu"];
             document.getElementById("today-menu").textContent = translation["today-menu"];
             document.getElementById("tomorrow-menu").textContent = translation["tomorrow-menu"];
-            document.getElementById("yesterday-title").textContent = translation["yesterday-title"];
-            document.getElementById("today-title").textContent = translation["today-title"];
-            document.getElementById("tomorrow-title").textContent = translation["tomorrow-title"];
             document.getElementById("yesterday-subtitle").textContent = translation["yesterday-subtitle"];
             document.getElementById("today-subtitle").textContent = translation["today-subtitle"];
             document.getElementById("tomorrow-subtitle").textContent = translation["tomorrow-subtitle"];
