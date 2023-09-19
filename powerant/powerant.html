@@ -126,20 +126,47 @@
 
 		}
 
-		/* New classes for the slide animations */
 		.slide-left {
 			transform: translateX(-100%);
-			transition: transform 400ms ease-in-out;
+			transition: transform 0.4s ease-in-out;
 		}
 
 		.slide-right {
 			transform: translateX(100%);
-			transition: transform 400ms ease-in-out;
+			transition: transform 0.4s ease-in-out;
 		}
 
 		.slide-reset {
 			transform: translateX(0);
-			transition: none;
+			transition: transform 0.4s ease-in-out;
+		}
+
+		.slide-in-from-right {
+			animation: slideInFromRight 0.4s ease-in-out;
+		}
+
+		.slide-in-from-left {
+			animation: slideInFromLeft 0.4s ease-in-out;
+		}
+
+		@keyframes slideInFromRight {
+			0% {
+				transform: translateX(100%);
+			}
+
+			100% {
+				transform: translateX(0);
+			}
+		}
+
+		@keyframes slideInFromLeft {
+			0% {
+				transform: translateX(-100%);
+			}
+
+			100% {
+				transform: translateX(0);
+			}
 		}
 	</style>
 </head>
@@ -224,50 +251,49 @@
 			let progressbar = document.getElementById('progressbar');
 
 			if (direction === 'next' && currentFieldsetIndex < fieldsets.length - 1) {
-
 				currentFieldset.classList.add('slide-left');
 
 				setTimeout(function () {
-					currentFieldset.classList.remove('slide-left');
 					currentFieldset.style.display = 'none';
+					currentFieldset.classList.remove('slide-left');
 
 					currentFieldsetIndex++;
 					let nextFieldset = fieldsets[currentFieldsetIndex];
 					nextFieldset.style.display = 'block';
-					nextFieldset.classList.add('slide-reset');
+					nextFieldset.classList.add('slide-in-from-right');
 
 					progressbar.children[currentFieldsetIndex].classList.add('active');
 
-					setTimeout(function () {
-						nextFieldset.classList.remove('slide-reset');
-						animating = false;
-					}, 0);
+					setTimeout(() => {
+						nextFieldset.classList.remove('slide-in-from-right');
+					}, 400);
 
+					animating = false;
 				}, 400);
 
 			} else if (direction === 'previous' && currentFieldsetIndex > 0) {
-
 				currentFieldset.classList.add('slide-right');
 
 				setTimeout(function () {
-					currentFieldset.classList.remove('slide-right');
 					currentFieldset.style.display = 'none';
+					currentFieldset.classList.remove('slide-right');
 
 					currentFieldsetIndex--;
 					let previousFieldset = fieldsets[currentFieldsetIndex];
 					previousFieldset.style.display = 'block';
-					previousFieldset.classList.add('slide-reset');
+					previousFieldset.classList.add('slide-in-from-left');
 
 					progressbar.children[currentFieldsetIndex + 1].classList.remove('active');
 
-					setTimeout(function () {
-						previousFieldset.classList.remove('slide-reset');
-						animating = false;
-					}, 0);
+					setTimeout(() => {
+						previousFieldset.classList.remove('slide-in-from-left');
+					}, 400);
 
+					animating = false;
 				}, 400);
 
 			} else {
+				console.log("Either at the first or last step, can't move.");
 				animating = false;
 			}
 		}
