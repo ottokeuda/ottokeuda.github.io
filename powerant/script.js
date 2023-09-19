@@ -110,20 +110,6 @@ nextButtons.forEach(function (button) {
     var fieldsets = document.querySelectorAll('fieldset');
     var index = Array.from(fieldsets).indexOf(next_fs);
     progressbar.children[index].classList.add('active');
-
-    // fade out the current fieldset
-    fadeOut(current_fs, function () {
-      // show the next fieldset
-      next_fs.style.display = 'block';
-
-      // fade in the next fieldset
-      fadeIn(next_fs);
-
-      // hide the current fieldset
-      current_fs.style.display = 'none';
-
-      animating = false;
-    });
   });
 });
 
