@@ -51,8 +51,6 @@
 			box-shadow: 0 0 1vw 0.5vw rgba(0, 0, 0, 0.4);
 			padding: 4vw;
 			/* stacking fieldsets above each other */
-
-
 		}
 
 		/* Hide all except second fieldset */
@@ -94,7 +92,7 @@
 
 		/* progressbar */
 		#progressbar {
-			margin-bottom: 1vw;
+			box-shadow: 0 0 2vw 1vw rgba(0, 0, 0, 0.4);
 			margin-top: 5vw;
 			overflow: hidden;
 			/* CSS counters to number the steps */
@@ -103,7 +101,8 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			border-radius: 5px;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
 		}
 
 		#progressbar li {
