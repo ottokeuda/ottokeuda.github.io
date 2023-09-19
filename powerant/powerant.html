@@ -147,6 +147,7 @@
 <body>
 	<!-- multistep form -->
 	<form id="msform" action='/connect' method='post'>
+		<br><br>
 		<img src="powerant-logo.png" alt="HTML" width="80%">
 		<!-- progressbar -->
 		<ul id="progressbar">
@@ -160,7 +161,7 @@
 			<h3 id="yesterday-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today</h2>
+			<h2 id="today-title" class="fs-title">Today!</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
 		</fieldset>
 		<fieldset>
@@ -214,7 +215,6 @@
 		document.addEventListener('touchstart', handleTouchStart, false);
 		document.addEventListener('touchmove', handleTouchMove, false);
 		document.addEventListener('touchend', handleTouchEnd, false);
-
 		function moveFieldset(direction) {
 			if (animating) return false;
 			animating = true;
@@ -271,6 +271,24 @@
 				animating = false;
 			}
 		}
+
+		document.addEventListener('DOMContentLoaded', () => {
+			const listItems = document.querySelectorAll('#progressbar li');
+			const dateOffsets = [-1, 0, 1];  // Yesterday, today, and tomorrow
+
+			listItems.forEach((li, index) => {
+				if (index < dateOffsets.length) {
+					const date = new Date();
+					date.setDate(date.getDate() + dateOffsets[index]);
+					const day = String(date.getDate());
+					const month = String(date.getMonth() + 1);
+					const formattedDate = `"${day}.${month}"`;  // Quote the string for valid CSS content
+					li.style.setProperty('--date', formattedDate);
+				}
+			});
+		});
+
+
 	</script>
 </body>
 
