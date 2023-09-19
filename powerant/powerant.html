@@ -201,7 +201,7 @@
 			<h3 id="yesterday-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today</h2>
+			<h2 id="today-title" class="fs-title">Today!</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
 		</fieldset>
 		<fieldset>
@@ -255,6 +255,7 @@
 		document.addEventListener('touchstart', handleTouchStart, false);
 		document.addEventListener('touchmove', handleTouchMove, false);
 		document.addEventListener('touchend', handleTouchEnd, false);
+		
 		function moveFieldset(direction) {
 			if (animating) return false;
 			animating = true;
@@ -262,6 +263,12 @@
 			let fieldsets = document.querySelectorAll('fieldset');
 			let currentFieldset = fieldsets[currentFieldsetIndex];
 			let progressbar = document.getElementById('progressbar');
+			let progressItems = progressbar.querySelectorAll('li');
+
+			// Clear all active statuses from the progress items
+			progressItems.forEach((item) => {
+				item.classList.remove('active');
+			});
 
 			if (direction === 'next' && currentFieldsetIndex < fieldsets.length - 1) {
 				currentFieldset.classList.add('slide-left');
@@ -275,7 +282,8 @@
 					nextFieldset.style.display = 'block';
 					nextFieldset.classList.add('slide-in-from-right');
 
-					progressbar.children[currentFieldsetIndex].classList.add('active');
+					// Set active status on the new current progress item
+					progressItems[currentFieldsetIndex].classList.add('active');
 
 					setTimeout(() => {
 						nextFieldset.classList.remove('slide-in-from-right');
@@ -296,7 +304,8 @@
 					previousFieldset.style.display = 'block';
 					previousFieldset.classList.add('slide-in-from-left');
 
-					progressbar.children[currentFieldsetIndex + 1].classList.remove('active');
+					// Set active status on the new current progress item
+					progressItems[currentFieldsetIndex].classList.add('active');
 
 					setTimeout(() => {
 						previousFieldset.classList.remove('slide-in-from-left');
