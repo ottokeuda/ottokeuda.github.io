@@ -29,7 +29,7 @@
             /* Relative max-width */
             margin: 1vw auto;
             text-align: center;
-        }
+            }
 
         #device-selector-container {
             width: 100%;
@@ -149,35 +149,6 @@
 
         }
 
-        .custom-select {
-            position: relative;
-            width: 200px;
-        }
-
-        #selected-option {
-            padding: 10px;
-            border: 1px solid #ccc;
-            text-align: center;
-        }
-
-        .custom-options {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            border: 1px solid #ccc;
-        }
-
-        .custom-options li {
-            padding: 10px;
-            text-align: center;
-        }
-
-        .custom-options li:hover {
-            background-color: #f2f2f2;
-        }
-
 
         /* marking active/completed steps green */
         #progressbar li.active:before,
@@ -243,13 +214,11 @@
             <li class="active" id="today-menu">Today</li>
             <li id="tomorrow-menu">Tomorrow</li>
         </ul>
-        <div id="custom-device-selector" class="custom-select">
-            <div id="selected-option">Select Device</div>
-            <ul id="custom-options" class="custom-options">
-                <li data-value="default">Select Device</li>
-                <li data-value="add-device">Add Device</li>
-                <!-- Add more options here -->
-            </ul>
+        <div id="device-selector-container">
+            <select id="device-selector">
+                <option id="device-selection-text" value="default">Select Device</option>
+                <option id="add-device-text" value="add-device">Add Device</option>
+            </select>
         </div>
         <!-- fieldsets -->
         <fieldset>
