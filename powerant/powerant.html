@@ -25,13 +25,13 @@
 
 		/* form styles */
 		#msform {
-			
+
 			max-width: 90vw;
 			/* Relative max-width */
 			margin: 1vw auto;
 			text-align: center;
-			
-			
+
+
 		}
 
 		#device-selector-container {
@@ -49,8 +49,8 @@
 			padding: 4vw;
 			margin: 0;
 			/* stacking fieldsets above each other */
-			
-			
+
+
 		}
 
 		/* Hide all except second fieldset */
@@ -126,6 +126,14 @@
 
 		}
 
+
+		/* marking active/completed steps green */
+		#progressbar li.active:before,
+		#progressbar li.active {
+			background: #27AE60;
+			color: white;
+		}
+
 		.slide-left {
 			transform: translateX(-100%);
 			transition: transform 0.4s ease-in-out;
@@ -189,7 +197,7 @@
 			<h3 id="yesterday-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
 		</fieldset>
 		<fieldset class="current">
-			<h2 id="today-title" class="fs-title">Today!!!</h2>
+			<h2 id="today-title" class="fs-title">Today</h2>
 			<h3 id="today-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
 		</fieldset>
 		<fieldset>
