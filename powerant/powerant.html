@@ -141,6 +141,9 @@
 
 		}
 
+		.hide {
+			display: none;
+		}
 
 		.slide-left {
 			transform: translateX(-100%);
@@ -154,35 +157,7 @@
 
 		.slide-reset {
 			transform: translateX(0);
-			transition: transform 0.4s ease-in-out;
-		}
-
-		.slide-in-from-right {
-			animation: slideInFromRight 0.4s ease-in-out;
-		}
-
-		.slide-in-from-left {
-			animation: slideInFromLeft 0.4s ease-in-out;
-		}
-
-		@keyframes slideInFromRight {
-			0% {
-				transform: translateX(100%);
-			}
-
-			100% {
-				transform: translateX(0);
-			}
-		}
-
-		@keyframes slideInFromLeft {
-			0% {
-				transform: translateX(-100%);
-			}
-
-			100% {
-				transform: translateX(0);
-			}
+			transition: none;
 		}
 	</style>
 </head>
@@ -200,7 +175,7 @@
 		<!-- fieldsets -->
 		<fieldset>
 			<h2 id="yesterday-title" class="fs-title">Yesterday</h2>
-			<h3 id="yesterday-subtitle" class="fs-subtitle">Info about yesterdays prices. </h3>
+			<h3 id="yesterday-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
 		</fieldset>
 		<fieldset class="current">
 			<h2 id="today-title" class="fs-title">Today</h2>
@@ -268,44 +243,34 @@
 
 			if (direction === 'next' && currentFieldsetIndex < fieldsets.length - 1) {
 				currentFieldset.classList.add('slide-left');
-
-				setTimeout(function () {
-					currentFieldset.style.display = 'none';
-					currentFieldset.classList.remove('slide-left');
-
+				setTimeout(() => {
+					currentFieldset.classList.remove('slide-left', 'slide-reset');
+					currentFieldset.classList.add('hide');
 					currentFieldsetIndex++;
 					let nextFieldset = fieldsets[currentFieldsetIndex];
-					nextFieldset.style.display = 'block';
-					nextFieldset.classList.add('slide-in-from-right');
-
+					nextFieldset.classList.remove('hide');
+					nextFieldset.classList.add('slide-reset');
 					progressbar.children[currentFieldsetIndex].classList.add('active');
-
 					setTimeout(() => {
-						nextFieldset.classList.remove('slide-in-from-right');
-					}, 400);
-
-					animating = false;
+						nextFieldset.classList.remove('slide-reset');
+						animating = false;
+					}, 10);
 				}, 400);
 
 			} else if (direction === 'previous' && currentFieldsetIndex > 0) {
 				currentFieldset.classList.add('slide-right');
-
-				setTimeout(function () {
-					currentFieldset.style.display = 'none';
-					currentFieldset.classList.remove('slide-right');
-
+				setTimeout(() => {
+					currentFieldset.classList.remove('slide-right', 'slide-reset');
+					currentFieldset.classList.add('hide');
 					currentFieldsetIndex--;
 					let previousFieldset = fieldsets[currentFieldsetIndex];
-					previousFieldset.style.display = 'block';
-					previousFieldset.classList.add('slide-in-from-left');
-
+					previousFieldset.classList.remove('hide');
+					previousFieldset.classList.add('slide-reset');
 					progressbar.children[currentFieldsetIndex + 1].classList.remove('active');
-
 					setTimeout(() => {
-						previousFieldset.classList.remove('slide-in-from-left');
-					}, 400);
-
-					animating = false;
+						previousFieldset.classList.remove('slide-reset');
+						animating = false;
+					}, 10);
 				}, 400);
 
 			} else {
