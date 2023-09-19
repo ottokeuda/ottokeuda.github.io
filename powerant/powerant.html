@@ -15,7 +15,7 @@
 		html {
 			height: 100%;
 			width: 100%;
-			background: linear-gradient(rgba(0, 0, 0, 0.723), rgba(0, 0, 0, 0.8));
+			background: linear-gradient(rgba(0, 0, 0, 0.609), rgba(0, 0, 0, 0.8));
 		}
 
 		body {
@@ -48,6 +48,8 @@
 			border: none;
 			padding: 4vw;
 			margin: 0;
+			box-shadow: 0 0 2vw 1vw rgba(0, 0, 0, 0.4);
+			padding: 4vw;
 			/* stacking fieldsets above each other */
 
 
@@ -56,6 +58,8 @@
 		/* Hide all except second fieldset */
 		#msform fieldset:not(:nth-of-type(2)) {
 			display: none;
+			box-shadow: 0 0 2vw 1vw rgba(0, 0, 0, 0.4);
+			padding: 4vw;
 		}
 
 		/* inputs */
@@ -184,7 +188,7 @@
 	<!-- multistep form -->
 	<form id="msform" action='/connect' method='post'>
 		<br><br>
-		<img src="powerant-logo.png" alt="HTML" width="80%">
+		<img src="powerant-logo2.png" alt="HTML" width="80%">
 		<!-- progressbar -->
 		<ul id="progressbar">
 			<li id="yesterday-menu">Yesterday</li>
@@ -275,10 +279,10 @@
 
 					setTimeout(() => {
 						nextFieldset.classList.remove('slide-in-from-right');
-					}, 400);
+					}, 100);
 
 					animating = false;
-				}, 400);
+				}, 100);
 
 			} else if (direction === 'previous' && currentFieldsetIndex > 0) {
 				currentFieldset.classList.add('slide-right');
@@ -296,10 +300,10 @@
 
 					setTimeout(() => {
 						previousFieldset.classList.remove('slide-in-from-left');
-					}, 400);
+					}, 100);
 
 					animating = false;
-				}, 400);
+				}, 100);
 
 			} else {
 				console.log("Either at the first or last step, can't move.");
