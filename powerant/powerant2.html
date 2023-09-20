@@ -96,6 +96,7 @@
             width: 100%;
             padding: 3vw;
 
+
         }
 
         #msform button {
@@ -112,9 +113,10 @@
             cursor: pointer;
             padding: 5vw;
             /* increased from 3vw 1.5vw to 5vw 2.5vw */
-            margin: 6vw;
+            margin-bottom: 6vw;
+            margin-top: 6vw;
             /* increased from 4vw 1.5vw to 6vw 2vw */
-            font-size: 6vw;
+            font-size: 4vw;
             /* increased from 3vw to 4vw */
         }
 
@@ -265,8 +267,8 @@
             <label for="device-code" style="display: block;">Device Code: </label>
             <input id="device-code" type="text" pattern="^[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}$"
                 title="Please enter in the format: xxxx-xxxx-xxxx-xxxx">
-            <button id="submit-device">Add Device</button>
             <button id="cancel-device">Cancel</button>
+            <button id="submit-device">Add Device</button>
         </div>
         <!-- Add this right above your <form> -->
         <div id="device-selector-container">
@@ -498,15 +500,15 @@
                 document.getElementById('device-code').value = '';
                 deviceSelector.value = "default";
                 document.getElementById('device-selector-container').style.display = 'block';
-                
-                
+
+
             }
 
             // Show form
             document.getElementById('submit-device').addEventListener('click', function () {
                 const deviceName = document.getElementById('device-name').value;
                 const deviceCode = document.getElementById('device-code').value;
-                
+
 
                 if (deviceName && deviceCode) {
                     const option = new Option(deviceName, deviceCode);
@@ -520,7 +522,7 @@
 
                 closeForm();
             });
-            
+
             document.getElementById('cancel-device').addEventListener('click', closeForm);
 
             deviceSelector.addEventListener("change", function () {
