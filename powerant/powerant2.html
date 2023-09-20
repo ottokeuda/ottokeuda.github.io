@@ -7,6 +7,7 @@
     <style>
         /* basic reset */
         * {
+            background: #;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -25,7 +26,7 @@
 
         /* form styles */
         #msform {
-            max-width: 97vw;
+            max-width: 80vw;
             /* Relative max-width */
             margin: 0vw auto;
             text-align: center;
@@ -41,7 +42,7 @@
             background: #333;
             border: none;
             padding: 4vw;
-            margin: 0;
+            margin: 0px;
             box-shadow: 0 0 1vw 0.5vw rgba(0, 0, 0, 0.4);
             padding: 4vw;
             /* stacking fieldsets above each other */
@@ -58,15 +59,28 @@
         #msform input,
         #msform textarea,
         #msform select {
-            padding: 3vw;
-            border: 0vw solid #ffffff;
+            padding: 1vw;
             border-radius: 5px;
-            margin-bottom: 0vw;
-            width: 100%;
-
+            margin-bottom: 3vw;
+            width: 80%;
+            background: #222;
             color: #ffffff;
-            font-size: 3vw;
-            
+            font-size: 6vw;
+            border: 1vw solid #666;
+            color: #ffffff;
+            text-align: center;
+
+        }
+
+        #device-form-container {
+            background: #333;
+            box-shadow: -2vw 0 2vw -1vw rgba(0, 0, 0, 0.4), 2vw 0 2vw -1vw rgba(0, 0, 0, 0.4);
+            border: none;
+            padding: none;
+        }
+
+        #msform label {
+            font-size: 5vw;
         }
 
         select#device-selector {
@@ -76,6 +90,12 @@
             border-top-left-radius: 0px;
             border-top-right-radius: 0px;
             background: #27AE60;
+            border: 0vw solid #ffffff;
+            color: #ffffff;
+            margin-bottom: 0vw;
+            width: 100%;
+            padding: 3vw;
+
         }
 
         #msform button {
@@ -90,11 +110,11 @@
             border-radius: 5px;
             /* increased from 3px to 5px for a slightly rounder edge */
             cursor: pointer;
-            padding: 5vw 2.5vw;
+            padding: 5vw;
             /* increased from 3vw 1.5vw to 5vw 2.5vw */
-            margin: 6vw 2vw;
+            margin: 6vw;
             /* increased from 4vw 1.5vw to 6vw 2vw */
-            font-size: 4vw;
+            font-size: 6vw;
             /* increased from 3vw to 4vw */
         }
 
@@ -106,10 +126,10 @@
 
         /* headings */
         .fs-title {
-            font-size: 4.5vw;
+            font-size: 7.5vw;
             text-transform: uppercase;
             color: #27AE60;
-            margin-bottom: 4vw;
+            padding: 2vw;
         }
 
         .fs-subtitle {
@@ -226,26 +246,28 @@
         </ul>
 
         <!-- fieldsets -->
-        <fieldset>
-            
-            <h3 id="yesterday-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
-        </fieldset>
-        <fieldset class="current">
-            
-            <h3 id="today-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
-            <div id="device-form-container" style="text-align: center; display: none;">
-                <label for="device-name" style="display: block;">Device Name: </label>
-                <input id="device-name" type="text">
-                <label for="device-code" style="display: block;">Device Code: </label>
-                <input id="device-code" type="text">
-                <button id="submit-device">Add Device</button>
-                <button id="cancel-device">Cancel</button>
-            </div>
-        </fieldset>
-        <fieldset>
-            
-            <h3 id="tomorrow-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
-        </fieldset>
+        <div id="fieldsets">
+            <fieldset>
+                <h3 id="yesterday-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
+            </fieldset>
+            <fieldset class="current">
+                <h3 id="today-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
+            </fieldset>
+            <fieldset>
+                <h3 id="tomorrow-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
+            </fieldset>
+        </div>
+
+        <div id="device-form-container" style="text-align: center; display: none;">
+            <h2 id="device-form-title" class="fs-title">Add a device</h2>
+            <label for="device-name" style="display: block;">Device Name: </label>
+            <input id="device-name" type="text">
+            <label for="device-code" style="display: block;">Device Code: </label>
+            <input id="device-code" type="text" pattern="^[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}$"
+                title="Please enter in the format: xxxx-xxxx-xxxx-xxxx">
+            <button id="submit-device">Add Device</button>
+            <button id="cancel-device">Cancel</button>
+        </div>
         <!-- Add this right above your <form> -->
         <div id="device-selector-container">
             <select id="device-selector">
@@ -404,6 +426,28 @@
             // add translations
         };
 
+        //Change the device code input to xxxx-xxxx-xxxx-xxxx
+        document.getElementById('device-code').addEventListener('input', function (e) {
+            var target = e.target,
+                value = target.value.replace(/[^a-zA-Z0-9]/g, ''), // Remove non-alphanumeric characters
+                dashAddedValue = '';
+
+            // Loop through the cleaned value and add dashes
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) dashAddedValue += '-';
+                dashAddedValue += value[i];
+            }
+
+            // Update the input's value
+            target.value = dashAddedValue;
+
+            // Position the cursor correctly after dashes
+            if (e.inputType !== "deleteContentBackward" && (dashAddedValue.length === 5 || dashAddedValue.length === 10 || dashAddedValue.length === 15)) {
+                target.setSelectionRange(dashAddedValue.length, dashAddedValue.length);
+            }
+        });
+
+
         function getBrowserLanguage() {
             const browserLanguage = navigator.language || navigator.userLanguage;
             if (browserLanguage.startsWith('en')) {
@@ -453,12 +497,16 @@
                 document.getElementById('device-name').value = '';
                 document.getElementById('device-code').value = '';
                 deviceSelector.value = "default";
+                document.getElementById('device-selector-container').style.display = 'block';
+                
+                
             }
 
             // Show form
             document.getElementById('submit-device').addEventListener('click', function () {
                 const deviceName = document.getElementById('device-name').value;
                 const deviceCode = document.getElementById('device-code').value;
+                
 
                 if (deviceName && deviceCode) {
                     const option = new Option(deviceName, deviceCode);
@@ -472,16 +520,18 @@
 
                 closeForm();
             });
-
+            
             document.getElementById('cancel-device').addEventListener('click', closeForm);
 
             deviceSelector.addEventListener("change", function () {
                 if (this.value === "add-device") {
+                    document.getElementById('device-selector-container').style.display = 'none';
+                    document.getElementById('fieldsets').style.display = 'none';
                     document.getElementById('device-form-container').style.display = 'block';
                 } else {
                     // Hide the form when any other option is selected
                     document.getElementById('device-form-container').style.display = 'none';
-
+                    document.getElementById('fieldsets').style.display = 'block';
                     updateTitles(this.options[this.selectedIndex].text);
                 }
             });
@@ -489,13 +539,13 @@
 
             function updateTitles(deviceName) {
                 if (deviceName && deviceName !== "Select Device") {
-                    document.getElementById("yesterday-title").innerText = ` ${deviceName}`;
-                    document.getElementById("today-title").innerText = ` ${deviceName}`;
-                    document.getElementById("tomorrow-title").innerText = ` ${deviceName}`;
+                    //document.getElementById("yesterday-title").innerText = ` ${deviceName}`;
+                    //document.getElementById("today-title").innerText = ` ${deviceName}`;
+                    //document.getElementById("tomorrow-title").innerText = ` ${deviceName}`;
                 } else {
-                    document.getElementById("yesterday-title").innerText = "Yesterday";
-                    document.getElementById("today-title").innerText = "Today";
-                    document.getElementById("tomorrow-title").innerText = "Tomorrow";
+                    //document.getElementById("yesterday-title").innerText = "Yesterday";
+                    //document.getElementById("today-title").innerText = "Today";
+                    //document.getElementById("tomorrow-title").innerText = "Tomorrow";
                 }
             }
         });
