@@ -544,8 +544,8 @@
                             code: deviceCode,
                             country: data.country,
                             timestamp: data.timestamp,
-                            triggerprice: data.triggerprice,
-                            triggerprice_tomorrow: data.triggerprice_tomorrow
+                            hoursactive: data.hoursactive,
+                            kwhtrigger: data.kwhtrigger
                         };
 
                         const devices = JSON.parse(localStorage.getItem("devices") || "[]");
