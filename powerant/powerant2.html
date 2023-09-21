@@ -7,7 +7,7 @@
     <style>
         /* basic reset */
         * {
-            background: #;
+            
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -30,12 +30,16 @@
             /* Relative max-width */
             margin: 0vw auto;
             text-align: center;
+            
         }
 
         #device-selector-container {
             width: 100%;
             text-align: center;
             box-shadow: 0 0 1vw 0.5vw rgba(0, 0, 0, 0.4);
+            margin-top: 3vw;
+            border-top-left-radius: 1vw;
+            border-top-right-radius: 1vw;
         }
 
         #msform fieldset {
@@ -44,7 +48,6 @@
             padding: 4vw;
             margin: 0px;
             box-shadow: 0 0 1vw 0.5vw rgba(0, 0, 0, 0.4);
-            padding: 4vw;
             /* stacking fieldsets above each other */
         }
 
@@ -60,16 +63,15 @@
         #msform textarea,
         #msform select {
             padding: 1vw;
-            border-radius: 5px;
-            margin-bottom: 3vw;
+            border-radius: 2px;
+            margin-bottom: 0vw;
             width: 80%;
             background: #222;
             color: #ffffff;
-            font-size: 6vw;
-            border: 1vw solid #666;
+            font-size: 3vw;
+            border: 2px solid #666;
             color: #ffffff;
             text-align: center;
-
         }
 
         #device-form-container {
@@ -80,23 +82,23 @@
         }
 
         #msform label {
-            font-size: 5vw;
+            font-size: 4vw;
+            padding-top: 3vw;
+            text-transform: uppercase;
         }
 
         select#device-selector {
             font-size: 5vw;
             text-align: center;
             text-transform: uppercase;
-            border-top-left-radius: 0px;
-            border-top-right-radius: 0px;
+            border-top-left-radius: 1vw;
+            border-top-right-radius: 1vw;
             background: #27AE60;
             border: 0vw solid #ffffff;
             color: #ffffff;
             margin-bottom: 0vw;
             width: 100%;
             padding: 3vw;
-
-
         }
 
         #msform button {
@@ -108,12 +110,12 @@
             font-weight: bold;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 2vw;
             /* increased from 3px to 5px for a slightly rounder edge */
             cursor: pointer;
             padding: 5vw;
             /* increased from 3vw 1.5vw to 5vw 2.5vw */
-            margin-bottom: 6vw;
+            margin-bottom: 15vw;
             margin-top: 6vw;
             /* increased from 4vw 1.5vw to 6vw 2vw */
             font-size: 4vw;
@@ -128,7 +130,7 @@
 
         /* headings */
         .fs-title {
-            font-size: 7.5vw;
+            font-size: 6vw;
             text-transform: uppercase;
             color: #27AE60;
             padding: 2vw;
@@ -138,13 +140,13 @@
             font-weight: normal;
             font-size: 3.5vw;
             color: #999;
-            margin-bottom: 8vw;
+            margin-bottom: 1vw;
         }
 
         /* progressbar */
         #progressbar {
             box-shadow: 0 0 2vw 1vw rgba(0, 0, 0, 0.4);
-            margin-top: 5vw;
+            margin-top: 0vw;
             overflow: hidden;
             /* CSS counters to number the steps */
             counter-reset: step;
@@ -152,8 +154,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
         }
 
         #progressbar li {
@@ -239,13 +241,15 @@
     <!-- multistep form -->
     <div id="msform">
         <br>
-        <img src="powerant-logo.png" alt="HTML" width="100%">
-        <!-- progressbar -->
-        <ul id="progressbar">
-            <li id="yesterday-menu">Yesterday</li>
-            <li class="active" id="today-menu">Today</li>
-            <li id="tomorrow-menu">Tomorrow</li>
-        </ul>
+        <img src="powerant-logo2.png" alt="HTML" width="80%">
+        
+        <!-- Add this right above your <form> -->
+            <div id="device-selector-container">
+                <select id="device-selector">
+                    <option id="device-selection-text" value="default">Select Device</option>
+                    <option id="add-device-text" value="add-device">Add Device</option>
+                </select>
+            </div>
 
         <!-- fieldsets -->
         <div id="fieldsets">
@@ -261,8 +265,7 @@
         </div>
 
         <div id="device-form-container" style="text-align: center; display: none;">
-            <h2 id="device-form-title" class="fs-title">Add a device</h2>
-            <label for="device-name" style="display: block;">Device Name: </label>
+            <label for="device-name" style="display: block;">NAME YOUR DEVICE: </label>
             <input id="device-name" type="text">
             <label for="device-code" style="display: block;">Device Code: </label>
             <input id="device-code" type="text" pattern="^[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}$"
@@ -270,13 +273,14 @@
             <button id="cancel-device">Cancel</button>
             <button id="submit-device">Add Device</button>
         </div>
-        <!-- Add this right above your <form> -->
-        <div id="device-selector-container">
-            <select id="device-selector">
-                <option id="device-selection-text" value="default">Select Device</option>
-                <option id="add-device-text" value="add-device">Add Device</option>
-            </select>
-        </div>
+        <!-- progressbar -->
+        <ul id="progressbar">
+            <li id="yesterday-menu">Yesterday</li>
+            <li class="active" id="today-menu">Today</li>
+            <li id="tomorrow-menu">Tomorrow</li>
+        </ul>
+
+        
     </div>
     <script>
 
@@ -499,7 +503,7 @@
                 document.getElementById('device-name').value = '';
                 document.getElementById('device-code').value = '';
                 deviceSelector.value = "default";
-                document.getElementById('device-selector-container').style.display = 'block';
+               
 
 
             }
@@ -527,7 +531,7 @@
 
             deviceSelector.addEventListener("change", function () {
                 if (this.value === "add-device") {
-                    document.getElementById('device-selector-container').style.display = 'none';
+                    
                     document.getElementById('fieldsets').style.display = 'none';
                     document.getElementById('device-form-container').style.display = 'block';
                 } else {

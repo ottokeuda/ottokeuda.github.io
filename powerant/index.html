@@ -12,20 +12,13 @@
 	<!-- multistep form -->
 	<form id="msform" action='/connect' method='post'>
 		<img src="powerant-logo.png" alt="HTML" width="100%">
+		<!-- Add this right above your <form> -->
 		<div id="device-selector-container">
 			<select id="device-selector">
 				<option id="device-selection-text" value="default">Select Device</option>
 				<option id="add-device-text" value="add-device">Add Device</option>
 			</select>
 		</div>
-		<!-- progressbar -->
-		<ul id="progressbar">
-			<li class="active" id="yesterday-menu">Yesterday</li>
-			<li class="active" id="today-menu">Today</li>
-			<li id="tomorrow-menu">Tomorrow</li>
-		</ul>
-		<!-- Add this right above your <form> -->
-		
 		<!-- fieldsets -->
 		<fieldset>
 			<h2 id="yesterday-title" class="fs-title">Yesterday</h2>
@@ -44,7 +37,12 @@
 			<h3 id="tomorrow-subtitle" class="fs-subtitle">Info about tomorrows prices. </h3>
 			<input type="button" name="previous" class="previous action-button" value="Previous" />
 		</fieldset>
-
+		<!-- progressbar -->
+		<ul id="progressbar">
+			<li class="active" id="yesterday-menu">Yesterday</li>
+			<li class="active" id="today-menu">Today</li>
+			<li id="tomorrow-menu">Tomorrow</li>
+		</ul>
 
 	</form>
 	<script src="script.js"></script>
