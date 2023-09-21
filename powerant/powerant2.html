@@ -7,7 +7,7 @@
     <style>
         /* basic reset */
         * {
-            
+
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -30,7 +30,7 @@
             /* Relative max-width */
             margin: 0vw auto;
             text-align: center;
-            
+
         }
 
         #device-selector-container {
@@ -60,16 +60,16 @@
 
         /* inputs */
         #msform input,
-        #msform textarea,
-        #msform select {
-            padding: 1vw;
+        #msform textarea {
+            padding: 1.5vw;
             border-radius: 2px;
             margin-bottom: 0vw;
             width: 80%;
             background: #222;
             color: #ffffff;
-            font-size: 3vw;
-            border: 2px solid #666;
+            font-size: 4vw;
+            border: 0.5vw solid #666;
+            border-radius: 0.5vw;
             color: #ffffff;
             text-align: center;
         }
@@ -83,7 +83,7 @@
 
         #msform label {
             font-size: 4vw;
-            padding-top: 3vw;
+            padding-top: 4vw;
             text-transform: uppercase;
         }
 
@@ -101,13 +101,18 @@
             padding: 3vw;
         }
 
+        select#device-selector:hover,
+        select#device-selector:focus {
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+        }
+
         #msform button {
             width: 40%;
             /* increased from 15vw to 25vw */
             max-width: 15rem;
             /* increased from 10rem to 15rem */
             background: #27AE60;
-            font-weight: bold;
+            /* font-weight: bold; */
             color: white;
             border: none;
             border-radius: 2vw;
@@ -242,34 +247,34 @@
     <div id="msform">
         <br>
         <img src="powerant-logo2.png" alt="HTML" width="80%">
-        
+
         <!-- Add this right above your <form> -->
-            <div id="device-selector-container">
-                <select id="device-selector">
-                    <option id="device-selection-text" value="default">Select Device</option>
-                    <option id="add-device-text" value="add-device">Add Device</option>
-                </select>
-            </div>
+        <div id="device-selector-container">
+            <select id="device-selector">
+                <option id="device-selection-text" value="default">Select Device</option>
+                <option id="add-device-text" value="add-device">Add Device</option>
+            </select>
+        </div>
 
         <!-- fieldsets -->
         <div id="fieldsets">
             <fieldset>
-                <h3 id="yesterday-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
+                <h3 id="yesterday-data" class="fs-subtitle">No device is selected. Select one from below. </h3>
             </fieldset>
             <fieldset class="current">
-                <h3 id="today-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
+                <h3 id="today-data" class="fs-subtitle">No device is selected. Select one from below. </h3>
             </fieldset>
             <fieldset>
-                <h3 id="tomorrow-subtitle" class="fs-subtitle">No device is selected. Select one from below. </h3>
+                <h3 id="tomorrow-data" class="fs-subtitle">No device is selected. Select one from below. </h3>
             </fieldset>
         </div>
 
         <div id="device-form-container" style="text-align: center; display: none;">
-            <label for="device-name" style="display: block;">NAME YOUR DEVICE: </label>
-            <input id="device-name" type="text">
-            <label for="device-code" style="display: block;">Device Code: </label>
-            <input id="device-code" type="text" pattern="^[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}$"
-                title="Please enter in the format: xxxx-xxxx-xxxx-xxxx">
+            <label for="device-name" id="device-name-label" style="display: block;">NAME YOUR DEVICE: </label>
+            <input id="device-name" type="text" placeholder="Water Boiler">
+            <label for="device-code" id="device-code-label" style="display: block;">Device Code: </label>
+            <input id="device-code" type="text" placeholder="1234-ABCD-5678"
+                pattern="^[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}-[0-9a-zA-Z]{4}$" maxlength="14">
             <button id="cancel-device">Cancel</button>
             <button id="submit-device">Add Device</button>
         </div>
@@ -280,7 +285,7 @@
             <li id="tomorrow-menu">Tomorrow</li>
         </ul>
 
-        
+
     </div>
     <script>
 
@@ -401,7 +406,6 @@
                 }
             });
         });
-
         const translations = {
             english: {
                 "yesterday-title": "Yesterday",
@@ -410,11 +414,15 @@
                 "yesterday-menu": "Yesterday",
                 "today-menu": "Today",
                 "tomorrow-menu": "Tomorrow",
-                "today-subtitle": "No device is selected. Select or add a device from below.",
-                "yesterday-subtitle": "No device is selected. Select or add a device from below.",
-                "tomorrow-subtitle": "No device is selected. Select or add a device from below.",
+                "today-data": "No device is selected. Select or add a device from below.",
+                "yesterday-data": "No device is selected. Select or add a device from below.",
+                "tomorrow-data": "No device is selected. Select or add a device from below.",
                 "device-selection-text": "Select device",
-                "add-device-text": "Add device"
+                "add-device-text": "Add device",
+                "device-name": "Name your device",
+                "device-code": "Device code:",
+                "cancel-device": "Cancel",
+                "submit-device": "Save"
             },
             finnish: {
                 "yesterday-title": "Eilen",
@@ -423,12 +431,18 @@
                 "yesterday-menu": "Eilen",
                 "today-menu": "Tänään",
                 "tomorrow-menu": "Huomenna",
-                "today-subtitle": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
-                "yesterday-subtitle": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
-                "tomorrow-subtitle": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
+                "today-data": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
+                "yesterday-data": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
+                "tomorrow-data": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
                 "device-selection-text": "Valitse laite",
-                "add-device-text": "Lisää laite"
+                "add-device-text": "Lisää laite",
+                "device-name-label": "Nimeä laitteesi",
+                "device-code-label": "Laitekoodi:",
+                "cancel-device": "Peruuta",
+                "submit-device": "Tallenna"
             }
+
+
             // add translations
         };
 
@@ -473,11 +487,15 @@
             document.getElementById("yesterday-menu").textContent = translation["yesterday-menu"];
             document.getElementById("today-menu").textContent = translation["today-menu"];
             document.getElementById("tomorrow-menu").textContent = translation["tomorrow-menu"];
-            document.getElementById("yesterday-subtitle").textContent = translation["yesterday-subtitle"];
-            document.getElementById("today-subtitle").textContent = translation["today-subtitle"];
-            document.getElementById("tomorrow-subtitle").textContent = translation["tomorrow-subtitle"];
+            document.getElementById("yesterday-data").textContent = translation["yesterday-data"];
+            document.getElementById("today-data").textContent = translation["today-data"];
+            document.getElementById("tomorrow-data").textContent = translation["tomorrow-data"];
             document.getElementById("device-selection-text").textContent = translation["device-selection-text"];
             document.getElementById("add-device-text").textContent = translation["add-device-text"];
+            document.getElementById("device-name-label").textContent = translation["device-name-label"];
+            document.getElementById("device-code-label").textContent = translation["device-code-label"];
+            document.getElementById("cancel-device").textContent = translation["cancel-device"];
+            document.getElementById("submit-device").textContent = translation["submit-device"];
 
             // Update more headings here
         }
@@ -503,55 +521,72 @@
                 document.getElementById('device-name').value = '';
                 document.getElementById('device-code').value = '';
                 deviceSelector.value = "default";
-               
-
-
             }
 
             // Show form
-            document.getElementById('submit-device').addEventListener('click', function () {
+            document.getElementById('submit-device').addEventListener('click', async function () {
                 const deviceName = document.getElementById('device-name').value;
                 const deviceCode = document.getElementById('device-code').value;
 
-
                 if (deviceName && deviceCode) {
-                    const option = new Option(deviceName, deviceCode);
-                    deviceSelector.add(option);
+                    try {
+                        const response = await fetch(`https://api.powerant.net/retrieve_data?api_key=${deviceCode}`);
 
-                    const newDevice = { name: deviceName, code: deviceCode };
-                    const devices = JSON.parse(localStorage.getItem("devices") || "[]");
-                    devices.push(newDevice);
-                    localStorage.setItem("devices", JSON.stringify(devices));
+                        if (!response.ok) {
+                            throw new Error("Invalid response from server");
+                        }
+
+                        const data = await response.json();
+
+                        // Save device info along with API data to local storage
+                        const newDevice = {
+                            name: deviceName,
+                            code: deviceCode,
+                            country: data.country,
+                            timestamp: data.timestamp,
+                            triggerprice: data.triggerprice,
+                            triggerprice_tomorrow: data.triggerprice_tomorrow
+                        };
+
+                        const devices = JSON.parse(localStorage.getItem("devices") || "[]");
+                        devices.push(newDevice);
+                        localStorage.setItem("devices", JSON.stringify(devices));
+
+                        const option = new Option(deviceName, deviceCode);
+                        deviceSelector.add(option);
+                        closeForm();
+                    } catch (error) {
+                        alert("Device key not valid. Check you have typed the key correctly.");
+                    }
                 }
-
-                closeForm();
             });
 
             document.getElementById('cancel-device').addEventListener('click', closeForm);
 
+
+
+
+            //Listens to changes in the device selector and updates the data as necessary.
             deviceSelector.addEventListener("change", function () {
                 if (this.value === "add-device") {
-                    
                     document.getElementById('fieldsets').style.display = 'none';
                     document.getElementById('device-form-container').style.display = 'block';
                 } else {
                     // Hide the form when any other option is selected
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
-                    updateTitles(this.options[this.selectedIndex].text);
+                    updateData(this.options[this.selectedIndex].text);
                 }
             });
 
 
-            function updateTitles(deviceName) {
+            function updateData(deviceName) {
                 if (deviceName && deviceName !== "Select Device") {
-                    //document.getElementById("yesterday-title").innerText = ` ${deviceName}`;
-                    //document.getElementById("today-title").innerText = ` ${deviceName}`;
-                    //document.getElementById("tomorrow-title").innerText = ` ${deviceName}`;
+                    document.getElementById("yesterday-data").innerText = ` ${deviceName}`;
+                    document.getElementById("today-data").innerText = ` ${deviceName}`;
+                    document.getElementById("tomorrow-data").innerText = ` ${deviceName}`;
                 } else {
-                    //document.getElementById("yesterday-title").innerText = "Yesterday";
-                    //document.getElementById("today-title").innerText = "Today";
-                    //document.getElementById("tomorrow-title").innerText = "Tomorrow";
+
                 }
             }
         });
