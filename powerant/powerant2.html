@@ -523,7 +523,7 @@
                 deviceSelector.value = "default";
             }
 
-            // Show form
+            // Add device to local storage
             document.getElementById('submit-device').addEventListener('click', async function () {
                 const deviceName = document.getElementById('device-name').value;
                 const deviceCode = document.getElementById('device-code').value;
@@ -561,10 +561,8 @@
                 }
             });
 
+            // Close the device form without adding a device
             document.getElementById('cancel-device').addEventListener('click', closeForm);
-
-
-
 
             //Listens to changes in the device selector and updates the data as necessary.
             deviceSelector.addEventListener("change", function () {
@@ -575,13 +573,13 @@
                     // Hide the form when any other option is selected
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
-                    updateData(this.options[this.selectedIndex].text);
+                    const selectedOption = this.options[this.selectedIndex];
+                    updateData(selectedOption.text, selectedOption.value);
                 }
             });
 
-
-            function updateData(deviceName) {
-                if (deviceName && deviceName !== "Select Device") {
+            function updateData(deviceName, deviceValue) {
+                if (deviceName && deviceValue !== "default") {
                     document.getElementById("yesterday-data").innerText = ` ${deviceName}`;
                     document.getElementById("today-data").innerText = ` ${deviceName}`;
                     document.getElementById("tomorrow-data").innerText = ` ${deviceName}`;
