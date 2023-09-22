@@ -560,7 +560,7 @@
                     }
                 }
             });
-
+            
             // Close the device form without adding a device
             document.getElementById('cancel-device').addEventListener('click', closeForm);
 
@@ -569,17 +569,23 @@
                 if (this.value === "add-device") {
                     document.getElementById('fieldsets').style.display = 'none';
                     document.getElementById('device-form-container').style.display = 'block';
-                } else {
+                }
+                if (this.value === "default") {
                     // Hide the form when any other option is selected
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
-                    const selectedOption = this.options[this.selectedIndex];
-                    updateData(selectedOption.text, selectedOption.value);
+                    updateFormLanguage();
+                }
+                else {
+                    // Hide the form when any other option is selected
+                    document.getElementById('device-form-container').style.display = 'none';
+                    document.getElementById('fieldsets').style.display = 'block';
+                    updateData(this.options[this.selectedIndex].text);
                 }
             });
 
-            function updateData(deviceName, deviceValue) {
-                if (deviceName && deviceValue !== "default") {
+            function updateData(deviceName) {
+                if (deviceName && deviceName !== "Select Device") {
                     document.getElementById("yesterday-data").innerText = ` ${deviceName}`;
                     document.getElementById("today-data").innerText = ` ${deviceName}`;
                     document.getElementById("tomorrow-data").innerText = ` ${deviceName}`;
