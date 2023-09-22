@@ -615,9 +615,9 @@
                         const values = Object.values(data);
 
                         // Divide the data into yesterday, today, and tomorrow
-                        const yesterdayData = values.slice(0+offsetInHours, 24+offsetInHours).join(', ');
-                        const todayData = values.slice(24+offsetInHours, 48+offsetInHours).join(', ');
-                        const tomorrowData = values.slice(48+offsetInHours).join(', ');
+                        const yesterdayData = values.slice(2+offsetInHours, 26+offsetInHours).join(', ');
+                        const todayData = values.slice(26+offsetInHours, 50+offsetInHours).join(', ');
+                        const tomorrowData = values.slice(50+offsetInHours).join(', ');
 
                         // Update the DOM
                         document.getElementById("yesterday-data").innerText = yesterdayData;
