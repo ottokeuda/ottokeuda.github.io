@@ -412,7 +412,7 @@
                 "today-title": "Today",
                 "tomorrow-title": "Tomorrow",
                 "yesterday-menu": "Yesterday",
-                "today-menu": "Today",
+                "today-menu": "Today1",
                 "tomorrow-menu": "Tomorrow",
                 "today-data": "No device is selected. Select or add a device from below.",
                 "yesterday-data": "No device is selected. Select or add a device from below.",
@@ -589,7 +589,7 @@
             async function fetchPriceData(apiKey, countryCode) {
                 try {
                     // Make the API request
-                    const response = await fetch(`https://api.powerant.net/retrieve_file?api_key=${apiKey}&file_name=${countryCode}`);
+                    const response = await fetch(`https://api.powerant.net/retrieve_file?api_key=${apiKey}&file_name=${countryCode}.json`);
 
                     // If not a successful request, throw an error
                     if (!response.ok) {
