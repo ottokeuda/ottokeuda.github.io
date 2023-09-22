@@ -412,7 +412,7 @@
                 "today-title": "Today",
                 "tomorrow-title": "Tomorrow",
                 "yesterday-menu": "Yesterday",
-                "today-menu": "Today1",
+                "today-menu": "Today",
                 "tomorrow-menu": "Tomorrow",
                 "today-data": "No device is selected. Select or add a device from below.",
                 "yesterday-data": "No device is selected. Select or add a device from below.",
@@ -608,15 +608,16 @@
                 const devices = JSON.parse(localStorage.getItem("devices") || "[]");
                 const countryCode = (devices.find(dev => dev.name === deviceName) || {}).country;
                 const apiKey = (devices.find(dev => dev.name === deviceName) || {}).code;
+                const offsetInHours = new Date().getTimezoneOffset() / 60;
 
                 fetchPriceData(apiKey, countryCode).then(data => {
                     if (data) {
                         const values = Object.values(data);
 
                         // Divide the data into yesterday, today, and tomorrow
-                        const yesterdayData = values.slice(0, 24).join(', ');
-                        const todayData = values.slice(24, 48).join(', ');
-                        const tomorrowData = values.slice(48).join(', ');
+                        const yesterdayData = values.slice(0+offsetInHours, 24+offsetInHours).join(', ');
+                        const todayData = values.slice(24+offsetInHours, 48+offsetInHours).join(', ');
+                        const tomorrowData = values.slice(48+offsetInHours).join(', ');
 
                         // Update the DOM
                         document.getElementById("yesterday-data").innerText = yesterdayData;
