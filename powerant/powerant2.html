@@ -566,18 +566,19 @@
 
             //Listens to changes in the device selector and updates the data as necessary.
             deviceSelector.addEventListener("change", function () {
+                // Show the form when the "add device" option is selected
                 if (this.value === "add-device") {
                     document.getElementById('fieldsets').style.display = 'none';
                     document.getElementById('device-form-container').style.display = 'block';
                 }
                 else if (this.value === "default") {
-                    // Hide the form when any other option is selected
+                    // Hide the form when the "select device" option is selected
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
                     updateFormLanguage();
                 }
                 else{
-                    // Hide the form when any other option is selected
+                    // Hide the form and fetch/update device price data to fieldsets when any other option is selected
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
                     updateData(this.options[this.selectedIndex].text);
