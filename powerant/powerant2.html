@@ -560,7 +560,7 @@
                     }
                 }
             });
-            
+
             // Close the device form without adding a device
             document.getElementById('cancel-device').addEventListener('click', closeForm);
 
@@ -584,14 +584,45 @@
                 }
             });
 
-            function updateData(deviceName) {
-                if (deviceName && deviceName !== "Select Device") {
-                    document.getElementById("yesterday-data").innerText = ` ${deviceName}`;
-                    document.getElementById("today-data").innerText = ` ${deviceName}`;
-                    document.getElementById("tomorrow-data").innerText = ` ${deviceName}`;
-                } else {
+            // Function to retrieve price data
+            async function fetchPriceData(apiKey, countryCode) {
+                try {
+                    // Make the API request
+                    const response = await fetch(`https://api.powerant.net/retrieve_file?api_key=${apiKey}&file_name=${countryCode}`);
 
+                    // If not a successful request, throw an error
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+
+                    // Parse the JSON data from the response
+                    return await response.json();
+                } catch (error) {
+                    console.error('There was a problem fetching the price data:', error);
+                    return null;
                 }
+            }
+
+            function updateData(deviceName) {
+                const devices = JSON.parse(localStorage.getItem("devices") || "[]");
+                const countryCode = (devices.find(dev => dev.name === deviceName) || {}).country;
+                const apiKey = (devices.find(dev => dev.name === deviceName) || {}).code;
+
+                fetchPriceData(apiKey, countryCode).then(data => {
+                    if (data) {
+                        const values = Object.values(data);
+
+                        // Divide the data into yesterday, today, and tomorrow
+                        const yesterdayData = values.slice(0, 24).join(', ');
+                        const todayData = values.slice(24, 48).join(', ');
+                        const tomorrowData = values.slice(48).join(', ');
+
+                        // Update the DOM
+                        document.getElementById("yesterday-data").innerText = yesterdayData;
+                        document.getElementById("today-data").innerText = todayData;
+                        document.getElementById("tomorrow-data").innerText = tomorrowData;
+                    }
+                });
             }
         });
 
