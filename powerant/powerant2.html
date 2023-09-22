@@ -577,7 +577,7 @@
                     document.getElementById('fieldsets').style.display = 'block';
                     updateFormLanguage();
                 }
-                else{
+                else {
                     // Hide the form and fetch/update device price data to fieldsets when any other option is selected
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
@@ -604,20 +604,46 @@
                 }
             }
 
+            function formatDate(date) {
+                const yyyy = date.getFullYear();
+                const mm = String(date.getMonth() + 1).padStart(2, '0'); // January is 0!
+                const dd = String(date.getDate()).padStart(2, '0');
+                return `${yyyy}${mm}${dd}`;
+            }
+
             function updateData(deviceName) {
                 const devices = JSON.parse(localStorage.getItem("devices") || "[]");
                 const countryCode = (devices.find(dev => dev.name === deviceName) || {}).country;
                 const apiKey = (devices.find(dev => dev.name === deviceName) || {}).code;
-                const offsetInHours = new Date().getTimezoneOffset() / 60;
 
                 fetchPriceData(apiKey, countryCode).then(data => {
                     if (data) {
-                        const values = Object.values(data);
+                        // Get formatted date strings
+                        const today = new Date();
+                        const yesterday = new Date(today);
+                        yesterday.setDate(yesterday.getDate() - 1);
+                        const tomorrow = new Date(today);
+                        tomorrow.setDate(tomorrow.getDate() + 1);
 
-                        // Divide the data into yesterday, today, and tomorrow
-                        const yesterdayData = values.slice(2+offsetInHours, 26+offsetInHours).join(', ');
-                        const todayData = values.slice(26+offsetInHours, 50+offsetInHours).join(', ');
-                        const tomorrowData = values.slice(50+offsetInHours).join(', ');
+                        const todayStr = formatDate(today);
+                        const yesterdayStr = formatDate(yesterday);
+                        const tomorrowStr = formatDate(tomorrow);
+
+                        // Filter values based on dates
+                        const yesterdayData = Object.entries(data)
+                            .filter(([key,]) => key.startsWith(yesterdayStr))
+                            .map(([key, value]) => value)
+                            .join(', ');
+
+                        const todayData = Object.entries(data)
+                            .filter(([key,]) => key.startsWith(todayStr))
+                            .map(([key, value]) => value)
+                            .join(', ');
+
+                        const tomorrowData = Object.entries(data)
+                            .filter(([key,]) => key.startsWith(tomorrowStr))
+                            .map(([key, value]) => value)
+                            .join(', ');
 
                         // Update the DOM
                         document.getElementById("yesterday-data").innerText = yesterdayData;
