@@ -570,13 +570,13 @@
                     document.getElementById('fieldsets').style.display = 'none';
                     document.getElementById('device-form-container').style.display = 'block';
                 }
-                if (this.value === "default") {
+                else if (this.value === "default") {
                     // Hide the form when any other option is selected
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
                     updateFormLanguage();
                 }
-                else {
+                else{
                     // Hide the form when any other option is selected
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
