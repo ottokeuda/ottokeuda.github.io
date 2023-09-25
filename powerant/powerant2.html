@@ -272,9 +272,13 @@
             /* Remove border for the last row */
         }
 
-        /* Highlight the "on" power state */
-        .data-container td:nth-child(3):contains("on") {
+        /* Power state colors */
+        .data-container .power-on {
             color: #27AE60;
+        }
+
+        .data-container .power-off {
+            color: #ddd;
         }
     </style>
 
@@ -456,7 +460,7 @@
                 "today-title": "Today",
                 "tomorrow-title": "Tomorrow",
                 "yesterday-menu": "Yesterday",
-                "today-menu": "Today1",
+                "today-menu": "Today",
                 "tomorrow-menu": "Tomorrow",
                 "today-data": "No device is selected. Select or add a device from below.",
                 "yesterday-data": "No device is selected. Select or add a device from below.",
@@ -656,18 +660,27 @@
             }
 
             // Function to generate the table HTML
-            function generateTableHTML(prices, kwhTrigger) {
-                // Define the fixed time intervals
+            function generateTableHTML(prices, kwhTrigger, cheapestHours) {
                 const times = Array.from({ length: 24 }, (_, i) => `${i}-${i + 1}`);
 
-                // Convert prices into rows of [time, price, power]
+                // Identify the 10th cheapest price
+                const sortedPrices = [...prices].sort((a, b) => a - b);
+                const thCheapestPrice = sortedPrices[cheapestHours - 1] || 0;
+
                 const rows = times.map((time, index) => {
-                    const price = prices[index] || 0; // Default to 0 if the price is missing
-                    const power = price < kwhTrigger ? 'on' : 'off';
-                    return [time, price, power];
+                    const price = prices[index] || 0;
+
+                    let power;
+                    if (price < kwhTrigger || price <= thCheapestPrice) {
+                        power = 'on';
+                    } else {
+                        power = 'off';
+                    }
+
+                    const powerClass = power === 'on' ? 'power-on' : 'power-off';
+                    return [time, price, power, powerClass];
                 });
 
-                // Generate the table HTML
                 const tableHTML = `
                     <table>
                         <thead>
@@ -682,7 +695,7 @@
                             <tr>
                                 <td>${row[0]}</td>
                                 <td>${row[1]}</td>
-                                <td>${row[2]}</td>
+                                <td class="${row[3]}">${row[2]}</td>
                             </tr>
                             `).join('')}
                         </tbody>
@@ -692,11 +705,13 @@
                 return tableHTML;
             }
 
+
             function updateData(deviceName) {
                 const devices = JSON.parse(localStorage.getItem("devices") || "[]");
                 const countryCode = (devices.find(dev => dev.name === deviceName) || {}).country;
                 const apiKey = (devices.find(dev => dev.name === deviceName) || {}).code;
                 const trigger = (devices.find(dev => dev.name === deviceName) || {}).kwhtrigger;
+                const hours = (devices.find(dev => dev.name === deviceName) || {}).hoursactive;
 
                 fetchPriceData(apiKey, countryCode).then(data => {
                     if (data) {
@@ -725,9 +740,9 @@
                             .map(([key, value]) => value)
 
                         // Update the DOM
-                        document.getElementById("yesterday-data").innerHTML = generateTableHTML(yesterdayData, trigger);
-                        document.getElementById("today-data").innerHTML = generateTableHTML(todayData, trigger);
-                        document.getElementById("tomorrow-data").innerHTML = generateTableHTML(tomorrowData, trigger);
+                        document.getElementById("yesterday-data").innerHTML = generateTableHTML(yesterdayData, trigger, hours);
+                        document.getElementById("today-data").innerHTML = generateTableHTML(todayData, trigger, hours);
+                        document.getElementById("tomorrow-data").innerHTML = generateTableHTML(tomorrowData, trigger, hours);
                     }
                 });
             }
