@@ -412,7 +412,7 @@
                 "today-title": "Today",
                 "tomorrow-title": "Tomorrow",
                 "yesterday-menu": "Yesterday",
-                "today-menu": "Today3",
+                "today-menu": "Today",
                 "tomorrow-menu": "Tomorrow",
                 "today-data": "No device is selected. Select or add a device from below.",
                 "yesterday-data": "No device is selected. Select or add a device from below.",
@@ -625,25 +625,25 @@
 
                 // Generate the table HTML
                 const tableHTML = `
-        <table>
-            <thead>
-                <tr>
-                    <th>Time</th>
-                    <th>Price</th>
-                    <th>Power</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${rows.map(row => `
-                <tr>
-                    <td>${row[0]}</td>
-                    <td>${row[1]}</td>
-                    <td>${row[2]}</td>
-                </tr>
-                `).join('')}
-            </tbody>
-        </table>
-    `;
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Price</th>
+                                <th>Power</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${rows.map(row => `
+                            <tr>
+                                <td>${row[0]}</td>
+                                <td>${row[1]}</td>
+                                <td>${row[2]}</td>
+                            </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
 
                 return tableHTML;
             }
