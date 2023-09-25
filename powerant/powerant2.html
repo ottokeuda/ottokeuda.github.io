@@ -238,6 +238,44 @@
                 transform: translateX(0);
             }
         }
+
+        /* Table Styles */
+        .data-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2vw;
+            box-shadow: 0 0 1vw 0.5vw rgba(0, 0, 0, 0.4);
+        }
+
+        .data-container th,
+        .data-container td {
+            padding: 1vw;
+            border-bottom: 0.2vw solid #444;
+            text-align: center;
+        }
+
+        .data-container th {
+            background-color: #27AE60;
+            color: white;
+            font-size: 4vw;
+            text-transform: uppercase;
+        }
+
+        .data-container td {
+            background-color: #222;
+            font-size: 3.5vw;
+            color: #ddd;
+        }
+
+        .data-container tr:last-child td {
+            border-bottom: none;
+            /* Remove border for the last row */
+        }
+
+        /* Highlight the "on" power state */
+        .data-container td:nth-child(3):contains("on") {
+            color: #27AE60;
+        }
     </style>
 
 </head>
