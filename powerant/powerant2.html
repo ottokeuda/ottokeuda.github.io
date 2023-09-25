@@ -259,13 +259,13 @@
         <!-- fieldsets -->
         <div id="fieldsets">
             <fieldset>
-                <h3 id="yesterday-data" class="fs-subtitle">No device is selected. Select one from below. </h3>
+                <div id="yesterday-data" class="fs-subtitle">No device is selected. Select one from below. </div>
             </fieldset>
             <fieldset class="current">
-                <h3 id="today-data" class="fs-subtitle">No device is selected. Select one from below. </h3>
+                <div id="today-data" class="fs-subtitle">No device is selected. Select one from below. </div>
             </fieldset>
             <fieldset>
-                <h3 id="tomorrow-data" class="fs-subtitle">No device is selected. Select one from below. </h3>
+                <div id="tomorrow-data" class="fs-subtitle">No device is selected. Select one from below. </div>
             </fieldset>
         </div>
 
@@ -412,7 +412,7 @@
                 "today-title": "Today",
                 "tomorrow-title": "Tomorrow",
                 "yesterday-menu": "Yesterday",
-                "today-menu": "Today2",
+                "today-menu": "Today3",
                 "tomorrow-menu": "Tomorrow",
                 "today-data": "No device is selected. Select or add a device from below.",
                 "yesterday-data": "No device is selected. Select or add a device from below.",
@@ -611,10 +611,48 @@
                 return `${yyyy}${mm}${dd}`;
             }
 
+            // Function to generate the table HTML
+            function generateTableHTML(prices, kwhTrigger) {
+                // Define the fixed time intervals
+                const times = Array.from({ length: 24 }, (_, i) => `${i}-${i + 1}`);
+
+                // Convert prices into rows of [time, price, power]
+                const rows = times.map((time, index) => {
+                    const price = prices[index] || 0; // Default to 0 if the price is missing
+                    const power = price < kwhTrigger ? 'on' : 'off';
+                    return [time, price, power];
+                });
+
+                // Generate the table HTML
+                const tableHTML = `
+        <table>
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Price</th>
+                    <th>Power</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${rows.map(row => `
+                <tr>
+                    <td>${row[0]}</td>
+                    <td>${row[1]}</td>
+                    <td>${row[2]}</td>
+                </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
+
+                return tableHTML;
+            }
+
             function updateData(deviceName) {
                 const devices = JSON.parse(localStorage.getItem("devices") || "[]");
                 const countryCode = (devices.find(dev => dev.name === deviceName) || {}).country;
                 const apiKey = (devices.find(dev => dev.name === deviceName) || {}).code;
+                const trigger = (devices.find(dev => dev.name === deviceName) || {}).kwhtrigger;
 
                 fetchPriceData(apiKey, countryCode).then(data => {
                     if (data) {
@@ -633,22 +671,19 @@
                         const yesterdayData = Object.entries(data)
                             .filter(([key,]) => key.startsWith(yesterdayStr))
                             .map(([key, value]) => value)
-                            .join(', ');
 
                         const todayData = Object.entries(data)
                             .filter(([key,]) => key.startsWith(todayStr))
                             .map(([key, value]) => value)
-                            .join(', ');
 
                         const tomorrowData = Object.entries(data)
                             .filter(([key,]) => key.startsWith(tomorrowStr))
                             .map(([key, value]) => value)
-                            .join(', ');
 
                         // Update the DOM
-                        document.getElementById("yesterday-data").innerText = yesterdayData;
-                        document.getElementById("today-data").innerText = todayData;
-                        document.getElementById("tomorrow-data").innerText = tomorrowData;
+                        document.getElementById("yesterday-data").innerHTML = generateTableHTML(yesterdayData, trigger);
+                        document.getElementById("today-data").innerHTML = generateTableHTML(todayData, trigger);
+                        document.getElementById("tomorrow-data").innerHTML = generateTableHTML(tomorrowData, trigger);
                     }
                 });
             }
