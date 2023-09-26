@@ -675,14 +675,7 @@
             function generateTableHTML(prices, kwhTrigger, cheapestHours) {
 
                 const selectedLanguage = getBrowserLanguage();
-                const translation = translations[selectedLanguage];
-                translation["time"]
-                translation["price"]
-                translation["power"]
-                translation["on"]
-                translation["off"]
-                
-
+                const translation = translations[selectedLanguage];              
 
                 const times = Array.from({ length: 24 }, (_, i) => `${i}-${i + 1}`);
 
@@ -770,6 +763,9 @@
                             .map(([key, value]) => value)
 
                         // Update the DOM
+                        document.getElementById('yesterday-title').style.display = 'none';
+                        document.getElementById('today-title').style.display = 'none';
+                        document.getElementById('tomorrow-title').style.display = 'none';
                         document.getElementById("yesterday-data").innerHTML = generateTableHTML(yesterdayData, trigger, hours);
                         document.getElementById("today-data").innerHTML = generateTableHTML(todayData, trigger, hours);
                         document.getElementById("tomorrow-data").innerHTML = generateTableHTML(tomorrowData, trigger, hours);
