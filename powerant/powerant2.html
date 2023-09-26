@@ -306,17 +306,20 @@
         <div id="fieldsets">
             <fieldset>
                 <div class="data-container">
-                    <div id="yesterday-data" class="fs-subtitle">No device is selected. Select one from below. </div>
+                    <h3 id="yesterday-title" class="fs-subtitle">No device is selected. Select one from below. </h3>
+                    <div id="yesterday-data"></div>
                 </div>
             </fieldset>
             <fieldset class="current">
                 <div class="data-container">
-                    <div id="today-data" class="fs-subtitle">No device is selected. Select one from below. </div>
+                    <h3 id="today-title" class="fs-subtitle">No device is selected. Select one from below. </h3>
+                    <div id="today-data"></div>
                 </div>
             </fieldset>
             <fieldset>
                 <div class="data-container">
-                    <div id="tomorrow-data" class="fs-subtitle">No device is selected. Select one from below. </div>
+                    <h3 id="tomorrow-title" class="fs-subtitle">No device is selected. Select one from below. </h3>
+                    <div id="tomorrow-data"></div>
                 </div>
             </fieldset>
         </div>
@@ -460,15 +463,12 @@
         });
         const translations = {
             english: {
-                "yesterday-title": "Yesterday",
-                "today-title": "Today",
-                "tomorrow-title": "Tomorrow",
+                "yesterday-title": "No device is selected. Select or add a device from below.",
+                "today-title": "No device is selected. Select or add a device from below.",
+                "tomorrow-title": "No device is selected. Select or add a device from below.",
                 "yesterday-menu": "Yesterday",
                 "today-menu": "Today",
                 "tomorrow-menu": "Tomorrow",
-                "today-data": "No device is selected. Select or add a device from below.",
-                "yesterday-data": "No device is selected. Select or add a device from below.",
-                "tomorrow-data": "No device is selected. Select or add a device from below.",
                 "device-selection-text": "Select device",
                 "add-device-text": "Add device",
                 "device-name": "Name your device",
@@ -483,15 +483,12 @@
 
             },
             finnish: {
-                "yesterday-title": "Eilen",
-                "today-title": "Tänään",
-                "tomorrow-title": "Huomenna",
+                "yesterday-title": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
+                "today-title": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
+                "tomorrow-title": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
                 "yesterday-menu": "Eilen",
                 "today-menu": "Tänään",
                 "tomorrow-menu": "Huomenna",
-                "today-data": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
-                "yesterday-data": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
-                "tomorrow-data": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
                 "device-selection-text": "Valitse laite",
                 "add-device-text": "Lisää laite",
                 "device-name-label": "Nimeä laitteesi",
@@ -550,9 +547,9 @@
             document.getElementById("yesterday-menu").textContent = translation["yesterday-menu"];
             document.getElementById("today-menu").textContent = translation["today-menu"];
             document.getElementById("tomorrow-menu").textContent = translation["tomorrow-menu"];
-            document.getElementById("yesterday-data").textContent = translation["yesterday-data"];
-            document.getElementById("today-data").textContent = translation["today-data"];
-            document.getElementById("tomorrow-data").textContent = translation["tomorrow-data"];
+            document.getElementById("yesterday-title").textContent = translation["yesterday-title"];
+            document.getElementById("today-title").textContent = translation["today-title"];
+            document.getElementById("tomorrow-title").textContent = translation["tomorrow-title"];
             document.getElementById("device-selection-text").textContent = translation["device-selection-text"];
             document.getElementById("add-device-text").textContent = translation["add-device-text"];
             document.getElementById("device-name-label").textContent = translation["device-name-label"];
