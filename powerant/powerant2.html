@@ -146,10 +146,10 @@
             font-size: 3.5vw;
             color: #999;
             margin: 4vw;
-            
-        
+
+
             text-align: center;
-            
+
         }
 
         /* progressbar */
@@ -580,7 +580,11 @@
                 document.getElementById('device-form-container').style.display = 'none';
                 document.getElementById('device-name').value = '';
                 document.getElementById('device-code').value = '';
+                document.getElementById('yesterday-title').style.display = 'block';
+                document.getElementById('today-title').style.display = 'block';
+                document.getElementById('tomorrow-title').style.display = 'block';
                 deviceSelector.value = "default";
+
             }
 
             // Add device to local storage
@@ -635,6 +639,12 @@
                     // Hide the form when the "select device" option is selected
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
+                    document.getElementById('yesterday-data').style.display = 'none';
+                    document.getElementById('today-data').style.display = 'none';
+                    document.getElementById('tomorrow-data').style.display = 'none';
+                    document.getElementById('yesterday-title').style.display = 'block';
+                    document.getElementById('today-title').style.display = 'block';
+                    document.getElementById('tomorrow-title').style.display = 'block';
                     updateFormLanguage();
                 }
                 else {
@@ -675,7 +685,7 @@
             function generateTableHTML(prices, kwhTrigger, cheapestHours) {
 
                 const selectedLanguage = getBrowserLanguage();
-                const translation = translations[selectedLanguage];              
+                const translation = translations[selectedLanguage];
 
                 const times = Array.from({ length: 24 }, (_, i) => `${i}-${i + 1}`);
 
@@ -694,13 +704,13 @@
                     }
 
                     const powerClass = power === 'on' ? 'power-on' : 'power-off';
-                    if (power == 'on'){
-                       power = translation["on"];
+                    if (power == 'on') {
+                        power = translation["on"];
                     }
-                    else{
+                    else {
                         power = translation["off"];
                     }
-                    
+
                     return [time, price, power, powerClass];
                 });
 
