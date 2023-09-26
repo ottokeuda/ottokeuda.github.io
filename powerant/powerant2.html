@@ -470,7 +470,13 @@
                 "device-name": "Name your device",
                 "device-code": "Device code:",
                 "cancel-device": "Cancel",
-                "submit-device": "Save"
+                "submit-device": "Save",
+                "time": "Time",
+                "price": "Price",
+                "power": "Power",
+                "on": "On",
+                "off": "Off"
+
             },
             finnish: {
                 "yesterday-title": "Eilen",
@@ -487,7 +493,12 @@
                 "device-name-label": "Nimeä laitteesi",
                 "device-code-label": "Laitekoodi:",
                 "cancel-device": "Peruuta",
-                "submit-device": "Tallenna"
+                "submit-device": "Tallenna",
+                "time": "Aika",
+                "price": "Hinta",
+                "power": "Virta",
+                "on": "Päällä",
+                "off": "Pois"
             }
 
 
@@ -661,6 +672,17 @@
 
             // Function to generate the table HTML
             function generateTableHTML(prices, kwhTrigger, cheapestHours) {
+
+                const selectedLanguage = getBrowserLanguage();
+                const translation = translations[selectedLanguage];
+                translation["time"]
+                translation["price"]
+                translation["power"]
+                translation["on"]
+                translation["off"]
+                
+
+
                 const times = Array.from({ length: 24 }, (_, i) => `${i}-${i + 1}`);
 
                 // Identify the 10th cheapest price
@@ -678,6 +700,13 @@
                     }
 
                     const powerClass = power === 'on' ? 'power-on' : 'power-off';
+                    if (power = 'on'){
+                       power = translation["on"];
+                    }
+                    else{
+                        power = translation["off"];
+                    }
+                    
                     return [time, price, power, powerClass];
                 });
 
@@ -685,9 +714,9 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Time</th>
-                                <th>Price</th>
-                                <th>Power</th>
+                                <th>${translation["time"]}</th>
+                                <th>${translation["price"]}</th>
+                                <th>${translation["power"]}</th>
                             </tr>
                         </thead>
                         <tbody>
