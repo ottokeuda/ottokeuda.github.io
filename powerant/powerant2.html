@@ -55,7 +55,7 @@
         #msform fieldset:not(:nth-of-type(2)) {
             display: none;
             box-shadow: 0 0 2vw 1vw rgba(0, 0, 0, 0.4);
-            
+
         }
 
         /* inputs */
@@ -247,7 +247,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 0vw;
-            
+
             text-align: center;
             table-layout: fixed;
         }
@@ -464,16 +464,17 @@
         });
         const translations = {
             english: {
-                "yesterday-title": "No device is selected. Select or add a device from below.",
-                "today-title": "No device is selected. Select or add a device from below.",
-                "tomorrow-title": "No device is selected. Select or add a device from below.",
+                "yesterday-title": "No device is selected. Select or add a device from above.",
+                "today-title": "No device is selected. Select or add a device from above.",
+                "tomorrow-title": "No device is selected. Select or add a device from above.",
                 "yesterday-menu": "Yesterday",
-                "today-menu": "Today",
+                "today-menu": "Today1",
                 "tomorrow-menu": "Tomorrow",
                 "device-selection-text": "Select device",
                 "add-device-text": "Add device",
-                "device-name": "Name your device",
-                "device-code": "Device code:",
+                "device-name-label": "Name your device",
+                "device-name-prefilled": "Kitchen radiator",
+                "device-code-label": "Device code:",
                 "cancel-device": "Cancel",
                 "submit-device": "Save",
                 "time": "Time",
@@ -484,15 +485,16 @@
 
             },
             finnish: {
-                "yesterday-title": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
-                "today-title": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
-                "tomorrow-title": "Ei laitetta valittuna. Valitse tai lisää laite alapuolella olevasta valikosta.",
+                "yesterday-title": "Ei laitetta valittuna. Valitse tai lisää laite yläpuolella olevasta valikosta.",
+                "today-title": "Ei laitetta valittuna. Valitse tai lisää laite yläpuolella olevasta valikosta.",
+                "tomorrow-title": "Ei laitetta valittuna. Valitse tai lisää laite yläpuolella olevasta valikosta.",
                 "yesterday-menu": "Eilen",
                 "today-menu": "Tänään",
                 "tomorrow-menu": "Huomenna",
                 "device-selection-text": "Valitse laite",
                 "add-device-text": "Lisää laite",
                 "device-name-label": "Nimeä laitteesi",
+                "device-name-prefilled": "Keittiön lämpöpatteri",
                 "device-code-label": "Laitekoodi:",
                 "cancel-device": "Peruuta",
                 "submit-device": "Tallenna",
@@ -501,8 +503,730 @@
                 "power": "Virta",
                 "on": "Päällä",
                 "off": "Pois"
-            }
+            },
 
+            french: {
+                "yesterday-title": "Aucun appareil n'est sélectionné. Sélectionnez ou ajoutez un appareil ci-dessus.",
+                "today-title": "Aucun appareil n'est sélectionné. Sélectionnez ou ajoutez un appareil ci-dessus.",
+                "tomorrow-title": "Aucun appareil n'est sélectionné. Sélectionnez ou ajoutez un appareil ci-dessus.",
+                "yesterday-menu": "Hier",
+                "today-menu": "Aujourd'hui",
+                "tomorrow-menu": "Demain",
+                "device-selection-text": "Sélectionner un appareil",
+                "add-device-text": "Ajouter un appareil",
+                "device-name-label": "Nommez votre appareil",
+                "device-name-prefilled": "Radiateur de cuisine",
+                "device-code-label": "Code de l'appareil:",
+                "cancel-device": "Annuler",
+                "submit-device": "Enregistrer",
+                "time": "Temps",
+                "price": "Prix",
+                "power": "Puissance",
+                "on": "Allumé",
+                "off": "Éteint"
+            },
+
+            german: {
+                "yesterday-title": "Kein Gerät ausgewählt. Wählen Sie ein Gerät aus oder fügen Sie eines von oben hinzu.",
+                "today-title": "Kein Gerät ausgewählt. Wählen Sie ein Gerät aus oder fügen Sie eines von oben hinzu.",
+                "tomorrow-title": "Kein Gerät ausgewählt. Wählen Sie ein Gerät aus oder fügen Sie eines von oben hinzu.",
+                "yesterday-menu": "Gestern",
+                "today-menu": "Heute",
+                "tomorrow-menu": "Morgen",
+                "device-selection-text": "Gerät auswählen",
+                "add-device-text": "Gerät hinzufügen",
+                "device-name-label": "Benennen Sie Ihr Gerät",
+                "device-name-prefilled": "Küchenheizkörper",
+                "device-code-label": "Gerätecode:",
+                "cancel-device": "Abbrechen",
+                "submit-device": "Speichern",
+                "time": "Zeit",
+                "price": "Preis",
+                "power": "Leistung",
+                "on": "Ein",
+                "off": "Aus"
+            },
+
+            spanish: {
+                "yesterday-title": "Ningún dispositivo está seleccionado. Selecciona o añade un dispositivo desde arriba.",
+                "today-title": "Ningún dispositivo está seleccionado. Selecciona o añade un dispositivo desde arriba.",
+                "tomorrow-title": "Ningún dispositivo está seleccionado. Selecciona o añade un dispositivo desde arriba.",
+                "yesterday-menu": "Ayer",
+                "today-menu": "Hoy",
+                "tomorrow-menu": "Mañana",
+                "device-selection-text": "Seleccionar dispositivo",
+                "add-device-text": "Añadir dispositivo",
+                "device-name-label": "Nombrar tu dispositivo",
+                "device-name-prefilled": "Radiador de cocina",
+                "device-code-label": "Código del dispositivo:",
+                "cancel-device": "Cancelar",
+                "submit-device": "Guardar",
+                "time": "Hora",
+                "price": "Precio",
+                "power": "Potencia",
+                "on": "Encendido",
+                "off": "Apagado"
+            },
+
+            italian: {
+                "yesterday-title": "Nessun dispositivo selezionato. Seleziona o aggiungi un dispositivo da sopra.",
+                "today-title": "Nessun dispositivo selezionato. Seleziona o aggiungi un dispositivo da sopra.",
+                "tomorrow-title": "Nessun dispositivo selezionato. Seleziona o aggiungi un dispositivo da sopra.",
+                "yesterday-menu": "Ieri",
+                "today-menu": "Oggi",
+                "tomorrow-menu": "Domani",
+                "device-selection-text": "Seleziona dispositivo",
+                "add-device-text": "Aggiungi dispositivo",
+                "device-name-label": "Nominare il tuo dispositivo",
+                "device-name-prefilled": "Radiatore della cucina",
+                "device-code-label": "Codice del dispositivo:",
+                "cancel-device": "Annulla",
+                "submit-device": "Salva",
+                "time": "Orario",
+                "price": "Prezzo",
+                "power": "Potenza",
+                "on": "Acceso",
+                "off": "Spento"
+            },
+
+            portuguese: {
+                "yesterday-title": "Nenhum dispositivo está selecionado. Selecione ou adicione um dispositivo acima.",
+                "today-title": "Nenhum dispositivo está selecionado. Selecione ou adicione um dispositivo acima.",
+                "tomorrow-title": "Nenhum dispositivo está selecionado. Selecione ou adicione um dispositivo acima.",
+                "yesterday-menu": "Ontem",
+                "today-menu": "Hoje",
+                "tomorrow-menu": "Amanhã",
+                "device-selection-text": "Selecionar dispositivo",
+                "add-device-text": "Adicionar dispositivo",
+                "device-name-label": "Nomeie o seu dispositivo",
+                "device-name-prefilled": "Radiador da cozinha",
+                "device-code-label": "Código do dispositivo:",
+                "cancel-device": "Cancelar",
+                "submit-device": "Salvar",
+                "time": "Hora",
+                "price": "Preço",
+                "power": "Potência",
+                "on": "Ligado",
+                "off": "Desligado"
+            },
+
+            dutch: {
+                "yesterday-title": "Geen apparaat geselecteerd. Selecteer of voeg een apparaat toe van boven.",
+                "today-title": "Geen apparaat geselecteerd. Selecteer of voeg een apparaat toe van boven.",
+                "tomorrow-title": "Geen apparaat geselecteerd. Selecteer of voeg een apparaat toe van boven.",
+                "yesterday-menu": "Gisteren",
+                "today-menu": "Vandaag",
+                "tomorrow-menu": "Morgen",
+                "device-selection-text": "Apparaat selecteren",
+                "add-device-text": "Apparaat toevoegen",
+                "device-name-label": "Geef je apparaat een naam",
+                "device-name-prefilled": "Keukenradiator",
+                "device-code-label": "Apparaatcode:",
+                "cancel-device": "Annuleren",
+                "submit-device": "Opslaan",
+                "time": "Tijd",
+                "price": "Prijs",
+                "power": "Vermogen",
+                "on": "Aan",
+                "off": "Uit"
+            },
+
+            swedish: {
+                "yesterday-title": "Ingen enhet är vald. Välj eller lägg till en enhet ovan.",
+                "today-title": "Ingen enhet är vald. Välj eller lägg till en enhet ovan.",
+                "tomorrow-title": "Ingen enhet är vald. Välj eller lägg till en enhet ovan.",
+                "yesterday-menu": "Igår",
+                "today-menu": "Idag",
+                "tomorrow-menu": "Imorgon",
+                "device-selection-text": "Välj enhet",
+                "add-device-text": "Lägg till enhet",
+                "device-name-label": "Namnge din enhet",
+                "device-name-prefilled": "Köksradiator",
+                "device-code-label": "Enhetskod:",
+                "cancel-device": "Avbryt",
+                "submit-device": "Spara",
+                "time": "Tid",
+                "price": "Pris",
+                "power": "Effekt",
+                "on": "På",
+                "off": "Av"
+            },
+
+            danish: {
+                "yesterday-title": "Ingen enhed er valgt. Vælg eller tilføj en enhed ovenfor.",
+                "today-title": "Ingen enhed er valgt. Vælg eller tilføj en enhed ovenfor.",
+                "tomorrow-title": "Ingen enhed er valgt. Vælg eller tilføj en enhed ovenfor.",
+                "yesterday-menu": "I går",
+                "today-menu": "I dag",
+                "tomorrow-menu": "I morgen",
+                "device-selection-text": "Vælg enhed",
+                "add-device-text": "Tilføj enhed",
+                "device-name-label": "Navngiv din enhed",
+                "device-name-prefilled": "Køkkenradiator",
+                "device-code-label": "Enheds kode:",
+                "cancel-device": "Afbryd",
+                "submit-device": "Gem",
+                "time": "Tid",
+                "price": "Pris",
+                "power": "Kraft",
+                "on": "Tændt",
+                "off": "Slukket"
+            },
+            norwegian: {
+                "yesterday-title": "Ingen enhet er valgt. Velg eller legg til en enhet ovenfor.",
+                "today-title": "Ingen enhet er valgt. Velg eller legg til en enhet ovenfor.",
+                "tomorrow-title": "Ingen enhet er valgt. Velg eller legg til en enhet ovenfor.",
+                "yesterday-menu": "I går",
+                "today-menu": "I dag",
+                "tomorrow-menu": "I morgen",
+                "device-selection-text": "Velg enhet",
+                "add-device-text": "Legg til enhet",
+                "device-name-label": "Navngi enheten din",
+                "device-name-prefilled": "Kjøkkenradiator",
+                "device-code-label": "Enhetskode:",
+                "cancel-device": "Avbryt",
+                "submit-device": "Lagre",
+                "time": "Tid",
+                "price": "Pris",
+                "power": "Kraft",
+                "on": "På",
+                "off": "Av"
+            },
+
+            polish: {
+                "yesterday-title": "Nie wybrano urządzenia. Wybierz lub dodaj urządzenie powyżej.",
+                "today-title": "Nie wybrano urządzenia. Wybierz lub dodaj urządzenie powyżej.",
+                "tomorrow-title": "Nie wybrano urządzenia. Wybierz lub dodaj urządzenie powyżej.",
+                "yesterday-menu": "Wczoraj",
+                "today-menu": "Dziś",
+                "tomorrow-menu": "Jutro",
+                "device-selection-text": "Wybierz urządzenie",
+                "add-device-text": "Dodaj urządzenie",
+                "device-name-label": "Nazwij swoje urządzenie",
+                "device-name-prefilled": "Kaloryfer kuchenny",
+                "device-code-label": "Kod urządzenia:",
+                "cancel-device": "Anuluj",
+                "submit-device": "Zapisz",
+                "time": "Czas",
+                "price": "Cena",
+                "power": "Moc",
+                "on": "Włączone",
+                "off": "Wyłączone"
+            },
+            russian: {
+                "yesterday-title": "Устройство не выбрано. Выберите или добавьте устройство выше.",
+                "today-title": "Устройство не выбрано. Выберите или добавьте устройство выше.",
+                "tomorrow-title": "Устройство не выбрано. Выберите или добавьте устройство выше.",
+                "yesterday-menu": "Вчера",
+                "today-menu": "Сегодня",
+                "tomorrow-menu": "Завтра",
+                "device-selection-text": "Выберите устройство",
+                "add-device-text": "Добавить устройство",
+                "device-name-label": "Назовите ваше устройство",
+                "device-name-prefilled": "Радиатор на кухне",
+                "device-code-label": "Код устройства:",
+                "cancel-device": "Отмена",
+                "submit-device": "Сохранить",
+                "time": "Время",
+                "price": "Цена",
+                "power": "Мощность",
+                "on": "Включено",
+                "off": "Выключено"
+            },
+
+            greek: {
+                "yesterday-title": "Δεν έχει επιλεγεί συσκευή. Επιλέξτε ή προσθέστε μια συσκευή από πάνω.",
+                "today-title": "Δεν έχει επιλεγεί συσκευή. Επιλέξτε ή προσθέστε μια συσκευή από πάνω.",
+                "tomorrow-title": "Δεν έχει επιλεγεί συσκευή. Επιλέξτε ή προσθέστε μια συσκευή από πάνω.",
+                "yesterday-menu": "Χθες",
+                "today-menu": "Σήμερα",
+                "tomorrow-menu": "Αύριο",
+                "device-selection-text": "Επιλέξτε συσκευή",
+                "add-device-text": "Προσθήκη συσκευής",
+                "device-name-label": "Ονομάστε τη συσκευή σας",
+                "device-name-prefilled": "Καλοριφέρ κουζίνας",
+                "device-code-label": "Κωδικός συσκευής:",
+                "cancel-device": "Ακύρωση",
+                "submit-device": "Αποθήκευση",
+                "time": "Ώρα",
+                "price": "Τιμή",
+                "power": "Ισχύς",
+                "on": "Ενεργοποιημένο",
+                "off": "Απενεργοποιημένο"
+            },
+            hungarian: {
+                "yesterday-title": "Nincs kiválasztva eszköz. Válasszon vagy adjon hozzá egy eszközt fent.",
+                "today-title": "Nincs kiválasztva eszköz. Válasszon vagy adjon hozzá egy eszközt fent.",
+                "tomorrow-title": "Nincs kiválasztva eszköz. Válasszon vagy adjon hozzá egy eszközt fent.",
+                "yesterday-menu": "Tegnap",
+                "today-menu": "Ma",
+                "tomorrow-menu": "Holnap",
+                "device-selection-text": "Eszköz kiválasztása",
+                "add-device-text": "Eszköz hozzáadása",
+                "device-name-label": "Nevezze el az eszközét",
+                "device-name-prefilled": "Konyhai radiátor",
+                "device-code-label": "Eszköz kódja:",
+                "cancel-device": "Mégse",
+                "submit-device": "Mentés",
+                "time": "Idő",
+                "price": "Ár",
+                "power": "Teljesítmény",
+                "on": "Bekapcsolva",
+                "off": "Kikapcsolva"
+            },
+
+            romanian: {
+                "yesterday-title": "Niciun dispozitiv selectat. Selectați sau adăugați un dispozitiv de mai sus.",
+                "today-title": "Niciun dispozitiv selectat. Selectați sau adăugați un dispozitiv de mai sus.",
+                "tomorrow-title": "Niciun dispozitiv selectat. Selectați sau adăugați un dispozitiv de mai sus.",
+                "yesterday-menu": "Ieri",
+                "today-menu": "Astăzi",
+                "tomorrow-menu": "Mâine",
+                "device-selection-text": "Selectați dispozitivul",
+                "add-device-text": "Adăugați dispozitiv",
+                "device-name-label": "Numele dispozitivului",
+                "device-name-prefilled": "Calorifer de bucătărie",
+                "device-code-label": "Codul dispozitivului:",
+                "cancel-device": "Anulează",
+                "submit-device": "Salvează",
+                "time": "Timp",
+                "price": "Preț",
+                "power": "Putere",
+                "on": "Pornit",
+                "off": "Oprit"
+            },
+            czech: {
+                "yesterday-title": "Není vybráno žádné zařízení. Vyberte nebo přidejte zařízení výše.",
+                "today-title": "Není vybráno žádné zařízení. Vyberte nebo přidejte zařízení výše.",
+                "tomorrow-title": "Není vybráno žádné zařízení. Vyberte nebo přidejte zařízení výše.",
+                "yesterday-menu": "Včera",
+                "today-menu": "Dnes",
+                "tomorrow-menu": "Zítra",
+                "device-selection-text": "Vyberte zařízení",
+                "add-device-text": "Přidat zařízení",
+                "device-name-label": "Pojmenujte své zařízení",
+                "device-name-prefilled": "Radiátor v kuchyni",
+                "device-code-label": "Kód zařízení:",
+                "cancel-device": "Zrušit",
+                "submit-device": "Uložit",
+                "time": "Čas",
+                "price": "Cena",
+                "power": "Výkon",
+                "on": "Zapnuto",
+                "off": "Vypnuto"
+            },
+
+            slovak: {
+                "yesterday-title": "Nie je vybrané žiadne zariadenie. Vyberte alebo pridajte zariadenie vyššie.",
+                "today-title": "Nie je vybrané žiadne zariadenie. Vyberte alebo pridajte zariadenie vyššie.",
+                "tomorrow-title": "Nie je vybrané žiadne zariadenie. Vyberte alebo pridajte zariadenie vyššie.",
+                "yesterday-menu": "Včera",
+                "today-menu": "Dnes",
+                "tomorrow-menu": "Zajtra",
+                "device-selection-text": "Vyberte zariadenie",
+                "add-device-text": "Pridať zariadenie",
+                "device-name-label": "Pomenujte svoje zariadenie",
+                "device-name-prefilled": "Radiátor v kuchyni",
+                "device-code-label": "Kód zariadenia:",
+                "cancel-device": "Zrušiť",
+                "submit-device": "Uložiť",
+                "time": "Čas",
+                "price": "Cena",
+                "power": "Výkon",
+                "on": "Zapnuté",
+                "off": "Vypnuté"
+            },
+
+            slovenian: {
+                "yesterday-title": "Nobena naprava ni izbrana. Izberite ali dodajte napravo zgoraj.",
+                "today-title": "Nobena naprava ni izbrana. Izberite ali dodajte napravo zgoraj.",
+                "tomorrow-title": "Nobena naprava ni izbrana. Izberite ali dodajte napravo zgoraj.",
+                "yesterday-menu": "Včeraj",
+                "today-menu": "Danes",
+                "tomorrow-menu": "Jutri",
+                "device-selection-text": "Izberite napravo",
+                "add-device-text": "Dodaj napravo",
+                "device-name-label": "Poimenujte svojo napravo",
+                "device-name-prefilled": "Kuhinjski radiator",
+                "device-code-label": "Koda naprave:",
+                "cancel-device": "Prekliči",
+                "submit-device": "Shrani",
+                "time": "Čas",
+                "price": "Cena",
+                "power": "Moč",
+                "on": "Vklopljeno",
+                "off": "Izklopljeno"
+            },
+
+            bulgarian: {
+                "yesterday-title": "Няма избрано устройство. Изберете или добавете устройство отгоре.",
+                "today-title": "Няма избрано устройство. Изберете или добавете устройство отгоре.",
+                "tomorrow-title": "Няма избрано устройство. Изберете или добавете устройство отгоре.",
+                "yesterday-menu": "Вчера",
+                "today-menu": "Днес",
+                "tomorrow-menu": "Утре",
+                "device-selection-text": "Изберете устройство",
+                "add-device-text": "Добавете устройство",
+                "device-name-label": "Наименувайте вашето устройство",
+                "device-name-prefilled": "Радиатор в кухнята",
+                "device-code-label": "Код на устройството:",
+                "cancel-device": "Отказ",
+                "submit-device": "Запази",
+                "time": "Време",
+                "price": "Цена",
+                "power": "Мощност",
+                "on": "Включено",
+                "off": "Изключено"
+            },
+            lithuanian: {
+                "yesterday-title": "Nepasirinktas joks įrenginys. Pasirinkite arba pridėkite įrenginį aukščiau.",
+                "today-title": "Nepasirinktas joks įrenginys. Pasirinkite arba pridėkite įrenginį aukščiau.",
+                "tomorrow-title": "Nepasirinktas joks įrenginys. Pasirinkite arba pridėkite įrenginį aukščiau.",
+                "yesterday-menu": "Vakar",
+                "today-menu": "Šiandien",
+                "tomorrow-menu": "Rytoj",
+                "device-selection-text": "Pasirinkite įrenginį",
+                "add-device-text": "Pridėti įrenginį",
+                "device-name-label": "Pavadinkite savo įrenginį",
+                "device-name-prefilled": "Virtuvės radiatorius",
+                "device-code-label": "Įrenginio kodas:",
+                "cancel-device": "Atšaukti",
+                "submit-device": "Išsaugoti",
+                "time": "Laikas",
+                "price": "Kaina",
+                "power": "Galia",
+                "on": "Įjungta",
+                "off": "Išjungta"
+            },
+
+            latvian: {
+                "yesterday-title": "Nav izvēlēta neviena ierīce. Izvēlieties vai pievienojiet ierīci augšā.",
+                "today-title": "Nav izvēlēta neviena ierīce. Izvēlieties vai pievienojiet ierīci augšā.",
+                "tomorrow-title": "Nav izvēlēta neviena ierīce. Izvēlieties vai pievienojiet ierīci augšā.",
+                "yesterday-menu": "Vakar",
+                "today-menu": "Šodien",
+                "tomorrow-menu": "Rīt",
+                "device-selection-text": "Izvēlieties ierīci",
+                "add-device-text": "Pievienot ierīci",
+                "device-name-label": "Nosaukiet savu ierīci",
+                "device-name-prefilled": "Virtuves radiators",
+                "device-code-label": "Ierīces kods:",
+                "cancel-device": "Atcelt",
+                "submit-device": "Saglabāt",
+                "time": "Laiks",
+                "price": "Cena",
+                "power": "Jauda",
+                "on": "Ieslēgts",
+                "off": "Izslēgts"
+            },
+
+            croatian: {
+                "yesterday-title": "Nijedan uređaj nije odabran. Odaberite ili dodajte uređaj iznad.",
+                "today-title": "Nijedan uređaj nije odabran. Odaberite ili dodajte uređaj iznad.",
+                "tomorrow-title": "Nijedan uređaj nije odabran. Odaberite ili dodajte uređaj iznad.",
+                "yesterday-menu": "Jučer",
+                "today-menu": "Danas",
+                "tomorrow-menu": "Sutra",
+                "device-selection-text": "Odaberite uređaj",
+                "add-device-text": "Dodaj uređaj",
+                "device-name-label": "Nazovite vaš uređaj",
+                "device-name-prefilled": "Radijator u kuhinji",
+                "device-code-label": "Kod uređaja:",
+                "cancel-device": "Odustani",
+                "submit-device": "Spremi",
+                "time": "Vrijeme",
+                "price": "Cijena",
+                "power": "Snaga",
+                "on": "Uključeno",
+                "off": "Isključeno"
+            },
+
+            serbian: {
+                "yesterday-title": "Nijedan uređaj nije odabran. Odaberite ili dodajte uređaj iznad.",
+                "today-title": "Nijedan uređaj nije odabran. Odaberite ili dodajte uređaj iznad.",
+                "tomorrow-title": "Nijedan uređaj nije odabran. Odaberite ili dodajte uređaj iznad.",
+                "yesterday-menu": "Juče",
+                "today-menu": "Danas",
+                "tomorrow-menu": "Sutra",
+                "device-selection-text": "Odaberite uređaj",
+                "add-device-text": "Dodaj uređaj",
+                "device-name-label": "Nazovite vaš uređaj",
+                "device-name-prefilled": "Radijator u kuhinji",
+                "device-code-label": "Kod uređaja:",
+                "cancel-device": "Otkaži",
+                "submit-device": "Spremi",
+                "time": "Vreme",
+                "price": "Cena",
+                "power": "Snaga",
+                "on": "Uključeno",
+                "off": "Isključeno"
+            },
+
+            estonian: {
+                "yesterday-title": "Ühtegi seadet pole valitud. Valige või lisage seade ülalt.",
+                "today-title": "Ühtegi seadet pole valitud. Valige või lisage seade ülalt.",
+                "tomorrow-title": "Ühtegi seadet pole valitud. Valige või lisage seade ülalt.",
+                "yesterday-menu": "Eile",
+                "today-menu": "Täna",
+                "tomorrow-menu": "Homme",
+                "device-selection-text": "Valige seade",
+                "add-device-text": "Lisa seade",
+                "device-name-label": "Nimeta oma seade",
+                "device-name-prefilled": "Köögi radiaator",
+                "device-code-label": "Seadme kood:",
+                "cancel-device": "Tühista",
+                "submit-device": "Salvesta",
+                "time": "Aeg",
+                "price": "Hind",
+                "power": "Võimsus",
+                "on": "Sees",
+                "off": "Väljas"
+            },
+
+            maltese: {
+                "yesterday-title": "L-ebda apparat ma ġie magħżul. Agħżel jew żid apparat minn fuq.",
+                "today-title": "L-ebda apparat ma ġie magħżul. Agħżel jew żid apparat minn fuq.",
+                "tomorrow-title": "L-ebda apparat ma ġie magħżul. Agħżel jew żid apparat minn fuq.",
+                "yesterday-menu": "Ilbieraħ",
+                "today-menu": "Illum",
+                "tomorrow-menu": "Għada",
+                "device-selection-text": "Agħżel apparat",
+                "add-device-text": "Żid apparat",
+                "device-name-label": "Isim l-apparat tiegħek",
+                "device-name-prefilled": "Radjatur tal-kċina",
+                "device-code-label": "Kodiċi tal-apparat:",
+                "cancel-device": "Annulla",
+                "submit-device": "Salva",
+                "time": "Ħin",
+                "price": "Prezz",
+                "power": "Qawwa",
+                "on": "Attivat",
+                "off": "Iffi"
+            },
+            luxembourgish: {
+                "yesterday-title": "Keng Apparat ass ausgewielt. Wielt oder setzt e Gerät vun uewen dobäi.",
+                "today-title": "Keng Apparat ass ausgewielt. Wielt oder setzt e Gerät vun uewen dobäi.",
+                "tomorrow-title": "Keng Apparat ass ausgewielt. Wielt oder setzt e Gerät vun uewen dobäi.",
+                "yesterday-menu": "Gëschter",
+                "today-menu": "Haut",
+                "tomorrow-menu": "Muer",
+                "device-selection-text": "Wielt e Gerät",
+                "add-device-text": "Setzt e Gerät dobäi",
+                "device-name-label": "Gidd ärem Gerät en Numm",
+                "device-name-prefilled": "Kichen Heizkierper",
+                "device-code-label": "Gerät Code:",
+                "cancel-device": "Ofbriechen",
+                "submit-device": "Späicheren",
+                "time": "Zäit",
+                "price": "Präis",
+                "power": "Kraaft",
+                "on": "U",
+                "off": "Aus"
+            },
+
+            irish: {
+                "yesterday-title": "Níl aon ghléas roghnaithe. Roghnaigh nó cuir gléas leis ón mbarr.",
+                "today-title": "Níl aon ghléas roghnaithe. Roghnaigh nó cuir gléas leis ón mbarr.",
+                "tomorrow-title": "Níl aon ghléas roghnaithe. Roghnaigh nó cuir gléas leis ón mbarr.",
+                "yesterday-menu": "Inné",
+                "today-menu": "Inniu",
+                "tomorrow-menu": "Amárach",
+                "device-selection-text": "Roghnaigh gléas",
+                "add-device-text": "Cuir gléas leis",
+                "device-name-label": "Tabhair ainm do do ghléas",
+                "device-name-prefilled": "Radiator na cistine",
+                "device-code-label": "Cód an ghléas:",
+                "cancel-device": "Cealaigh",
+                "submit-device": "Sábháil",
+                "time": "Am",
+                "price": "Praghas",
+                "power": "Cumhacht",
+                "on": "Ar siúl",
+                "off": "As"
+            },
+            macedonian: {
+                "yesterday-title": "Не е одбрано уред. Одберете или додадете уред одгоре.",
+                "today-title": "Не е одбрано уред. Одберете или додадете уред одгоре.",
+                "tomorrow-title": "Не е одбрано уред. Одберете или додадете уред одгоре.",
+                "yesterday-menu": "Вчера",
+                "today-menu": "Денес",
+                "tomorrow-menu": "Утре",
+                "device-selection-text": "Одберете уред",
+                "add-device-text": "Додадете уред",
+                "device-name-label": "Именувајте го вашиот уред",
+                "device-name-prefilled": "Радијатор во кујна",
+                "device-code-label": "Код на уредот:",
+                "cancel-device": "Откажи",
+                "submit-device": "Зачувај",
+                "time": "Време",
+                "price": "Цена",
+                "power": "Моќ",
+                "on": "Вклучено",
+                "off": "Исклучено"
+            },
+
+            albanian: {
+                "yesterday-title": "Asnjë pajisje nuk është zgjedhur. Zgjidhni ose shtoni një pajisje më lart.",
+                "today-title": "Asnjë pajisje nuk është zgjedhur. Zgjidhni ose shtoni një pajisje më lart.",
+                "tomorrow-title": "Asnjë pajisje nuk është zgjedhur. Zgjidhni ose shtoni një pajisje më lart.",
+                "yesterday-menu": "Dje",
+                "today-menu": "Sot",
+                "tomorrow-menu": "Nesër",
+                "device-selection-text": "Zgjidhni pajisjen",
+                "add-device-text": "Shto pajisje",
+                "device-name-label": "Emërtoni pajisjen tuaj",
+                "device-name-prefilled": "Radiatori i kuzhinës",
+                "device-code-label": "Kodi i pajisjes:",
+                "cancel-device": "Anulo",
+                "submit-device": "Ruaj",
+                "time": "Koha",
+                "price": "Çmimi",
+                "power": "Fuqia",
+                "on": "Aktiv",
+                "off": "Joaktiv"
+            },
+            mandarinChinese: {
+                "yesterday-title": "未选择任何设备。请从上面选择或添加设备。",
+                "today-title": "未选择任何设备。请从上面选择或添加设备。",
+                "tomorrow-title": "未选择任何设备。请从上面选择或添加设备。",
+                "yesterday-menu": "昨天",
+                "today-menu": "今天",
+                "tomorrow-menu": "明天",
+                "device-selection-text": "选择设备",
+                "add-device-text": "添加设备",
+                "device-name-label": "为您的设备命名",
+                "device-name-prefilled": "厨房暖气片",
+                "device-code-label": "设备代码：",
+                "cancel-device": "取消",
+                "submit-device": "保存",
+                "time": "时间",
+                "price": "价格",
+                "power": "功率",
+                "on": "开",
+                "off": "关"
+            },
+
+            hindi: {
+                "yesterday-title": "कोई डिवाइस चुनी गई नहीं है। ऊपर से डिवाइस चुनें या जोड़ें।",
+                "today-title": "कोई डिवाइस चुनी गई नहीं है। ऊपर से डिवाइस चुनें या जोड़ें।",
+                "tomorrow-title": "कोई डिवाइस चुनी गई नहीं है। ऊपर से डिवाइस चुनें या जोड़ें।",
+                "yesterday-menu": "कल",
+                "today-menu": "आज",
+                "tomorrow-menu": "कल",
+                "device-selection-text": "डिवाइस चुनें",
+                "add-device-text": "डिवाइस जोड़ें",
+                "device-name-label": "अपने डिवाइस का नाम दें",
+                "device-name-prefilled": "रसोई रेडिएटर",
+                "device-code-label": "डिवाइस कोड:",
+                "cancel-device": "रद्द करें",
+                "submit-device": "सहेजें",
+                "time": "समय",
+                "price": "मूल्य",
+                "power": "शक्ति",
+                "on": "चालू",
+                "off": "बंद"
+            },
+
+            bengali: {
+                "yesterday-title": "কোন ডিভাইস নির্বাচিত হয়নি। উপর থেকে ডিভাইস নির্বাচন করুন বা যোগ করুন।",
+                "today-title": "কোন ডিভাইস নির্বাচিত হয়নি। উপর থেকে ডিভাইস নির্বাচন করুন বা যোগ করুন।",
+                "tomorrow-title": "কোন ডিভাইস নির্বাচিত হয়নি। উপর থেকে ডিভাইস নির্বাচন করুন বা যোগ করুন।",
+                "yesterday-menu": "গতকাল",
+                "today-menu": "আজ",
+                "tomorrow-menu": "আগামীকাল",
+                "device-selection-text": "ডিভাইস নির্বাচন করুন",
+                "add-device-text": "ডিভাইস যোগ করুন",
+                "device-name-label": "আপনার ডিভাইসের নাম দিন",
+                "device-name-prefilled": "রান্নাঘর রেডিয়েটর",
+                "device-code-label": "ডিভাইস কোড:",
+                "cancel-device": "বাতিল করুন",
+                "submit-device": "সংরক্ষণ করুন",
+                "time": "সময়",
+                "price": "মূল্য",
+                "power": "শক্তি",
+                "on": "চালু",
+                "off": "বন্ধ"
+            },
+            japanese: {
+                "yesterday-title": "デバイスが選択されていません。上からデバイスを選択するか追加してください。",
+                "today-title": "デバイスが選択されていません。上からデバイスを選択するか追加してください。",
+                "tomorrow-title": "デバイスが選択されていません。上からデバイスを選択するか追加してください。",
+                "yesterday-menu": "昨日",
+                "today-menu": "今日",
+                "tomorrow-menu": "明日",
+                "device-selection-text": "デバイスを選択",
+                "add-device-text": "デバイスを追加",
+                "device-name-label": "デバイスの名前をつけてください",
+                "device-name-prefilled": "キッチンのラジエーター",
+                "device-code-label": "デバイスコード：",
+                "cancel-device": "キャンセル",
+                "submit-device": "保存",
+                "time": "時間",
+                "price": "価格",
+                "power": "電力",
+                "on": "オン",
+                "off": "オフ"
+            },
+            cantonese: {
+                "yesterday-title": "未選擇任何設備。請從上面選擇或加入設備。",
+                "today-title": "未選擇任何設備。請從上面選擇或加入設備。",
+                "tomorrow-title": "未選擇任何設備。請從上面選擇或加入設備。",
+                "yesterday-menu": "昨日",
+                "today-menu": "今日",
+                "tomorrow-menu": "聽日",
+                "device-selection-text": "選擇設備",
+                "add-device-text": "加入設備",
+                "device-name-label": "給您的設備命名",
+                "device-name-prefilled": "廚房散熱器",
+                "device-code-label": "設備編碼：",
+                "cancel-device": "取消",
+                "submit-device": "儲存",
+                "time": "時間",
+                "price": "價錢",
+                "power": "功率",
+                "on": "開",
+                "off": "關"
+            },
+            arabic: {
+                "yesterday-title": "لم يتم اختيار أي جهاز. الرجاء اختيار جهاز أو إضافة واحد من الأعلى.",
+                "today-title": "لم يتم اختيار أي جهاز. الرجاء اختيار جهاز أو إضافة واحد من الأعلى.",
+                "tomorrow-title": "لم يتم اختيار أي جهاز. الرجاء اختيار جهاز أو إضافة واحد من الأعلى.",
+                "yesterday-menu": "أمس",
+                "today-menu": "اليوم",
+                "tomorrow-menu": "غدًا",
+                "device-selection-text": "اختر الجهاز",
+                "add-device-text": "أضف جهاز",
+                "device-name-label": "سمي جهازك",
+                "device-name-prefilled": "مشعاع المطبخ",
+                "device-code-label": "كود الجهاز:",
+                "cancel-device": "إلغاء",
+                "submit-device": "حفظ",
+                "time": "الوقت",
+                "price": "السعر",
+                "power": "الطاقة",
+                "on": "تشغيل",
+                "off": "إيقاف"
+            },
+            turkish: {
+                "yesterday-title": "Hiçbir cihaz seçilmedi. Yukarıdan bir cihaz seçin veya ekleyin.",
+                "today-title": "Hiçbir cihaz seçilmedi. Yukarıdan bir cihaz seçin veya ekleyin.",
+                "tomorrow-title": "Hiçbir cihaz seçilmedi. Yukarıdan bir cihaz seçin veya ekleyin.",
+                "yesterday-menu": "Dün",
+                "today-menu": "Bugün",
+                "tomorrow-menu": "Yarın",
+                "device-selection-text": "Cihazı Seçin",
+                "add-device-text": "Cihaz Ekle",
+                "device-name-label": "Cihazınıza bir isim verin",
+                "device-name-prefilled": "Mutfak Radyatörü",
+                "device-code-label": "Cihaz Kodu:",
+                "cancel-device": "İptal",
+                "submit-device": "Kaydet",
+                "time": "Zaman",
+                "price": "Fiyat",
+                "power": "Güç",
+                "on": "Açık",
+                "off": "Kapalı"
+            }
 
             // add translations
         };
@@ -531,20 +1255,54 @@
 
         function getBrowserLanguage() {
             const browserLanguage = navigator.language || navigator.userLanguage;
-            if (browserLanguage.startsWith('en')) {
-                return 'english';
-            } else if (browserLanguage.startsWith('fi')) {
-                return 'finnish';
-            }
-            return 'english'; // Default to English
+
+            const languageMap = {
+                'en': 'english',
+                'fi': 'finnish',
+                'fr': 'french',
+                'de': 'german',
+                'it': 'italian',
+                'es': 'spanish',
+                'pt': 'portuguese',
+                'nl': 'dutch',
+                'sv': 'swedish',
+                'da': 'danish',
+                'no': 'norwegian',
+                'pl': 'polish',
+                'ru': 'russian',
+                'el': 'greek',
+                'hu': 'hungarian',
+                'ro': 'romanian',
+                'cs': 'czech',
+                'sk': 'slovak',
+                'sl': 'slovenian',
+                'bg': 'bulgarian',
+                'hr': 'croatian',
+                'lt': 'lithuanian',
+                'lv': 'latvian',
+                'et': 'estonian',
+                'mt': 'maltese',
+                'ga': 'irish',
+                'ja': 'japanese',
+                'yue': 'cantonese',
+                'zh': 'mandarinChinese',
+                'hi': 'hindi',
+                'bn': 'bengali',
+                'gd': 'scottish gaelic',
+                'ar': 'arabic',
+                'tr': 'turkish',
+
+            };
+
+            const prefix = browserLanguage.slice(0, 2); // get the first two characters of the language code
+            return languageMap[prefix] || 'english'; // Default to English if language isn't in the map
         }
 
         function updateFormLanguage() {
             const selectedLanguage = getBrowserLanguage();
             const translation = translations[selectedLanguage];
 
-            // Update the headings
-
+            // Update the languge of the website
             document.getElementById("yesterday-menu").textContent = translation["yesterday-menu"];
             document.getElementById("today-menu").textContent = translation["today-menu"];
             document.getElementById("tomorrow-menu").textContent = translation["tomorrow-menu"];
@@ -557,8 +1315,9 @@
             document.getElementById("device-code-label").textContent = translation["device-code-label"];
             document.getElementById("cancel-device").textContent = translation["cancel-device"];
             document.getElementById("submit-device").textContent = translation["submit-device"];
+            document.getElementById('device-name').placeholder = translation["device-name-prefilled"];
 
-            // Update more headings here
+
         }
 
 
@@ -588,43 +1347,59 @@
 
             }
 
-            // Add device to local storage
-            document.getElementById('submit-device').addEventListener('click', async function () {
-                const deviceName = document.getElementById('device-name').value;
-                const deviceCode = document.getElementById('device-code').value;
+            // Add device to local storage after the 'submit-device' click event
+            document.getElementById('submit-device').addEventListener('click', function () {
+                const deviceName = document.getElementById('device-name').value.trim();
+                const deviceCode = document.getElementById('device-code').value.trim();
+                handleDeviceSubmission(deviceName, deviceCode);
+            });
 
-                if (deviceName && deviceCode) {
-                    try {
-                        const response = await fetch(`https://api.powerant.net/retrieve_data?api_key=${deviceCode}`);
+            // 
+            async function handleDeviceSubmission(deviceName, deviceCode) {
+                if (!deviceCode) {
+                    console.error("Device code is required for submission.");
+                    return;
+                }
 
-                        if (!response.ok) {
-                            throw new Error("Invalid response from server");
-                        }
+                try {
+                    const response = await fetch(`https://api.powerant.net/retrieve_data?api_key=${deviceCode}`);
 
-                        const data = await response.json();
+                    if (!response.ok) {
+                        throw new Error("Invalid response from server");
+                    }
 
-                        // Save device info along with API data to local storage
+                    const data = await response.json();
+
+                    const devices = JSON.parse(localStorage.getItem("devices") || "[]");
+                    const existingDevice = devices.find(device => device.code === deviceCode);
+
+                    if (existingDevice) {
+                        if (deviceName) existingDevice.name = deviceName;
+                        existingDevice.country = data.country;
+                        existingDevice.timestamp = data.timestamp;
+                        existingDevice.hoursactive = data.hoursactive;
+                        existingDevice.kwhtrigger = data.kwhtrigger;
+                    } else {
                         const newDevice = {
-                            name: deviceName,
+                            name: deviceName || "Unnamed Device",
                             code: deviceCode,
                             country: data.country,
                             timestamp: data.timestamp,
                             hoursactive: data.hoursactive,
                             kwhtrigger: data.kwhtrigger
                         };
-
-                        const devices = JSON.parse(localStorage.getItem("devices") || "[]");
                         devices.push(newDevice);
-                        localStorage.setItem("devices", JSON.stringify(devices));
 
-                        const option = new Option(deviceName, deviceCode);
+                        const option = new Option(newDevice.name, deviceCode);
                         deviceSelector.add(option);
-                        closeForm();
-                    } catch (error) {
-                        alert("Device key not valid. Check you have typed the key correctly.");
                     }
+
+                    localStorage.setItem("devices", JSON.stringify(devices));
+                    closeForm();
+                } catch (error) {
+                    alert("Device key not valid. Check you have typed the key correctly.");
                 }
-            });
+            }
 
             // Close the device form without adding a device
             document.getElementById('cancel-device').addEventListener('click', closeForm);
@@ -650,6 +1425,7 @@
                 }
                 else {
                     // Hide the form and fetch/update device price data to fieldsets when any other option is selected
+                    handleDeviceSubmission(this.options[this.selectedIndex].text, this.value);
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
                     updateData(this.options[this.selectedIndex].text);
