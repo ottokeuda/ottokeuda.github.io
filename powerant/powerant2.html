@@ -1565,9 +1565,13 @@
                         document.getElementById('yesterday-title').style.display = 'none';
                         document.getElementById('today-title').style.display = 'none';
                         document.getElementById('tomorrow-title').style.display = 'none';
+
                         document.getElementById("yesterday-data").innerHTML = generateTableHTML(yesterdayData, trigger, hours);
                         document.getElementById("today-data").innerHTML = generateTableHTML(todayData, trigger, hours);
                         document.getElementById("tomorrow-data").innerHTML = generateTableHTML(tomorrowData, trigger, hours);
+                        document.getElementById('yesterday-data').style.display = 'block';
+                        document.getElementById('today-data').style.display = 'block';
+                        document.getElementById('tomorrow-data').style.display = 'block';
                     }
                 });
             }
