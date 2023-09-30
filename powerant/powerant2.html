@@ -1335,17 +1335,6 @@
                 deviceSelector.add(option);
             });
 
-            // Close and reset form
-            function closeForm() {
-                document.getElementById('device-form-container').style.display = 'none';
-                document.getElementById('device-name').value = '';
-                document.getElementById('device-code').value = '';
-                document.getElementById('yesterday-title').style.display = 'block';
-                document.getElementById('today-title').style.display = 'block';
-                document.getElementById('tomorrow-title').style.display = 'block';
-                deviceSelector.value = "default";
-
-            }
 
             // Add device to local storage after the 'submit-device' click event
             document.getElementById('submit-device').addEventListener('click', function () {
@@ -1379,6 +1368,7 @@
                         existingDevice.timestamp = data.timestamp;
                         existingDevice.hoursactive = data.hoursactive;
                         existingDevice.kwhtrigger = data.kwhtrigger;
+                        existingDevice.selected = true;
                     } else {
                         const newDevice = {
                             name: deviceName || "Unnamed Device",
@@ -1392,17 +1382,33 @@
 
                         const option = new Option(newDevice.name, deviceCode);
                         deviceSelector.add(option);
+                        option.selected = true;
+
                     }
 
                     localStorage.setItem("devices", JSON.stringify(devices));
-                    closeForm();
+                    document.getElementById('device-form-container').style.display = 'none';
+                    document.getElementById('device-name').value = '';
+                    document.getElementById('device-code').value = '';
                 } catch (error) {
                     alert("Device key not valid. Check you have typed the key correctly.");
                 }
             }
 
             // Close the device form without adding a device
-            document.getElementById('cancel-device').addEventListener('click', closeForm);
+            document.getElementById('cancel-device').addEventListener('click', function () {
+                document.getElementById('device-form-container').style.display = 'none';
+                document.getElementById('device-name').value = '';
+                document.getElementById('device-code').value = '';
+                deviceSelector.selectedIndex = 0;
+                document.getElementById('fieldsets').style.display = 'block';
+                document.getElementById('yesterday-title').style.display = 'block';
+                document.getElementById('today-title').style.display = 'block';
+                document.getElementById('tomorrow-title').style.display = 'block';
+                document.getElementById('yesterday-data').style.display = 'none';
+                document.getElementById('today-data').style.display = 'none';
+                document.getElementById('tomorrow-data').style.display = 'none';
+            });
 
             //Listens to changes in the device selector and updates the data as necessary.
             deviceSelector.addEventListener("change", function () {
@@ -1410,17 +1416,20 @@
                 if (this.value === "add-device") {
                     document.getElementById('fieldsets').style.display = 'none';
                     document.getElementById('device-form-container').style.display = 'block';
+                    document.getElementById('yesterday-data').style.display = 'none';
+                    document.getElementById('today-data').style.display = 'none';
+                    document.getElementById('tomorrow-data').style.display = 'none';
                 }
                 else if (this.value === "default") {
                     // Hide the form when the "select device" option is selected
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
-                    document.getElementById('yesterday-data').style.display = 'none';
-                    document.getElementById('today-data').style.display = 'none';
-                    document.getElementById('tomorrow-data').style.display = 'none';
                     document.getElementById('yesterday-title').style.display = 'block';
                     document.getElementById('today-title').style.display = 'block';
                     document.getElementById('tomorrow-title').style.display = 'block';
+                    document.getElementById('yesterday-data').style.display = 'none';
+                    document.getElementById('today-data').style.display = 'none';
+                    document.getElementById('tomorrow-data').style.display = 'none';
                     updateFormLanguage();
                 }
                 else {
@@ -1428,6 +1437,9 @@
                     handleDeviceSubmission(this.options[this.selectedIndex].text, this.value);
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('fieldsets').style.display = 'block';
+                    document.getElementById('yesterday-title').style.display = 'none';
+                    document.getElementById('today-title').style.display = 'none';
+                    document.getElementById('tomorrow-title').style.display = 'none';
                     updateData(this.options[this.selectedIndex].text);
                 }
             });
