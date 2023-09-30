@@ -1390,6 +1390,7 @@
                     document.getElementById('device-form-container').style.display = 'none';
                     document.getElementById('device-name').value = '';
                     document.getElementById('device-code').value = '';
+                    updateData(deviceName);
                 } catch (error) {
                     alert("Device key not valid. Check you have typed the key correctly.");
                 }
@@ -1440,7 +1441,8 @@
                     document.getElementById('yesterday-title').style.display = 'none';
                     document.getElementById('today-title').style.display = 'none';
                     document.getElementById('tomorrow-title').style.display = 'none';
-                    updateData(this.options[this.selectedIndex].text);
+                    
+                   
                 }
             });
 
