@@ -1363,7 +1363,8 @@
                     const existingDevice = devices.find(device => device.code === deviceCode);
 
                     if (existingDevice) {
-                        if (deviceName) existingDevice.name = deviceName;
+                        if (deviceName) 
+                        existingDevice.name = data.deviceName;
                         existingDevice.country = data.country;
                         existingDevice.timestamp = data.timestamp;
                         existingDevice.hoursactive = data.hoursactive;
@@ -1442,8 +1443,8 @@
                     document.getElementById('yesterday-title').style.display = 'none';
                     document.getElementById('today-title').style.display = 'none';
                     document.getElementById('tomorrow-title').style.display = 'none';
-                    
-                   
+
+
                 }
             });
 
