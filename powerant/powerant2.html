@@ -285,6 +285,21 @@
         .data-container .power-off {
             color: #ddd;
         }
+
+        .credits-footer {
+            display: flex;
+            justify-content: space-between;
+            /* This will push the items to the left and right edges */
+            padding-top: 2vw;
+            /* Some padding for breathing space */
+            align-items: center;
+        }
+
+        .credits-text-left,
+        .credits-text-right {
+            margin: 0;
+            /* Removing default margin */
+        }
     </style>
 
 </head>
@@ -340,6 +355,11 @@
             <li class="active" id="today-menu">Today</li>
             <li id="tomorrow-menu">Tomorrow</li>
         </ul>
+        <footer class="credits-footer">
+            <p class="credits-text-left">Copyright © 2023 Powerant Oy</p>
+            <p class="credits-text-right">App by <a href="http://wattlify.com"
+                    style="color: white; text-decoration: underline;">Wattlify</a></p>
+        </footer>
 
 
     </div>
@@ -1363,8 +1383,8 @@
                     const existingDevice = devices.find(device => device.code === deviceCode);
 
                     if (existingDevice) {
-                        if (deviceName) 
-                        existingDevice.name = data.deviceName;
+                        if (deviceName)
+                            existingDevice.name = data.deviceName;
                         existingDevice.country = data.country;
                         existingDevice.timestamp = data.timestamp;
                         existingDevice.hoursactive = data.hoursactive;
